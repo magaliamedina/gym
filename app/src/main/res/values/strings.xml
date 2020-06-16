@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Gimnasio_UNNE</string>
+    <string name="txt_dni">Número de documento</string>
+    <string name="txt_apellido">Apellido</string>
+    <string name="txt_nombres">Nombres</string>
+    <string name="txt_profesor">Profesor</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_password">Contraseña</string>
+    <string name="txt_grupo">Grupo:</string>
+    <string name="txt_profesores">Profesores:</string>
+    <string name="txt_totalCupos">Total de cupos:</string>
+
+
+    <string name="btn_insertar">Guardar</string>
+    <string name="btn_editar">Editar</string>
+    <string name="btn_eliminar">Eliminar</string>
+    <string name="btn_buscar">Buscar</string>
+    <string name="btn_iniciar_sesion">Iniciar Sesión</string>
+    <string name="btn_altagrupo">Alta grupos</string>
+    <string name="btn_fecha">Fecha</string>
+    <string name="btn_hora">Hora</string>
+</resources>
