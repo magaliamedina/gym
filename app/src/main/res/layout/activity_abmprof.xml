@@ -56,17 +56,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_apellido" />
 
-    <Button
+    <ImageView
         android:id="@+id/btn_insertar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/btn_insertar"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/btn_buscar"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_add" />
 
-    <Button
+    <ImageView
         android:id="@+id/btn_editar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -74,9 +74,10 @@
         android:layout_marginTop="30dp"
         android:text="@string/btn_editar"
         app:layout_constraintStart_toEndOf="@+id/btn_insertar"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat = "@android:drawable/ic_menu_edit"/>
 
-    <Button
+    <ImageView
         android:id="@+id/btn_eliminar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -84,17 +85,16 @@
         android:layout_marginTop="30dp"
         android:text="@string/btn_eliminar"
         app:layout_constraintStart_toEndOf="@+id/btn_editar"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_delete"/>
 
-    <Button
+    <ImageView
         android:id="@+id/btn_buscar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"
-        android:background="#B245C5"
-        android:textColor="#D5E353"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="79dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toEndOf="@+id/btn_irmenu"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_search" />
 
@@ -124,25 +124,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_email" />
 
-    <Button
-        android:id="@+id/btn_irmenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="260dp"
-        android:layout_marginTop="8dp"
-        android:onClick="irMenu"
-        android:text="volver menu"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_password" />
-
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="363dp"
-        android:layout_marginTop="15dp"
+        android:id="@+id/btn_irmenu"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="30dp"
+        android:onClick="irMenu"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_eliminar"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

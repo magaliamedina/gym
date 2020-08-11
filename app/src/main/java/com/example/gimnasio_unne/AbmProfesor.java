@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -27,7 +28,7 @@ import java.util.Map;
 
 public class AbmProfesor extends AppCompatActivity {
     EditText etNroDoc, etNombre, etApellido, etEmail, etPassword;
-    Button btnAgregar, btnEditar, btnEliminar, btnBuscar, btnMenu ;
+    ImageView btnAgregar, btnEditar, btnEliminar, btnBuscar, btnMenu ;
     RequestQueue requestQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,28 +50,28 @@ public class AbmProfesor extends AppCompatActivity {
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ejecutarServicio("http://192.168.1.9/gimnasio_unne/insertar_profesor.php");
+                ejecutarServicio("http://medinamagali.com.ar/gimnasio_unne/insertar_profesor.php");
             }
         });
 
         btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ejecutarServicio("http://192.168.1.9/gimnasio_unne/insertar_profesor.php");
+                ejecutarServicio("http://medinamagali.com.ar/gimnasio_unne/insertar_profesor.php");
             }
         });
 
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buscar("http://192.168.1.9/gimnasio_unne/buscar_profesor.php?dni="+etNroDoc.getText()+"");
+                buscar("http://medinamagali.com.ar/gimnasio_unne/buscar_profesor.php?dni="+etNroDoc.getText()+"");
             }
         });
 
         btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                eliminar("http://192.168.1.9/gimnasio_unne/eliminar_profesor.php");
+                eliminar("http://medinamagali.com.ar/gimnasio_unne/eliminar_profesor.php");
             }
         });
     }

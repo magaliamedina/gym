@@ -23,6 +23,7 @@ import java.util.Map;
 public class Login extends AppCompatActivity {
     EditText edtUsuario, edtPassword;
     Button btnLogin;
+    String usuario, password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,22 +35,28 @@ public class Login extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validarUsuario("http://192.168.1.9/gimnasio_unne/validar_usuario.php");
+                usuario = edtUsuario.getText().toString();
+                password = edtPassword.getText().toString();
+                if(!usuario.isEmpty() && !password.isEmpty()) {
+                    validarUsuario("http://medinamagali.com.ar/gimnasio_unne/validar_usuario.php");
+                } else {
+                    Toast.makeText(Login.this, "Completa los campos", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
     }
 
     private void validarUsuario (String URL) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
-            public void onResponse(String response) { //se ejecuta en caso de ok
+            public void onResponse(String response) { //nos devuelve la fila encontrada en el servicio web
                 if (!response.isEmpty()) {
                     Intent intent = new Intent(getApplicationContext(), Administrador.class);
                     startActivity(intent);
-                    finishActivity(1); //agregado inventado
                 }
                 else {
-                    Toast.makeText(Login.this, "Email y/o contraseña incorrecta", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Email o contraseña incorrecta", Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -61,8 +68,8 @@ public class Login extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
-                parametros.put("Email",edtUsuario.getText().toString());
-                parametros.put("Password", edtPassword.getText().toString());
+                parametros.put("email",edtUsuario.getText().toString());
+                parametros.put("password", edtPassword.getText().toString());
                 return parametros;
             }
         };

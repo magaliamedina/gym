@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".AltaGrupos">
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <Spinner
         android:id="@+id/spinner_horario"
         android:layout_width="150dp"
@@ -23,16 +30,6 @@
         android:layout_marginTop="48dp"
         app:layout_constraintStart_toEndOf="@+id/txt_grupos_profesores"
         app:layout_constraintTop_toBottomOf="@+id/spinner_horario" />
-
-    <Button
-        android:id="@+id/btn_alta_grupo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="45dp"
-        android:text="@string/btn_insertar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/spinner_cupolibre"
@@ -61,13 +58,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="49dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="123dp"
+        android:autofillHints=""
         android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/txt_grupo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_alta_grupo"
-        android:autofillHints="" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txt_grupos_horarios"
