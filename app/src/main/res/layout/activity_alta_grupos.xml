@@ -103,7 +103,7 @@
         android:layout_marginStart="228dp"
         android:layout_marginTop="20dp"
         android:onClick="irMenu"
-        android:text="volver al menu"
+        android:text="VOLVER"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_totalCupos" />
 
