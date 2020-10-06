@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/fragmentListarPersonas">
+
+    <fragment
+        android:id="@+id/fragmentListarGrupos"
+        android:name="com.example.gimnasio_unne.FragmentListarGrupos"
+        android:label="fragment_listar_grupos"
+        tools:layout="@layout/fragment_listar_grupos" />
+    <fragment
+        android:id="@+id/fragmentListarPersonas"
+        android:name="com.example.gimnasio_unne.FragmentListarPersonas"
+        android:label="fragment_listar_personas"
+        tools:layout="@layout/fragment_listar_personas" />
+</navigation>

@@ -52,7 +52,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onResponse(String response) { //nos devuelve la fila encontrada en el servicio web
                 if (!response.isEmpty()) {
-                    Intent intent = new Intent(getApplicationContext(), Administrador.class);
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                 }
                 else {

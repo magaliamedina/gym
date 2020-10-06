@@ -45,7 +45,6 @@ public class AbmProfesor extends AppCompatActivity {
         btnEliminar = findViewById(R.id.btn_eliminar);
         btnBuscar = findViewById(R.id.btn_buscar);
 
-        btnMenu = findViewById(R.id.btn_irmenu);
 
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
