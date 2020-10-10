@@ -6,12 +6,12 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/fragmentListarGrupos"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Lista de grupos" />
+            android:icon="@drawable/ic_people_white_18dp"
+            android:title="Grupos" />
         <item
             android:id="@+id/fragmentListarPersonas"
-            android:title="Lista de personas"
-            android:drawableStart="@drawable/vector_person"
+            android:title="Personas"
+            android:icon="@drawable/vector_person"
             />
     </group>
 </menu>

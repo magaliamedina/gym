@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".DetallesPersonas">
+
+    <TextView
+        android:id="@+id/txtidpersonadetalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ID:"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/txtdnipersonadetalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="DNI:"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/txtapellidopersonadetalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Apellido:"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/txtnombrespersonadetalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombres:"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/txtsexopersonadetalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Sexo:"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/txtfechnacpersonadetalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Fecha de nacimiento:"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/txtlocalidadpersonadetalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Localidad:"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/txtprovinciapersonadetalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Provincia:"
+        android:textSize="18sp" />
+    <TextView
+    android:id="@+id/txtestadopersonadetalle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Estado:"
+    android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/txtestadocivilpersonadetalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Estado civil:"
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/txtusuariopersonadetalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tipo de usuario:"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/txtemailpersonadetalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email:"
+        android:textSize="18sp" />
+
+       <TextView
+        android:id="@+id/txtlupersonadetalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="LU:"
+        android:textSize="18sp" />
+</LinearLayout>

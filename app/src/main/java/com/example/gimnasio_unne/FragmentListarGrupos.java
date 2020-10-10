@@ -1,64 +1,133 @@
 package com.example.gimnasio_unne;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentListarGrupos#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FragmentListarGrupos extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private ListView list;
+    Adaptador adaptador;
+    public static ArrayList<Grupos>groups= new ArrayList<>();
+    String url="https://medinamagali.com.ar/gimnasio_unne/mostrargrupos.php";
+    Grupos grupos;
 
     public FragmentListarGrupos() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentListarGrupos.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentListarGrupos newInstance(String param1, String param2) {
-        FragmentListarGrupos fragment = new FragmentListarGrupos();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_listar_grupos, container, false);
+        View view = inflater.inflate(R.layout.fragment_listar_grupos, container, false);
+
+        list = view.findViewById(R.id.listview);
+        //Ver CONTEXTO DE UN FRAGMENT
+        adaptador= new Adaptador(getActivity().getApplicationContext(), groups);
+        list.setAdapter(adaptador);
+
+        //items para editar, eliminar y ver detalles
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                ProgressDialog progressDialog=new ProgressDialog(view.getContext());
+
+                CharSequence[] dialogoItem={"Ver datos","Editar datos", "Eliminar datos"};
+                builder.setTitle(groups.get(position).getDescripcion());
+                builder.setItems(dialogoItem, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        switch (i) {
+
+                            case 0:
+                                //pasamos position para poder recibir en detalles
+                                startActivity(new Intent(getActivity().getApplicationContext(), DetallesGrupo.class)
+                                        .putExtra("position",position));
+                                break;
+                            case 1:
+                                //pasamos position para poder recibir en editar
+                                startActivity(new Intent(getActivity().getApplicationContext(), EditarGrupos.class)
+                                        .putExtra("position",position));
+                                break;
+                            case 2:
+                                break;
+
+                        }
+                    }
+                });
+                builder.create().show();
+            }
+        });
+        mostrarDatos();
+        return view;
     }
+
+    public void mostrarDatos() {
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                groups.clear();
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String sucess=jsonObject.getString("sucess");
+                    JSONArray jsonArray=jsonObject.getJSONArray("grupos");
+                    if (sucess.equals("1")) {
+                        for (int i=0;i<jsonArray.length();i++) {
+                            JSONObject object= jsonArray.getJSONObject(i);
+                            String id= object.getString("grupo_id");
+                            String horario = object.getString("horario_id");
+                            String prof1 = object.getString("profesor1_id");
+                            String prof2 = object.getString("profesor2_id");
+                            String cupototal = object.getString("total_cupos");
+                            String descripcion = object.getString("descripcion");
+                            grupos = new Grupos(id, prof1, prof2, horario, cupototal, descripcion);
+                            groups.add(grupos);
+                            adaptador.notifyDataSetChanged();
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        requestQueue.add(request);
+    }
+
+
+
 }
