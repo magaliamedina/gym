@@ -17,6 +17,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +29,7 @@ public class Login extends AppCompatActivity {
     EditText edtUsuario, edtPassword;
     Button btnLogin;
     String usuario, password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,13 +57,36 @@ public class Login extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) { //nos devuelve la fila encontrada en el servicio web
-                if (!response.isEmpty()) {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
+                if (!response.isEmpty() ) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String usuario_id = jsonObject.getString("usuario_id");
+                        if( usuario_id.equals("1")) {
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                        }/*
+                        if( usuario_id.equals("2")) {
+                            Intent intent = new Intent(getApplicationContext(), Administrador.class);
+                            startActivity(intent);
+                        }
+                        if( usuario_id.equals("3")) {
+                            Intent intent = new Intent(getApplicationContext(), Administrador.class);
+                            startActivity(intent);
+                        }
+                        if( usuario_id.equals("4")) {
+                            Intent intent = new Intent(getApplicationContext(), Administrador.class);
+                            startActivity(intent);
+                        }*/
+                    }
+                        catch (JSONException e) {
+                             e.printStackTrace();
+                        }
+
                 }
                 else {
                     Toast.makeText(Login.this, "Email o contraseña incorrecta", Toast.LENGTH_SHORT).show();
                 }
+
             }
         }, new Response.ErrorListener() {
             @Override

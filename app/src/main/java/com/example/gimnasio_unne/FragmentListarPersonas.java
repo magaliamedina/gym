@@ -29,9 +29,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class FragmentListarPersonas extends Fragment {
     private ListView list;
     AdaptadorPersonas adaptador;

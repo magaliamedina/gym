@@ -5,48 +5,67 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp"
     tools:context=".DetallesGrupo">
-
-    <TextView
-        android:id="@+id/txtid"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="ID:"
-        android:textSize="18sp" />
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-    <TextView
-        android:id="@+id/txthorariogrupodetalle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Horario:"
-        android:textSize="18sp" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-    <TextView
-        android:id="@+id/txtnombre"
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nombre:"
-        android:textSize="18sp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/txtid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ID:"
+            android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/txtprof1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Profesor:"
-        android:textSize="18sp" />
+        <TextView
+            android:id="@+id/txthorariogrupodetalle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Horario:"
+            android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/txtprof2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Profesor:"
-        android:textSize="18sp" />
+        <TextView
+            android:id="@+id/txtnombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre:"
+            android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/txtcupototal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Total de cupos:"
-        android:textSize="18sp" />
+        <TextView
+            android:id="@+id/txtprof1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Profesor:"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtprof2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Profesor:"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtcupototal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Total de cupos:"
+            android:textSize="18sp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 </LinearLayout>
