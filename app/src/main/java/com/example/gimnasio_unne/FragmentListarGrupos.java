@@ -22,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,7 +51,16 @@ public class FragmentListarGrupos extends Fragment {
         View view = inflater.inflate(R.layout.fragment_listar_grupos, container, false);
 
         list = view.findViewById(R.id.listview);
-        //Ver CONTEXTO DE UN FRAGMENT
+
+        FloatingActionButton fab = view.findViewById(R.id.fabgrupos);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity().getApplication(), AltaGrupo.class);
+                startActivity(intent);
+            }
+        });
+
         adaptador= new Adaptador(getActivity().getApplicationContext(), groups);
         list.setAdapter(adaptador);
 
@@ -104,12 +114,15 @@ public class FragmentListarGrupos extends Fragment {
                         for (int i=0;i<jsonArray.length();i++) {
                             JSONObject object= jsonArray.getJSONObject(i);
                             String id= object.getString("grupo_id");
-                            String horario = object.getString("horario_id");
-                            String prof1 = object.getString("profesor1_id");
+                            String hora_inicio = object.getString("hora_inicio");
+                            String hora_fin = object.getString("hora_fin");
+                            String descripcion = object.getString("descripcion");
+                            String nombres = object.getString("nombres");
+                            String apellido = object.getString("apellido");
                             String prof2 = object.getString("profesor2_id");
                             String cupototal = object.getString("total_cupos");
-                            String descripcion = object.getString("descripcion");
-                            grupos = new Grupos(id, prof1, prof2, horario, cupototal, descripcion);
+                            grupos = new Grupos(id, nombres+" " + apellido, prof2, "de "+hora_inicio+" a " +
+                                    hora_fin, cupototal, descripcion);
                             groups.add(grupos);
                             adaptador.notifyDataSetChanged();
                         }

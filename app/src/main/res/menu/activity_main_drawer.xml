@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/menu_top"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/fragmentListarGrupos"
             android:icon="@drawable/ic_people_white_18dp"
@@ -14,4 +16,14 @@
             android:icon="@drawable/vector_person"
             />
     </group>
+    <group
+        android:id="@+id/menu_inferior"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/cerrarsesion"
+            android:title="Cerrar Sesión"
+            android:icon="@drawable/ic_exit_to_app_white_18dp"
+            />
+    </group>
+
 </menu>

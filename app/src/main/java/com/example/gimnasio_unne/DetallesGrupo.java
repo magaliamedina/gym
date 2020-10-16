@@ -15,7 +15,6 @@ public class DetallesGrupo extends AppCompatActivity {
         setContentView(R.layout.activity_detalles_grupo);
         tvid = findViewById(R.id.txtid);
         tvhorario = findViewById(R.id.txthorariogrupodetalle);
-
         tvnombre = findViewById(R.id.txtnombre);
         tvprof1 = findViewById(R.id.txtprof1);
         tvprof2 = findViewById(R.id.txtprof2);
@@ -27,7 +26,6 @@ public class DetallesGrupo extends AppCompatActivity {
 
         tvid.setText("ID " + FragmentListarGrupos.groups.get(position).getId());
         tvhorario.setText("Horario " + FragmentListarGrupos.groups.get(position).getHorario());
-
         tvnombre.setText("Nombre " + FragmentListarGrupos.groups.get(position).getDescripcion());
         tvprof1.setText("Profesor " + FragmentListarGrupos.groups.get(position).getProf1());
         tvprof2.setText("Profesor " + FragmentListarGrupos.groups.get(position).getProf2());

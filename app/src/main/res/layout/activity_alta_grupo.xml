@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".EditarGrupos">
+    tools:context=".AltaGrupo">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -21,76 +21,73 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="10dp">
         <EditText
-            android:id="@+id/etideditargrupo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="ID"
-            android:inputType="number"
-            android:textSize="18sp" />
-        <EditText
-            android:id="@+id/ethorarioeditargrupo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Horario"
-            android:inputType="textPersonName"
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/etnombreeditargrupo"
+            android:id="@+id/etnombrealtagrupo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Nombre del grupo"
-            android:inputType="textPersonName"
-            android:textSize="18sp" />
+            android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/etprof1editargrupo"
+            android:id="@+id/ethorarioaltagrupo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/txt_profesor"
-            android:inputType="textPersonName"
-            android:textSize="18sp" />
+            android:hint="Horario"
+            android:inputType="time" />
 
-        <EditText
-            android:id="@+id/etprof2editargrupo"
+            <EditText
+            android:id="@+id/etprof1altagrupo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/txt_profesor"
-            android:inputType="textPersonName"
-            android:textSize="18sp" />
+            android:hint="Profesor "
+            android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/ettotaleditargrupo"
+            android:id="@+id/etprof2altagrupo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/txt_totalCupos"
-            android:inputType="number"
-            android:textSize="18sp" />
+            android:hint="Profesor "
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/ettotalcuposaltagrupo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Cupo total"
+            android:inputType="number" />
 
         <Button
-            android:id="@+id/btneditargrupo"
+            android:id="@+id/btnaltagrupo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:background="@color/colorPrimary"
-            android:onClick="actualizar"
-            android:text="Modificar"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp" />
+            android:layout_marginTop="10dp"
+            android:textColor="#ffffff"
+            android:text="Guardar" />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            <Spinner
+                android:id="@+id/spinnerprof2altagrupo"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:visibility="invisible" />
+
+            <Spinner
+                android:id="@+id/spinnerProf1altagrupo"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:visibility="invisible" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
 
 

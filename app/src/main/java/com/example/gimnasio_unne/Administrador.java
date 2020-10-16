@@ -36,7 +36,7 @@ public class Administrador extends AppCompatActivity {
     }
 
     public void irAltaGrupo (View view) {
-        Intent i = new Intent(this, AltaGrupos.class);
+        Intent i = new Intent(this, AltaGrupo.class);
         startActivity(i);
     }
 

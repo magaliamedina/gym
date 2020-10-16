@@ -1,9 +1,11 @@
 package com.example.gimnasio_unne;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -32,6 +34,7 @@ public class DetallesPersonas extends AppCompatActivity {
         tvemail = findViewById(R.id.txtemailpersonadetalle);
         tvlu = findViewById(R.id.txtlupersonadetalle);
 
+
         //recibimos los parametros de Home
         Intent intent=getIntent();
         position= intent.getExtras().getInt("position");
@@ -49,5 +52,9 @@ public class DetallesPersonas extends AppCompatActivity {
         tvusuarioId.setText("Tipo de usuario " + FragmentListarPersonas.persons.get(position).getUsuarioId());
         tvemail.setText("Email " + FragmentListarPersonas.persons.get(position).getEmail());
         tvlu.setText("LU " + FragmentListarPersonas.persons.get(position).getLu());
+
+
     }
+
+
 }

@@ -64,11 +64,11 @@ public class Login extends AppCompatActivity {
                         if( usuario_id.equals("1")) {
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
-                        }/*
+                        }
                         if( usuario_id.equals("2")) {
                             Intent intent = new Intent(getApplicationContext(), Administrador.class);
                             startActivity(intent);
-                        }
+                        }/*
                         if( usuario_id.equals("3")) {
                             Intent intent = new Intent(getApplicationContext(), Administrador.class);
                             startActivity(intent);

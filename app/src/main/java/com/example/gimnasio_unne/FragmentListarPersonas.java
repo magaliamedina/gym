@@ -21,6 +21,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,11 +45,19 @@ public class FragmentListarPersonas extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_listar_personas, container, false);
 
         list = view.findViewById(R.id.listviewpersonas);
-        //Ver CONTEXTO DE UN FRAGMENT
+
+        FloatingActionButton fab = view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity().getApplication(), AltaPersona.class);
+                startActivity(intent);
+            }
+        });
+
         adaptador= new AdaptadorPersonas(getActivity().getApplicationContext(), persons);
         list.setAdapter(adaptador);
 
@@ -64,7 +74,6 @@ public class FragmentListarPersonas extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
                         switch (i) {
-
                             case 0:
                                // pasamos position para poder recibir en detalles
                                 startActivity(new Intent(getActivity().getApplicationContext(), DetallesPersonas.class)
@@ -111,10 +120,9 @@ public class FragmentListarPersonas extends Fragment {
                             String estadoCivil = object.getString("estado_civil");
                             String usuario_id = object.getString("usuario_id");
                             String email = object.getString("email");
-                            String password = object.getString("pass");
                             String lu = object.getString("lu");
                             personas = new Personas(id, dni, apellido, nombres, sexo, fechaNac, localidad, provincia,
-                            estado, estadoCivil, usuario_id, email, password,lu);
+                            estado, estadoCivil, usuario_id, email, " ",lu);
                             persons.add(personas);
                             adaptador.notifyDataSetChanged();
                         }
