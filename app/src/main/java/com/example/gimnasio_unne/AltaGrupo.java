@@ -2,10 +2,13 @@ package com.example.gimnasio_unne;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -16,6 +19,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,6 +29,7 @@ public class AltaGrupo extends AppCompatActivity {
     EditText etprof1, etprof2, ethorario, ettotalcupos, etdescripcion;
     Button btnguardar;
     RequestQueue requestQueue;
+    private Spinner spinnerprof1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +37,10 @@ public class AltaGrupo extends AppCompatActivity {
         setContentView(R.layout.activity_alta_grupo);
         etdescripcion = findViewById(R.id.etnombrealtagrupo);
         ethorario = findViewById(R.id.ethorarioaltagrupo);
-        etprof1 = findViewById(R.id.etprof1altagrupo);
+        etprof1 = findViewById(R.id.etprof1altagrupo); //borrar
+        /*spinnerprof1 = findViewById(R.id.spinnerProf1altagrupo);
+
+        cargarSpinnerProfesor("https://medinamagali.com.ar/gimnasio_unne/mostrarpersonas.php");*/
         etprof2 = findViewById(R.id.etprof2altagrupo);
         ettotalcupos = findViewById(R.id.ettotalcuposaltagrupo);
 
@@ -44,6 +54,25 @@ public class AltaGrupo extends AppCompatActivity {
         });
 
     }
+/*
+    private void cargarSpinnerProfesor(String respuesta) {
+        ArrayList<Personas> listaPersonas = new ArrayList<Personas>();
+        try {
+            JSONArray jsonArray = new JSONArray(respuesta);
+            for (int i= 0; i< jsonArray.length();i++){
+                Personas p = new Personas();
+                p.setNombres(jsonArray.getJSONObject(i).getString("nombres"));
+                listaPersonas.add(p);
+            }
+            ArrayAdapter<Personas> personas = new ArrayAdapter<Personas>(this, android.R.
+                    layout.simple_dropdown_item_1line, listaPersonas);
+            spinnerprof1.setAdapter(personas);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }*/
 
     private void altagrupo(String URL) {
         StringRequest stringRequest= new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
@@ -68,7 +97,7 @@ public class AltaGrupo extends AppCompatActivity {
                 return parametros;
             }
         };
-        requestQueue = Volley.newRequestQueue(this);
+        requestQueue = Volley.newRequestQueue(AltaGrupo.this);
         requestQueue.add(stringRequest);
     }
 }

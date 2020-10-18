@@ -72,11 +72,12 @@ public class Login extends AppCompatActivity {
                         if( usuario_id.equals("3")) {
                             Intent intent = new Intent(getApplicationContext(), Administrador.class);
                             startActivity(intent);
-                        }
-                        if( usuario_id.equals("4")) {
-                            Intent intent = new Intent(getApplicationContext(), Administrador.class);
-                            startActivity(intent);
                         }*/
+                        //alumno
+                        if( usuario_id.equals("4")) {
+                            Intent intent = new Intent(getApplicationContext(), AlumnoActivity.class);
+                            startActivity(intent);
+                        }
                     }
                         catch (JSONException e) {
                              e.printStackTrace();

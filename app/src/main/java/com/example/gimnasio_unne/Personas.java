@@ -139,4 +139,8 @@ public class Personas {
     public void setLu(String lu) {
         this.lu = lu;
     }
+
+    public String toString() {
+        return nombres+ " " +apellido;
+    }
 }

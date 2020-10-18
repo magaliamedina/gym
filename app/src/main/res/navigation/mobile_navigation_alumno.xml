@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation_alumno"
+    app:startDestination="@id/fragmentListarCuposLibres">
+
+    <fragment
+        android:id="@+id/fragmentListarCuposLibres"
+        android:name="com.example.gimnasio_unne.FragmentListarCuposLibres"
+        android:label="Cupos libres"
+        tools:layout="@layout/fragment_listar_cupos_libres" />
+</navigation>
