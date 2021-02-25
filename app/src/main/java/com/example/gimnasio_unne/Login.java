@@ -17,11 +17,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -61,21 +59,24 @@ public class Login extends AppCompatActivity {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
                         String usuario_id = jsonObject.getString("usuario_id");
+                       edtUsuario.setText("");
+                        edtPassword.setText("");
                         if( usuario_id.equals("1")) {
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                         }
-                        if( usuario_id.equals("2")) {
-                            Intent intent = new Intent(getApplicationContext(), Administrador.class);
-                            startActivity(intent);
-                        }/*
-                        if( usuario_id.equals("3")) {
+                        /*if( usuario_id.equals("2")) {
                             Intent intent = new Intent(getApplicationContext(), Administrador.class);
                             startActivity(intent);
                         }*/
                         //alumno
-                        if( usuario_id.equals("4")) {
+                        if( usuario_id.equals("3")) {
                             Intent intent = new Intent(getApplicationContext(), AlumnoActivity.class);
+                            startActivity(intent);
+                        }
+                        //personal
+                        if( usuario_id.equals("4")) {
+                            Intent intent = new Intent(getApplicationContext(), PersonalActivity.class);
                             startActivity(intent);
                         }
                     }

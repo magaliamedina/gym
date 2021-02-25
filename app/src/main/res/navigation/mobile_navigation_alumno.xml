@@ -8,6 +8,6 @@
     <fragment
         android:id="@+id/fragmentListarCuposLibres"
         android:name="com.example.gimnasio_unne.FragmentListarCuposLibres"
-        android:label="Cupos libres"
+        android:label="Reservar"
         tools:layout="@layout/fragment_listar_cupos_libres" />
 </navigation>

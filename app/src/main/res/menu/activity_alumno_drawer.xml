@@ -7,6 +7,6 @@
         <item
             android:id="@+id/fragmentListarCuposLibres"
             android:icon="@drawable/ic_exit_to_app_white_18dp"
-            android:title="listar cupos libres" />
+            android:title="Reservar" />
     </group>
 </menu>

@@ -12,9 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".PersonalActivity"
+            android:label="@string/title_activity_personal"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".AlumnoActivity"
             android:label="@string/title_activity_alumno"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".AltaPersona" />
         <activity android:name=".AltaGrupo" />
         <activity android:name=".DetallesPersonas" />
@@ -23,9 +27,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".Administrador" />
         <activity android:name=".Reservar" />
         <activity android:name=".AbmProfesor" />
