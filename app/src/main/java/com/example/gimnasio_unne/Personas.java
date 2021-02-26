@@ -7,7 +7,14 @@ public class Personas {
 
     public Personas () {}
 
-    public Personas (String id, String apellido, String nombres, String email, String password) {}
+    public Personas (String id, String apellido, String nombres, String email, String password) {
+        this.id = id;
+        this.dni = dni;
+        this.apellido = apellido;
+        this.nombres = nombres;
+        this.email = email;
+        this.password = password;
+    }
 
     public Personas(String id, String dni, String apellido, String nombres, String sexo, String fechaNac,
                     String localidad, String provincia, String estado, String estadoCivil, String usuarioId,
@@ -141,6 +148,6 @@ public class Personas {
     }
 
     public String toString() {
-        return nombres+ " " +apellido;
+        return nombres+ " " +apellido + " " + id;
     }
 }

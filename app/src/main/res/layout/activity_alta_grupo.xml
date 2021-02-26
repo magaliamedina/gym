@@ -36,14 +36,25 @@
                 android:inputType="textPersonName"
                 android:autofillHints="" />
 
-            <EditText
-            android:id="@+id/ethorarioaltagrupo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Horario"
-            android:inputType="number"
-                android:autofillHints="" />
+
+            <TextView
+                android:id="@+id/tvaltagrupo1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Seleccione el horario:"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/spinnerhorarioaltagrupo"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+
+            <TextView
+                android:id="@+id/tvaltagrupo2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Seleccione el profesor:"
+                android:textSize="18sp" />
 
             <Spinner
                 android:id="@+id/spinnerProf1altagrupo"
@@ -60,14 +71,15 @@
             android:inputType="number"
             android:autofillHints="" />
 
-        <Button
-            android:id="@+id/btnaltagrupo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:layout_marginTop="10dp"
-            android:textColor="#ffffff"
-            android:text="Guardar" />
+            <Button
+                android:id="@+id/btnaltagrupo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorPrimary"
+                android:text="Guardar"
+                android:textColor="#ffffff"
+                android:textSize="18sp" />
 
 
 

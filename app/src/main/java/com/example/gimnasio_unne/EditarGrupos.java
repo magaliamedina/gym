@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +24,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EditarGrupos extends AppCompatActivity {
-    EditText etnombre, ethorario, etprof1, etprof2, etcupototal,etid;
+    EditText etnombre, ethorario, etprof2, etcupototal,etid;
+    Spinner spinnerProf;
     Button btn1;
     int position;
     @Override
@@ -33,7 +35,7 @@ public class EditarGrupos extends AppCompatActivity {
         etid = findViewById(R.id.etideditargrupo);
         ethorario = findViewById(R.id.ethorarioeditargrupo);
         etnombre = findViewById(R.id.etnombreeditargrupo);
-        etprof1 = findViewById(R.id.etprof1editargrupo);
+        spinnerProf = findViewById(R.id.spinnerProfeditargrupo);
         etprof2 = findViewById(R.id.etprof2editargrupo);
         etcupototal = findViewById(R.id.ettotaleditargrupo);
         btn1= findViewById(R.id.btneditargrupo);
@@ -43,7 +45,7 @@ public class EditarGrupos extends AppCompatActivity {
         etid.setText(FragmentListarGrupos.groups.get(position).getId());
         ethorario.setText(FragmentListarGrupos.groups.get(position).getHorario());
         etnombre.setText(FragmentListarGrupos.groups.get(position).getDescripcion());
-        etprof1.setText(FragmentListarGrupos.groups.get(position).getProf1());
+        //etprof1.setText(FragmentListarGrupos.groups.get(position).getProf1());
         etprof2.setText(FragmentListarGrupos.groups.get(position).getProf2());
         etcupototal.setText(FragmentListarGrupos.groups.get(position).getCupototal());
     }
@@ -51,7 +53,7 @@ public class EditarGrupos extends AppCompatActivity {
     public void actualizar(View view) {
         final String nombre = etnombre.getText().toString();
         final String horario = ethorario.getText().toString();
-        final String prof1 = etprof1.getText().toString();
+        //final String prof1 = etprof1.getText().toString();
         final String prof2 = etprof2.getText().toString();
         final String cupototal = etcupototal.getText().toString();
         final String id = etid.getText().toString();
@@ -81,7 +83,7 @@ public class EditarGrupos extends AppCompatActivity {
                 Map<String, String> params= new HashMap<String, String>();
                 params.put("grupo_id", id);
                 params.put("horario_id", horario);
-                params.put("profesor1_id", prof1);
+                //params.put("profesor1_id", prof1);
                 params.put("profesor2_id", prof2);
                 params.put("total_cupos", cupototal);
                 params.put("descripcion", nombre);

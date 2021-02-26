@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,32 +30,36 @@ import com.loopj.android.http.*;
 import cz.msebera.android.httpclient.Header;
 
 public class AltaGrupo extends AppCompatActivity {
-    EditText etprof1, etprof2, ethorario, ettotalcupos, etdescripcion;
+    EditText ettotalcupos, etdescripcion;
     Button btnguardar;
     RequestQueue requestQueue;
-    private Spinner spinnerprof1;
-    private AsyncHttpClient cliente;
+    private Spinner spinnerprof1, spinnerhorario;
+    private AsyncHttpClient cliente, cliente2;
+    private String idprof, idhorario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alta_grupo);
         etdescripcion = findViewById(R.id.etnombrealtagrupo);
-        ethorario = findViewById(R.id.ethorarioaltagrupo);
+        spinnerhorario= findViewById(R.id.spinnerhorarioaltagrupo);
+
         spinnerprof1 = findViewById(R.id.spinnerProf1altagrupo);
         cliente = new AsyncHttpClient();
-        llenarSpinner();
+        cliente2 = new AsyncHttpClient();
 
         ettotalcupos = findViewById(R.id.ettotalcuposaltagrupo);
         btnguardar = findViewById(R.id.btnaltagrupo);
-
+        llenarSpinner();
+        llenarSpinnerHorario();
         btnguardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 altagrupo("http://medinamagali.com.ar/gimnasio_unne/altagrupo.php");
             }
         });
- }
+
+    }
 
     private void llenarSpinner() {
         String url = "https://medinamagali.com.ar/gimnasio_unne/prueba.php";
@@ -73,25 +78,84 @@ public class AltaGrupo extends AppCompatActivity {
         });
     }
 
+    private void llenarSpinnerHorario() {
+        String url = "https://medinamagali.com.ar/gimnasio_unne/consultarhorarios.php";
+        cliente2.post(url, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                if(statusCode== 200) {
+                    cargarSpinnerHorario(new String(responseBody));
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+            }
+        });
+    }
+
     private void cargarSpinnerProfesor(String respuesta) {
-        ArrayList<Personas> listaPersonas = new ArrayList<Personas>();
+        final ArrayList<Personas> listaPersonas = new ArrayList<Personas>();
         try {
             JSONArray jsonArray = new JSONArray(respuesta);
+
             for (int i= 0; i< jsonArray.length();i++){
                 Personas p = new Personas();
                 p.setNombres(jsonArray.getJSONObject(i).getString("nombres"));
                 p.setApellido(jsonArray.getJSONObject(i).getString("apellido"));
+                p.setId(jsonArray.getJSONObject(i).getString("personas_id"));
                 //en el metodo tostring de la clase producto se define lo que se va a mostrar
                 listaPersonas.add(p);
             }
             ArrayAdapter<Personas> personas = new ArrayAdapter<Personas>(this, android.R.
                     layout.simple_dropdown_item_1line, listaPersonas);
             spinnerprof1.setAdapter(personas);
+            spinnerprof1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                //para saber la posicion del elemento seleccionado en el spinner
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    idprof= listaPersonas.get(position).getId();
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    private void cargarSpinnerHorario(String respuesta) {
+        final ArrayList<Horarios> listaHorarios = new ArrayList<Horarios>();
+        try {
+            JSONArray jsonArray = new JSONArray(respuesta);
+
+            for (int i= 0; i< jsonArray.length();i++){
+                Horarios p = new Horarios();
+                p.setHoraInicio(jsonArray.getJSONObject(i).getString("hora_inicio"));
+                p.setHoraFin(jsonArray.getJSONObject(i).getString("hora_fin"));
+                p.setId(jsonArray.getJSONObject(i).getString("horario_id"));
+                //en el metodo tostring de la clase producto se define lo que se va a mostrar
+                listaHorarios.add(p);
+            }
+            ArrayAdapter<Horarios> horarios = new ArrayAdapter<Horarios>(this, android.R.
+                    layout.simple_dropdown_item_1line, listaHorarios);
+            spinnerhorario.setAdapter(horarios);
+            spinnerhorario.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    idhorario= listaHorarios.get(position).getId();
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void altagrupo(String URL) {
@@ -99,6 +163,9 @@ public class AltaGrupo extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(), "Alta de grupo exitosa", Toast.LENGTH_SHORT).show();
+                etdescripcion.setText("");
+                //ethorario.setText("");
+                ettotalcupos.setText("");
             }
         }, new Response.ErrorListener() {
             @Override
@@ -109,9 +176,9 @@ public class AltaGrupo extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
-                parametros.put("horario_id", ethorario.getText().toString());
-                parametros.put("profesor1_id", etprof1.getText().toString());
-                parametros.put("profesor2_id", etprof2.getText().toString());
+                parametros.put("horario_id", idhorario);
+                parametros.put("profesor1_id", idprof);
+                parametros.put("profesor2_id", "11");
                 parametros.put("total_cupos", ettotalcupos.getText().toString());
                 parametros.put("descripcion", etdescripcion.getText().toString());
                 return parametros;

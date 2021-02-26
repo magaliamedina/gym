@@ -34,6 +34,18 @@
             android:hint="ID"
             android:inputType="number"
             android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tveditargrupo1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Horario:"
+            android:textSize="18sp" />
+        <Spinner
+            android:id="@+id/spinnerhorarioeditargrupo"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"/>
+
         <EditText
             android:id="@+id/ethorarioeditargrupo"
             android:layout_width="match_parent"
@@ -52,14 +64,17 @@
             android:inputType="textPersonName"
             android:textSize="18sp" />
 
-        <EditText
-            android:id="@+id/etprof1editargrupo"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tveditargrupo2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/txt_profesor"
-            android:inputType="textPersonName"
+            android:text="Profesor:"
             android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/spinnerProfeditargrupo"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
 
         <EditText
             android:id="@+id/etprof2editargrupo"
