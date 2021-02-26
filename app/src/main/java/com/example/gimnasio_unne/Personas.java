@@ -7,7 +7,7 @@ public class Personas {
 
     public Personas () {}
 
-    public Personas(String id, String apellido, String nombres, String email, String password) {}
+    public Personas (String id, String apellido, String nombres, String email, String password) {}
 
     public Personas(String id, String dni, String apellido, String nombres, String sexo, String fechaNac,
                     String localidad, String provincia, String estado, String estadoCivil, String usuarioId,

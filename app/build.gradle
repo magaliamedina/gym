@@ -45,4 +45,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
+
+    //asincrono para cargar spinner
+    implementation 'com.loopj.android:android-async-http:1.4.9'
 }

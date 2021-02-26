@@ -24,12 +24,16 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import com.loopj.android.http.*;
+
+import cz.msebera.android.httpclient.Header;
 
 public class AltaGrupo extends AppCompatActivity {
     EditText etprof1, etprof2, ethorario, ettotalcupos, etdescripcion;
     Button btnguardar;
     RequestQueue requestQueue;
     private Spinner spinnerprof1;
+    private AsyncHttpClient cliente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +41,11 @@ public class AltaGrupo extends AppCompatActivity {
         setContentView(R.layout.activity_alta_grupo);
         etdescripcion = findViewById(R.id.etnombrealtagrupo);
         ethorario = findViewById(R.id.ethorarioaltagrupo);
-        etprof1 = findViewById(R.id.etprof1altagrupo); //borrar
-        /*spinnerprof1 = findViewById(R.id.spinnerProf1altagrupo);
+        spinnerprof1 = findViewById(R.id.spinnerProf1altagrupo);
+        cliente = new AsyncHttpClient();
+        llenarSpinner();
 
-        cargarSpinnerProfesor("https://medinamagali.com.ar/gimnasio_unne/mostrarpersonas.php");*/
-        etprof2 = findViewById(R.id.etprof2altagrupo);
         ettotalcupos = findViewById(R.id.ettotalcuposaltagrupo);
-
         btnguardar = findViewById(R.id.btnaltagrupo);
 
         btnguardar.setOnClickListener(new View.OnClickListener() {
@@ -52,9 +54,25 @@ public class AltaGrupo extends AppCompatActivity {
                 altagrupo("http://medinamagali.com.ar/gimnasio_unne/altagrupo.php");
             }
         });
+ }
 
+    private void llenarSpinner() {
+        String url = "https://medinamagali.com.ar/gimnasio_unne/prueba.php";
+        cliente.post(url, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                if(statusCode== 200) {
+                    cargarSpinnerProfesor(new String(responseBody));
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+            }
+        });
     }
-/*
+
     private void cargarSpinnerProfesor(String respuesta) {
         ArrayList<Personas> listaPersonas = new ArrayList<Personas>();
         try {
@@ -62,6 +80,8 @@ public class AltaGrupo extends AppCompatActivity {
             for (int i= 0; i< jsonArray.length();i++){
                 Personas p = new Personas();
                 p.setNombres(jsonArray.getJSONObject(i).getString("nombres"));
+                p.setApellido(jsonArray.getJSONObject(i).getString("apellido"));
+                //en el metodo tostring de la clase producto se define lo que se va a mostrar
                 listaPersonas.add(p);
             }
             ArrayAdapter<Personas> personas = new ArrayAdapter<Personas>(this, android.R.
@@ -72,7 +92,7 @@ public class AltaGrupo extends AppCompatActivity {
             e.printStackTrace();
         }
 
-    }*/
+    }
 
     private void altagrupo(String URL) {
         StringRequest stringRequest= new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
