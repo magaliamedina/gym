@@ -8,6 +8,13 @@
     <fragment
         android:id="@+id/fragmentListarCuposLibres"
         android:name="com.example.gimnasio_unne.view.fragments.FragmentListarCuposLibres"
-        android:label="Reservar"
-        tools:layout="@layout/fragment_listar_cupos_libres" />
+        android:label="Reservar un cupo"
+        tools:layout="@layout/fragment_listar_cupos_libres" >
+
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentMisReservas"
+        android:name="com.example.gimnasio_unne.view.fragments.FragmentMisReservas"
+        android:label="Mis reservas"
+        tools:layout="@layout/fragment_mis_reservas" />
 </navigation>

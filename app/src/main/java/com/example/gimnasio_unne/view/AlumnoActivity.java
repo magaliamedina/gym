@@ -28,21 +28,25 @@ public class AlumnoActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //el drawer layout esta en activity_alumno
         DrawerLayout drawer = findViewById(R.id.drawer_layout_alumno);
         NavigationView navigationView = findViewById(R.id.nav_view_alumno);
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.fragmentListarCuposLibres, R.id.fragment_mis_reservas) //se encuenta en menu/activity_alumno_drawer
+                //es el identificador del menu que se encuenta en menu/menu_alumno
+                R.id.fragmentListarCuposLibres, R.id.fragmentMisReservas)
                 .setDrawerLayout(drawer)
                 .build();
+        //nav_host_fragment_alumno se encuentra en content_alumno
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_alumno);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
+    //selector de opciones para cerrar sesion
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_alumno_drawer, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 

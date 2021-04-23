@@ -78,7 +78,7 @@ public class Login extends AppCompatActivity {
                         }
                         //PERFIL PERSONAL ADMINISTRATIVO
                         if( usuario_id.equals("4")) {
-                            Intent intent = new Intent(getApplicationContext(), PersonalActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), ActivityPersonal.class);
                             startActivity(intent);
                         }
                     }

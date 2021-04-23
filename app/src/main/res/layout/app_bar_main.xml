@@ -19,10 +19,7 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
-
 <!-- es el contenedor en donde se van a mostrar los diferentes fragments-->
     <include layout="@layout/content_main" />
-
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -9,7 +9,7 @@
             android:icon="@drawable/ic_reserve"
             android:title="Reservar un cupo" />
         <item
-
+            android:id="@+id/fragmentMisReservas"
             android:icon="@drawable/ic_mis_reservas"
             android:title="Mis reservas" />
     </group>

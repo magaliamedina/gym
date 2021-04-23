@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/tvid"
-        android:layout_width="40dp"
+        android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="4dp"
         android:background="@drawable/circulo"
@@ -29,5 +29,13 @@
         android:textSize="20dp"
         app:layout_constraintStart_toEndOf="@+id/tvid"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorAccent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,12 +2,13 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation_personal"
-    app:startDestination="@id/fragmentReservas">
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/fragment_confirmar_reservas">
 
     <fragment
-        android:id="@+id/fragmentReservas"
-        android:name="com.example.gimnasio_unne.view.fragments.FragmentReservas"
-        android:label="fragment_reservas"
-        tools:layout="@layout/fragment_reservas" />
+        android:id="@+id/fragment_confirmar_reservas"
+        android:name="com.example.gimnasio_unne.view.fragments.FragmentConfirmarReservas"
+        android:label="Reservas realizadas"
+        tools:layout="@layout/fragment_confirmar_reservas"/>
+
 </navigation>

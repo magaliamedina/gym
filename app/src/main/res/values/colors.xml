@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#4782d3</color>
     <color name="colorPrimaryDark">#4782d3</color>
-    <color name="colorAccent">#4782d3</color>
+    <color name="colorAccent">#042F6A</color>
     <color name="white">#ffffff</color>
 
     <!-- para la fuente montserrat y open sans -->

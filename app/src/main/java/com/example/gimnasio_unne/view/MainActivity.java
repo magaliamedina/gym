@@ -32,8 +32,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
 
         //se cargan los id de los fragments que se van a mostrar
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.fragmentListarGrupos, R.id.fragmentListarPersonas)
+        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.fragmentListarGrupos, R.id.fragmentListarPersonas)
                 .setDrawerLayout(drawer)
                 .build();
 
