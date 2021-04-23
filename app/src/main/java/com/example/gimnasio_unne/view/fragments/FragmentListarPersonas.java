@@ -1,4 +1,4 @@
-package com.example.gimnasio_unne;
+package com.example.gimnasio_unne.view.fragments;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -22,6 +21,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.gimnasio_unne.view.adapter.AdaptadorPersonas;
+import com.example.gimnasio_unne.AltaPersona;
+import com.example.gimnasio_unne.DetallesPersonas;
+import com.example.gimnasio_unne.R;
+import com.example.gimnasio_unne.model.Personas;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -31,15 +35,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class FragmentListarGrupos extends Fragment {
-
+public class FragmentListarPersonas extends Fragment {
     private ListView list;
-    Adaptador adaptador;
-    public static ArrayList<Grupos>groups= new ArrayList<>();
-    String url="https://medinamagali.com.ar/gimnasio_unne/mostrargrupos.php";
-    Grupos grupos;
-
-    public FragmentListarGrupos() {
+    AdaptadorPersonas adaptador;
+    public static ArrayList<Personas> persons= new ArrayList<>();
+    String url="https://medinamagali.com.ar/gimnasio_unne/mostrarpersonas.php";
+    Personas personas;
+    public FragmentListarPersonas() {
         // Required empty public constructor
     }
 
@@ -47,21 +49,20 @@ public class FragmentListarGrupos extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_listar_grupos, container, false);
+        View view = inflater.inflate(R.layout.fragment_listar_personas, container, false);
 
-        list = view.findViewById(R.id.listview);
+        list = view.findViewById(R.id.listviewpersonas);
 
-        FloatingActionButton fab = view.findViewById(R.id.fabgrupos);
+        FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity().getApplication(), AltaGrupo.class);
+                Intent intent = new Intent(getActivity().getApplication(), AltaPersona.class);
                 startActivity(intent);
             }
         });
 
-        adaptador= new Adaptador(getActivity().getApplicationContext(), groups);
+        adaptador= new AdaptadorPersonas(getActivity().getApplicationContext(), persons);
         list.setAdapter(adaptador);
 
         //items para editar, eliminar y ver detalles
@@ -72,21 +73,20 @@ public class FragmentListarGrupos extends Fragment {
                 ProgressDialog progressDialog=new ProgressDialog(view.getContext());
 
                 CharSequence[] dialogoItem={"Ver datos","Editar datos", "Eliminar datos"};
-                builder.setTitle(groups.get(position).getDescripcion());
+                builder.setTitle(persons.get(position).getApellido()+" "+persons.get(position).getNombres());
                 builder.setItems(dialogoItem, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
                         switch (i) {
-
                             case 0:
-                                //pasamos position para poder recibir en detalles
-                                startActivity(new Intent(getActivity().getApplicationContext(), DetallesGrupo.class)
+                               // pasamos position para poder recibir en detalles
+                                startActivity(new Intent(getActivity().getApplicationContext(), DetallesPersonas.class)
                                         .putExtra("position",position));
                                 break;
                             case 1:
-                                //pasamos position para poder recibir en editar
-                                startActivity(new Intent(getActivity().getApplicationContext(), EditarGrupos.class)
-                                        .putExtra("position",position));
+                                /*pasamos position para poder recibir en editar
+                                startActivity(new Intent(getActivity().getApplicationContext(), EditarPersonas.class)
+                                        .putExtra("position",position));*/
                                 break;
                             case 2:
                                 break;
@@ -100,30 +100,34 @@ public class FragmentListarGrupos extends Fragment {
         mostrarDatos();
         return view;
     }
-
     public void mostrarDatos() {
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                groups.clear();
+                persons.clear();
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String sucess=jsonObject.getString("sucess");
-                    JSONArray jsonArray=jsonObject.getJSONArray("grupos");
+                    JSONArray jsonArray=jsonObject.getJSONArray("personas");
                     if (sucess.equals("1")) {
                         for (int i=0;i<jsonArray.length();i++) {
                             JSONObject object= jsonArray.getJSONObject(i);
-                            String id= object.getString("grupo_id");
-                            String hora_inicio = object.getString("hora_inicio");
-                            String hora_fin = object.getString("hora_fin");
-                            String descripcion = object.getString("descripcion");
-                            String nombres = object.getString("nombres");
+                            String id= object.getString("personas_id");
+                            String dni = object.getString("dni");
                             String apellido = object.getString("apellido");
-                            String prof2 = object.getString("profesor2_id");
-                            String cupototal = object.getString("total_cupos");
-                            grupos = new Grupos(id, nombres+" " + apellido, prof2, "de "+hora_inicio+" a " +
-                                    hora_fin, cupototal, descripcion);
-                            groups.add(grupos);
+                            String nombres = object.getString("nombres");
+                            String sexo = object.getString("sexo_id");
+                            String fechaNac = object.getString("fecha_nacimiento");
+                            String localidad = object.getString("localidad");
+                            String provincia = object.getString("provincia");
+                            String estado = object.getString("estado");
+                            String estadoCivil = object.getString("estado_civil");
+                            String usuario_id = object.getString("usuario_id");
+                            String email = object.getString("email");
+                            String lu = object.getString("lu");
+                            personas = new Personas(id, dni, apellido, nombres, sexo, fechaNac, localidad, provincia,
+                            estado, estadoCivil, usuario_id, email, " ",lu);
+                            persons.add(personas);
                             adaptador.notifyDataSetChanged();
                         }
                     }
@@ -140,7 +144,4 @@ public class FragmentListarGrupos extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         requestQueue.add(request);
     }
-
-
-
 }

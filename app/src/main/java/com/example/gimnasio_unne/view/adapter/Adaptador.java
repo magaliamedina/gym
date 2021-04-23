@@ -1,4 +1,4 @@
-package com.example.gimnasio_unne;
+package com.example.gimnasio_unne.view.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+
+import com.example.gimnasio_unne.R;
+import com.example.gimnasio_unne.model.Grupos;
 
 import java.util.List;
 

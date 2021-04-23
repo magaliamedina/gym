@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragmentReservas"
-        android:name="com.example.gimnasio_unne.FragmentReservas"
+        android:name="com.example.gimnasio_unne.view.fragments.FragmentReservas"
         android:label="fragment_reservas"
         tools:layout="@layout/fragment_reservas" />
 </navigation>

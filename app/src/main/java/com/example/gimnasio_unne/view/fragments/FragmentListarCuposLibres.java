@@ -1,4 +1,4 @@
-package com.example.gimnasio_unne;
+package com.example.gimnasio_unne.view.fragments;
 
 import android.os.Bundle;
 
@@ -8,19 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.gimnasio_unne.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class FragmentListarCuposLibres extends Fragment {
 
     public FragmentListarCuposLibres() {
-        // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,6 +31,5 @@ public class FragmentListarCuposLibres extends Fragment {
             }
         });
         return view;
-
     }
 }

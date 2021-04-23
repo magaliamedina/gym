@@ -1,4 +1,4 @@
-package com.example.gimnasio_unne;
+package com.example.gimnasio_unne.model;
 
 public class Horarios {
     private String id, hora_inicio, hora_fin;

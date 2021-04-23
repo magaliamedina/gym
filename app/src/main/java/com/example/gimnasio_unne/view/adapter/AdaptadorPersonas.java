@@ -1,4 +1,4 @@
-package com.example.gimnasio_unne;
+package com.example.gimnasio_unne.view.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.example.gimnasio_unne.R;
+import com.example.gimnasio_unne.model.Personas;
+
 import java.util.List;
 
 public class AdaptadorPersonas extends ArrayAdapter<Personas> {
@@ -17,7 +20,6 @@ public class AdaptadorPersonas extends ArrayAdapter<Personas> {
     List<Personas> arrayListPersons;
     public AdaptadorPersonas(@NonNull Context context, List<Personas>arrayListPersons) {
         super(context, R.layout.list_personas, arrayListPersons);
-
         this.context = context;
         this.arrayListPersons=arrayListPersons;
     }

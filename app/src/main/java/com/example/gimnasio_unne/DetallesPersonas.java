@@ -1,14 +1,12 @@
 package com.example.gimnasio_unne;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import com.example.gimnasio_unne.view.fragments.FragmentListarPersonas;
 
 //no muestra la contraseña
 public class DetallesPersonas extends AppCompatActivity {

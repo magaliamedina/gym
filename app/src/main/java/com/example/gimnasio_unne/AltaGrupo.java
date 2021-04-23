@@ -2,7 +2,6 @@ package com.example.gimnasio_unne;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,6 +24,9 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.example.gimnasio_unne.model.Horarios;
+import com.example.gimnasio_unne.model.Personas;
 import com.loopj.android.http.*;
 
 import cz.msebera.android.httpclient.Header;

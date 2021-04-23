@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.gimnasio_unne.view.fragments.FragmentListarGrupos;
+
 public class DetallesGrupo extends AppCompatActivity {
     TextView tvnombre, tvprof1, tvprof2, tvtcupototal,tvid, tvhorario;
     int position;

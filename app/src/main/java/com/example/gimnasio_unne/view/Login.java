@@ -1,4 +1,4 @@
-package com.example.gimnasio_unne;
+package com.example.gimnasio_unne.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.gimnasio_unne.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -61,6 +62,7 @@ public class Login extends AppCompatActivity {
                         String usuario_id = jsonObject.getString("usuario_id");
                        edtUsuario.setText("");
                         edtPassword.setText("");
+                        //PERFIL ADMINISTRADOR
                         if( usuario_id.equals("1")) {
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
@@ -69,12 +71,12 @@ public class Login extends AppCompatActivity {
                             Intent intent = new Intent(getApplicationContext(), Administrador.class);
                             startActivity(intent);
                         }*/
-                        //alumno
+                        //PERFIL ESTUDIANTE
                         if( usuario_id.equals("3")) {
                             Intent intent = new Intent(getApplicationContext(), AlumnoActivity.class);
                             startActivity(intent);
                         }
-                        //personal
+                        //PERFIL PERSONAL ADMINISTRATIVO
                         if( usuario_id.equals("4")) {
                             Intent intent = new Intent(getApplicationContext(), PersonalActivity.class);
                             startActivity(intent);
