@@ -19,7 +19,6 @@ public class Adaptador extends ArrayAdapter<Grupos> {
     List<Grupos>arrayListGroups;
     public Adaptador(@NonNull Context context, List<Grupos>arrayListGroups) {
         super(context, R.layout.list_grupos, arrayListGroups);
-
         this.context = context;
         this.arrayListGroups=arrayListGroups;
     }
@@ -30,10 +29,8 @@ public class Adaptador extends ArrayAdapter<Grupos> {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_grupos, null, true);
         TextView tvid= view.findViewById(R.id.tvid);
         TextView tvgrupo = view.findViewById(R.id.tvgrupo);
-
         tvid.setText(arrayListGroups.get(position).getId());
         tvgrupo.setText(arrayListGroups.get(position).getDescripcion());
         return view;
-
     }
 }

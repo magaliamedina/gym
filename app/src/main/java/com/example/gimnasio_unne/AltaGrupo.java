@@ -166,7 +166,6 @@ public class AltaGrupo extends AppCompatActivity {
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(), "Alta de grupo exitosa", Toast.LENGTH_SHORT).show();
                 etdescripcion.setText("");
-                //ethorario.setText("");
                 ettotalcupos.setText("");
             }
         }, new Response.ErrorListener() {

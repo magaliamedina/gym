@@ -2,7 +2,9 @@ package com.example.gimnasio_unne.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.gimnasio_unne.R;
+import com.example.gimnasio_unne.model.Personas;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -60,7 +63,9 @@ public class Login extends AppCompatActivity {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
                         String usuario_id = jsonObject.getString("usuario_id");
-                       edtUsuario.setText("");
+                        String personas_id= jsonObject.getString("personas_id");
+                        saveLoginSharedPreferences(personas_id);
+                        edtUsuario.setText("");
                         edtPassword.setText("");
                         //PERFIL ADMINISTRADOR
                         if( usuario_id.equals("1")) {
@@ -108,5 +113,12 @@ public class Login extends AppCompatActivity {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+
+    private void saveLoginSharedPreferences(String personas_id) {
+        SharedPreferences sharedPref = getSharedPreferences("personas_id",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("personas_id", personas_id);
+        editor.commit();
     }
 }

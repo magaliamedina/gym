@@ -22,7 +22,6 @@
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:drawableStart="@drawable/vector_person"
-
         android:ems="10"
         android:hint="@string/txt_email"
         android:inputType="textEmailAddress" />
@@ -38,11 +37,19 @@
         android:hint="@string/txt_password"
         android:inputType="textPassword" />
 
+    <CheckBox
+        android:id="@+id/cbRecordarUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginTop="20dp"
+        android:text="Recordar usuario y contraseña" />
+
     <Button
         android:id="@+id/btn_iniciarsesion"
         android:layout_width="370dp"
         android:layout_height="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:background="@color/colorPrimary"
         android:text="@string/btn_iniciar_sesion"
         android:textColor="#ffffff" />
