@@ -21,73 +21,74 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="10dp">
-        <EditText
-            android:id="@+id/etideditargrupo"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="ID"
-            android:inputType="number"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/tveditargrupo1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Horario:"
-            android:textSize="18sp" />
-        <Spinner
-            android:id="@+id/spinnerhorarioeditargrupo"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"/>
-
-        <EditText
-            android:id="@+id/ethorarioeditargrupo"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="ID: "
+                android:inputType="number"
+                android:textSize="18sp" />
+            <TextView
+                android:id="@+id/tvideditargrupo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="número de ID"
+                android:inputType="number"
+                android:textSize="18sp" />
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Horario"
-            android:inputType="textPersonName"
-            android:textSize="18sp" />
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tvHorarioEditarGrupo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Horario:"
+                android:textSize="18sp" />
+            <Spinner
+                android:id="@+id/spinnerhorarioeditargrupo"
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
 
         <EditText
             android:id="@+id/etnombreeditargrupo"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Nombre del grupo"
             android:inputType="textPersonName"
             android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/tveditargrupo2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Profesor:"
-            android:textSize="18sp" />
-
-        <Spinner
-            android:id="@+id/spinnerProfeditargrupo"
-            android:layout_width="match_parent"
-            android:layout_height="50dp" />
-
-        <EditText
-            android:id="@+id/etprof2editargrupo"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/txt_profesor"
-            android:inputType="textPersonName"
-            android:textSize="18sp" />
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tvProfesorEditarGrupo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profesor:"
+                android:textSize="18sp"/>
+            <Spinner
+                android:id="@+id/spinnerProfeditargrupo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
 
         <EditText
             android:id="@+id/ettotaleditargrupo"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/txt_totalCupos"
@@ -105,8 +106,6 @@
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-
+    </LinearLayout>
 
 </LinearLayout>

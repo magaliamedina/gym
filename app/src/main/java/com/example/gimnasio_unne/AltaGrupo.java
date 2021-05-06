@@ -35,7 +35,7 @@ public class AltaGrupo extends AppCompatActivity {
     EditText ettotalcupos, etdescripcion;
     Button btnguardar;
     RequestQueue requestQueue;
-    private Spinner spinnerprof1, spinnerhorario;
+    private Spinner spinnerprof, spinnerhorario;
     private AsyncHttpClient cliente, cliente2;
     private String idprof, idhorario;
 
@@ -45,8 +45,7 @@ public class AltaGrupo extends AppCompatActivity {
         setContentView(R.layout.activity_alta_grupo);
         etdescripcion = findViewById(R.id.etnombrealtagrupo);
         spinnerhorario= findViewById(R.id.spinnerhorarioaltagrupo);
-
-        spinnerprof1 = findViewById(R.id.spinnerProf1altagrupo);
+        spinnerprof = findViewById(R.id.spinnerProfaltagrupo);
         cliente = new AsyncHttpClient();
         cliente2 = new AsyncHttpClient();
 
@@ -64,7 +63,7 @@ public class AltaGrupo extends AppCompatActivity {
     }
 
     private void llenarSpinner() {
-        String url = "https://medinamagali.com.ar/gimnasio_unne/prueba.php";
+        String url = "https://medinamagali.com.ar/gimnasio_unne/consultarProfesor.php";
         cliente.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -72,11 +71,8 @@ public class AltaGrupo extends AppCompatActivity {
                     cargarSpinnerProfesor(new String(responseBody));
                 }
             }
-
             @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
-            }
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) { }
         });
     }
 
@@ -89,11 +85,8 @@ public class AltaGrupo extends AppCompatActivity {
                     cargarSpinnerHorario(new String(responseBody));
                 }
             }
-
             @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
-            }
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) { }
         });
     }
 
@@ -101,19 +94,18 @@ public class AltaGrupo extends AppCompatActivity {
         final ArrayList<Personas> listaPersonas = new ArrayList<Personas>();
         try {
             JSONArray jsonArray = new JSONArray(respuesta);
-
             for (int i= 0; i< jsonArray.length();i++){
                 Personas p = new Personas();
                 p.setNombres(jsonArray.getJSONObject(i).getString("nombres"));
                 p.setApellido(jsonArray.getJSONObject(i).getString("apellido"));
                 p.setId(jsonArray.getJSONObject(i).getString("personas_id"));
-                //en el metodo tostring de la clase producto se define lo que se va a mostrar
+                //en el metodo tostring de la clase persona se define lo que se va a mostrar
                 listaPersonas.add(p);
             }
             ArrayAdapter<Personas> personas = new ArrayAdapter<Personas>(this, android.R.
                     layout.simple_dropdown_item_1line, listaPersonas);
-            spinnerprof1.setAdapter(personas);
-            spinnerprof1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            spinnerprof.setAdapter(personas);
+            spinnerprof.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 //para saber la posicion del elemento seleccionado en el spinner
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -139,7 +131,7 @@ public class AltaGrupo extends AppCompatActivity {
                 p.setHoraInicio(jsonArray.getJSONObject(i).getString("hora_inicio"));
                 p.setHoraFin(jsonArray.getJSONObject(i).getString("hora_fin"));
                 p.setId(jsonArray.getJSONObject(i).getString("horario_id"));
-                //en el metodo tostring de la clase producto se define lo que se va a mostrar
+                //en el metodo tostring de la clase persona se define lo que se va a mostrar
                 listaHorarios.add(p);
             }
             ArrayAdapter<Horarios> horarios = new ArrayAdapter<Horarios>(this, android.R.
@@ -178,8 +170,7 @@ public class AltaGrupo extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
                 parametros.put("horario_id", idhorario);
-                parametros.put("profesor1_id", idprof);
-                parametros.put("profesor2_id", "11");
+                parametros.put("profesor_id", idprof);
                 parametros.put("total_cupos", ettotalcupos.getText().toString());
                 parametros.put("descripcion", etdescripcion.getText().toString());
                 return parametros;

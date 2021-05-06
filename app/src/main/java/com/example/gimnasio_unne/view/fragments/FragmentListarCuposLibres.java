@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,12 +30,14 @@ public class FragmentListarCuposLibres extends Fragment {
     String url = "https://medinamagali.com.ar/gimnasio_unne/listarcuposlibres.php";
     AdaptadorCuposLibres adaptador;
     CuposLibres cuposLibres;
+    TextView tvReservaRealizada;
 
     public FragmentListarCuposLibres() {  }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_listar_cupos_libres, container, false);
+        tvReservaRealizada=view.findViewById(R.id.tvReservaRealizada);
 
         list = view.findViewById(R.id.lvListarCuposLibres);
 
@@ -42,7 +45,6 @@ public class FragmentListarCuposLibres extends Fragment {
         list.setAdapter(adaptador);
 
         mostrarDatos();
-
         return view;
     }
 
@@ -71,6 +73,9 @@ public class FragmentListarCuposLibres extends Fragment {
                             arrayCuposLibres.add(cuposLibres);
                             adaptador.notifyDataSetChanged();
                         }
+                    }
+                    else {
+                        tvReservaRealizada.setVisibility(View.VISIBLE);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

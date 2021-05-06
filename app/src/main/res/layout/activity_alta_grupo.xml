@@ -21,7 +21,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -35,32 +35,36 @@
                 android:hint="Nombre del grupo"
                 android:inputType="textPersonName"
                 android:autofillHints="" />
-
-
-            <TextView
-                android:id="@+id/tvaltagrupo1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Seleccione el horario:"
-                android:textSize="18sp" />
-
-            <Spinner
-                android:id="@+id/spinnerhorarioaltagrupo"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"/>
-
-            <TextView
-                android:id="@+id/tvaltagrupo2"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Seleccione el profesor:"
-                android:textSize="18sp" />
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Horario:"
+                    android:textSize="18sp" />
+                <Spinner
+                    android:id="@+id/spinnerhorarioaltagrupo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
 
-            <Spinner
-                android:id="@+id/spinnerProf1altagrupo"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:visibility="visible" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Profesor:"
+                    android:textSize="18sp" />
+                <Spinner
+                    android:id="@+id/spinnerProfaltagrupo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible" />
+            </LinearLayout>
 
         <EditText
             android:id="@+id/ettotalcuposaltagrupo"
@@ -80,11 +84,7 @@
                 android:text="Guardar"
                 android:textColor="#ffffff"
                 android:textSize="18sp" />
-
-
-
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
+        </LinearLayout>
 
 
 

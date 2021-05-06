@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.example.gimnasio_unne.view.fragments.FragmentListarGrupos;
 
 public class DetallesGrupo extends AppCompatActivity {
-    TextView tvnombre, tvprof1, tvprof2, tvtcupototal,tvid, tvhorario;
+    TextView tvnombre, tvprof,  tvtcupototal,tvid, tvhorario;
     int position;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,8 +18,7 @@ public class DetallesGrupo extends AppCompatActivity {
         tvid = findViewById(R.id.txtid);
         tvhorario = findViewById(R.id.txthorariogrupodetalle);
         tvnombre = findViewById(R.id.txtnombre);
-        tvprof1 = findViewById(R.id.txtprof1);
-        tvprof2 = findViewById(R.id.txtprof2);
+        tvprof = findViewById(R.id.txtprof);
         tvtcupototal = findViewById(R.id.txtcupototal);
 
         //recibimos los parametros de Home
@@ -29,8 +28,7 @@ public class DetallesGrupo extends AppCompatActivity {
         tvid.setText("ID " + FragmentListarGrupos.groups.get(position).getId());
         tvhorario.setText("Horario " + FragmentListarGrupos.groups.get(position).getHorario());
         tvnombre.setText("Nombre " + FragmentListarGrupos.groups.get(position).getDescripcion());
-        tvprof1.setText("Profesor " + FragmentListarGrupos.groups.get(position).getProf1());
-        tvprof2.setText("Profesor " + FragmentListarGrupos.groups.get(position).getProf2());
+        tvprof.setText("Profesor " + FragmentListarGrupos.groups.get(position).getProf());
         tvtcupototal.setText("Cupo total " + FragmentListarGrupos.groups.get(position).getCupototal());
     }
 }

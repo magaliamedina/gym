@@ -19,7 +19,6 @@ public class Administrador extends AppCompatActivity {
         setContentView(R.layout.activity_admin);
         btn1 = findViewById(R.id.btn_iraltagrupo);
         btn2 = findViewById(R.id.btn_iraltaprof);
-        btn3 = findViewById(R.id.btn_irareservar);
 
         toolbar= findViewById(R.id.tool_bar);
 
@@ -30,10 +29,6 @@ public class Administrador extends AppCompatActivity {
     }
 
 
-    public void irReservar (View view) {
-        Intent i = new Intent(this, Reservar.class);
-        startActivity(i);
-    }
 
     public void irAltaGrupo (View view) {
         Intent i = new Intent(this, AltaGrupo.class);

@@ -11,7 +11,7 @@ import com.example.gimnasio_unne.view.fragments.FragmentListarPersonas;
 //no muestra la contraseña
 public class DetallesPersonas extends AppCompatActivity {
     TextView tvid, tvdni, tvapellido, tvnombres, tvsexo, tvfechaNac, tvlocalidad, tvprovincia, tvestado,tvestadocivil,
-     tvusuarioId, tvemail, tvlu;
+     tvusuarioId, tvemail;
     int position;
 
     @Override
@@ -30,7 +30,6 @@ public class DetallesPersonas extends AppCompatActivity {
         tvestadocivil = findViewById(R.id.txtestadocivilpersonadetalle);
         tvusuarioId = findViewById(R.id.txtusuariopersonadetalle);
         tvemail = findViewById(R.id.txtemailpersonadetalle);
-        tvlu = findViewById(R.id.txtlupersonadetalle);
 
 
         //recibimos los parametros de Home
@@ -41,18 +40,23 @@ public class DetallesPersonas extends AppCompatActivity {
         tvdni.setText("DNI " + FragmentListarPersonas.persons.get(position).getDni());
         tvapellido.setText("Apellido " + FragmentListarPersonas.persons.get(position).getApellido());
         tvnombres.setText("Nombres " + FragmentListarPersonas.persons.get(position).getNombres());
-        tvsexo.setText("Sexo " + FragmentListarPersonas.persons.get(position).getSexo());
+        if (FragmentListarPersonas.persons.get(position).getSexo().equals("1")) {
+            tvsexo.setText("Sexo: Masculino");
+        } else if (FragmentListarPersonas.persons.get(position).getSexo().equals("2")) {
+            tvsexo.setText("Sexo: Femenino");
+        } else if (FragmentListarPersonas.persons.get(position).getSexo().equals("3")){
+            tvsexo.setText("Sexo: Otro");
+        }
         tvfechaNac.setText("Fecha de nacimiento " + FragmentListarPersonas.persons.get(position).getFechaNac());
-        tvlocalidad.setText("Localidad " + FragmentListarPersonas.persons.get(position).getLocalidad());
-        tvprovincia.setText("Provincia " + FragmentListarPersonas.persons.get(position).getProvincia());
-        tvestado.setText("Estado " + FragmentListarPersonas.persons.get(position).getEstado());
-        tvestadocivil.setText("Estado civil " + FragmentListarPersonas.persons.get(position).getEstadoCivil());
-        tvusuarioId.setText("Tipo de usuario " + FragmentListarPersonas.persons.get(position).getUsuarioId());
-        tvemail.setText("Email " + FragmentListarPersonas.persons.get(position).getEmail());
-        tvlu.setText("LU " + FragmentListarPersonas.persons.get(position).getLu());
-
-
+        tvlocalidad.setText("Localidad: " + FragmentListarPersonas.persons.get(position).getLocalidad());
+        tvprovincia.setText("Provincia: " + FragmentListarPersonas.persons.get(position).getProvincia());
+        if (FragmentListarPersonas.persons.get(position).getEstado().equals("1")) {
+            tvestado.setText("Estado: Activo");
+        } else {
+            tvestado.setText("Estado: Inactivo");
+        }
+        tvestadocivil.setText("Estado civil: " + FragmentListarPersonas.persons.get(position).getEstadoCivil());
+        tvusuarioId.setText("Tipo de usuario: " + FragmentListarPersonas.persons.get(position).getUsuarioId());
+        tvemail.setText("Email: " + FragmentListarPersonas.persons.get(position).getEmail());
     }
-
-
 }

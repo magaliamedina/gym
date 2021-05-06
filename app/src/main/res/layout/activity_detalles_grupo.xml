@@ -46,14 +46,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/txtprof1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Profesor:"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/txtprof2"
+            android:id="@+id/txtprof"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Profesor:"

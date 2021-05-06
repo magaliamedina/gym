@@ -46,7 +46,7 @@ public class Login extends AppCompatActivity {
                 usuario = edtUsuario.getText().toString();
                 password = edtPassword.getText().toString();
                 if(!usuario.isEmpty() && !password.isEmpty()) {
-                    validarUsuario("http://medinamagali.com.ar/gimnasio_unne/validar_usuario.php");
+                    validarUsuario("https://medinamagali.com.ar/gimnasio_unne/validar_usuario.php");
                 } else {
                     Toast.makeText(Login.this, "Completa los campos", Toast.LENGTH_SHORT).show();
                 }

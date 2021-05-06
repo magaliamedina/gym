@@ -14,14 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".EditarProfesor"></activity>
+        <activity android:name=".EditarGrupos$EditarPersona" />
         <activity
             android:name=".view.ActivityPersonal"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.AlumnoActivity"
             android:label="@string/title_activity_alumno"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".AltaPersona" />
         <activity android:name=".AltaGrupo" />
         <activity android:name=".DetallesPersonas" />
@@ -30,13 +31,10 @@
         <activity
             android:name=".view.MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Administrador" />
-        <activity android:name=".Reservar" />
         <activity android:name=".AbmProfesor" />
-        <activity android:name=".view.Login" >
+        <activity android:name=".view.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

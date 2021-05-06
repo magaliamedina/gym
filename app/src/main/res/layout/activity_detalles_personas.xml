@@ -94,13 +94,6 @@
             android:hint="Email:"
             android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/txtlupersonadetalle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="LU:"
-            android:textSize="18sp" />
-
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 

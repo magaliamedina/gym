@@ -2,14 +2,13 @@ package com.example.gimnasio_unne.model;
 
 public class Grupos {
 
-    private String id, prof1,prof2, horario, cupototal, descripcion;
+    private String id, prof, horario, cupototal, descripcion;
 
     public Grupos() {}
 
-    public Grupos(String id, String prof1, String prof2, String horario, String cupototal, String descripcion) {
+    public Grupos(String id, String prof, String horario, String cupototal, String descripcion) {
         this.id = id;
-        this.prof1 = prof1;
-        this.prof2 = prof2;
+        this.prof = prof;
         this.horario = horario;
         this.cupototal = cupototal;
         this.descripcion= descripcion;
@@ -31,20 +30,12 @@ public class Grupos {
         this.id = id;
     }
 
-    public String getProf1() {
-        return prof1;
+    public String getProf() {
+        return prof;
     }
 
-    public void setProf1(String prof1) {
-        this.prof1 = prof1;
-    }
-
-    public String getProf2() {
-        return prof2;
-    }
-
-    public void setProf2(String prof2) {
-        this.prof2 = prof2;
+    public void setProf(String prof1) {
+        this.prof = prof;
     }
 
     public String getHorario() {
@@ -62,5 +53,6 @@ public class Grupos {
     public void setCupototal(String cupototal) {
         this.cupototal = cupototal;
     }
+
 
 }

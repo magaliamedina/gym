@@ -8,14 +8,9 @@
     android:padding="10dp"
     tools:context=".AltaPersona">
 
-    <Spinner
-        android:id="@+id/sptipousuarioaltapersona"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <EditText
         android:id="@+id/etdnialtapersona"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/txt_dni"
@@ -23,7 +18,7 @@
 
     <EditText
         android:id="@+id/etapellidoaltapersona"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:fontFamily="sans-serif"
@@ -32,28 +27,45 @@
 
     <EditText
         android:id="@+id/etnombresaltapersona"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/txt_nombres"
         android:inputType="textPersonName" />
 
-    <Spinner
-        android:id="@+id/spsexoaltapersona"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <EditText
-        android:id="@+id/etestadoaltapersona"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Estado"
-        android:inputType="number" />
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="Sexo:"/>
+        <Spinner
+            android:id="@+id/spsexoaltapersona"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="Provincia:"/>
+        <Spinner
+            android:id="@+id/spinnerProvinciaAltaProfesor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
     <EditText
         android:id="@+id/etestadocivilaltapersona"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Estado Civil"
@@ -61,7 +73,7 @@
 
     <EditText
         android:id="@+id/etemailaltapersona"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/txt_email"
@@ -69,24 +81,21 @@
 
     <EditText
         android:id="@+id/etpassaltapersona"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/txt_password"
         android:inputType="textPassword" />
 
-    <EditText
-        android:id="@+id/etlualtapersona"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="LU"
-        android:inputType="number" />
 
     <Button
         android:id="@+id/btnaltapersona"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimary"
+        android:textSize="18sp"
+        android:textColor="@color/white"
         android:text="GUARDAR" />
 
 </LinearLayout>
