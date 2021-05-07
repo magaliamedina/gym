@@ -1,6 +1,7 @@
 package com.example.gimnasio_unne;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -49,6 +50,12 @@ public class EditarGrupos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_grupos);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         tvid = findViewById(R.id.tvideditargrupo);
         etnombre = findViewById(R.id.etnombreeditargrupo);
         spinnerProf = findViewById(R.id.spinnerProfeditargrupo);
@@ -63,6 +70,7 @@ public class EditarGrupos extends AppCompatActivity {
         tvid.setText(FragmentListarGrupos.groups.get(position).getId());
         etnombre.setText(FragmentListarGrupos.groups.get(position).getDescripcion());
         etcupototal.setText(FragmentListarGrupos.groups.get(position).getCupototal());
+
         llenarSpinnerProfesor();
         llenarSpinnerHorario();
     }
@@ -121,7 +129,6 @@ public class EditarGrupos extends AppCompatActivity {
         final ArrayList<Horarios> listaHorarios = new ArrayList<Horarios>();
         try {
             JSONArray jsonArray = new JSONArray(respuesta);
-
             for (int i= 0; i< jsonArray.length();i++){
                 Horarios p = new Horarios();
                 p.setHoraInicio(jsonArray.getJSONObject(i).getString("hora_inicio"));
@@ -132,6 +139,7 @@ public class EditarGrupos extends AppCompatActivity {
             }
             ArrayAdapter<Horarios> horarios = new ArrayAdapter<Horarios>(this, android.R.
                     layout.simple_dropdown_item_1line, listaHorarios);
+
             spinnerHorario.setAdapter(horarios);
             spinnerHorario.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override

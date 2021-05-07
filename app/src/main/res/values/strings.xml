@@ -22,9 +22,12 @@
     <string name="bienvenido">Bienvenido</string>
 
     <string name="title_activity_main">MainActivity</string>
+
     <string name="title_activity_alumno">AlumnoActivity</string>
     <string name="nav_header_title">Gimnasio UNNE</string>
     <string name="nav_header_subtitle">Secretaria General de Asuntos Sociales</string>
+    <string name="drawer_close">Drawer close</string>
+
 
 
 </resources>

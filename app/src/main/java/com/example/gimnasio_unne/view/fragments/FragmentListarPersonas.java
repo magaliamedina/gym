@@ -42,17 +42,14 @@ public class FragmentListarPersonas extends Fragment {
     public static ArrayList<Personas> persons= new ArrayList<>();
     String url="https://medinamagali.com.ar/gimnasio_unne/mostrarpersonas.php";
     Personas personas;
-    public FragmentListarPersonas() {
-        // Required empty public constructor
-    }
-
+    public FragmentListarPersonas() {  }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_listar_personas, container, false);
         list = view.findViewById(R.id.listviewpersonas);
-        FloatingActionButton fab = view.findViewById(R.id.fab);
+        FloatingActionButton fab = view.findViewById(R.id.fabpersonas);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,6 +96,8 @@ public class FragmentListarPersonas extends Fragment {
         mostrarDatos();
         return view;
     }
+
+
     public void mostrarDatos() {
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -123,8 +122,10 @@ public class FragmentListarPersonas extends Fragment {
                             String estadoCivil = object.getString("estado_civil");
                             String usuario_id = object.getString("usuario_id");
                             String email = object.getString("email");
+                            String pass = object.getString("pass");
+
                             personas = new Personas(id, dni, apellido, nombres, sexo, fechaNac, localidad, provincia,
-                            estado, estadoCivil, usuario_id, email);
+                            estado, estadoCivil, usuario_id, email, pass);
                             persons.add(personas);
                             adaptador.notifyDataSetChanged();
                         }

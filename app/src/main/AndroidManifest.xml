@@ -14,8 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".EditarProfesor"></activity>
-        <activity android:name=".EditarGrupos$EditarPersona" />
+        <activity
+            android:name=".EditarProfesor"
+            android:parentActivityName=".view.MainActivity"/>
         <activity
             android:name=".view.ActivityPersonal"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -23,11 +24,19 @@
             android:name=".view.AlumnoActivity"
             android:label="@string/title_activity_alumno"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AltaPersona" />
-        <activity android:name=".AltaGrupo" />
-        <activity android:name=".DetallesPersonas" />
-        <activity android:name=".EditarGrupos" />
-        <activity android:name=".DetallesGrupo" />
+        <activity android:name=".AltaPersona"
+            android:parentActivityName=".view.MainActivity"/>
+        <activity android:name=".AltaGrupo"
+            android:parentActivityName=".view.MainActivity"/>
+        <activity
+            android:name=".DetallesPersonas"
+            android:parentActivityName=".view.MainActivity"/>
+        <activity
+            android:name=".EditarGrupos"
+            android:parentActivityName=".view.MainActivity"/>
+        <activity
+            android:name=".DetallesGrupo"
+            android:parentActivityName=".view.MainActivity"/>
         <activity
             android:name=".view.MainActivity"
             android:label="@string/title_activity_main"

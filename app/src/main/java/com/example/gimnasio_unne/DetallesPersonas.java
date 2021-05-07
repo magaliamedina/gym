@@ -1,6 +1,7 @@
 package com.example.gimnasio_unne;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +19,12 @@ public class DetallesPersonas extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalles_personas);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         tvid = findViewById(R.id.txtidpersonadetalle);
         tvdni = findViewById(R.id.txtdnipersonadetalle);
         tvapellido = findViewById(R.id.txtapellidopersonadetalle);

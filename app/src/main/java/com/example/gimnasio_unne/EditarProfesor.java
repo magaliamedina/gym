@@ -1,6 +1,7 @@
 package com.example.gimnasio_unne;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -49,6 +50,12 @@ public class EditarProfesor extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_profesor);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         tvid = findViewById(R.id.tvideditarprofesor);
         etdni = findViewById(R.id.etDnieditarprofesor);
         etapellido= findViewById(R.id.etApellidoeditarprofesor);
@@ -75,7 +82,7 @@ public class EditarProfesor extends AppCompatActivity {
         ArrayAdapter <String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sexos);
         spinnerSexos.setAdapter(adapter);
 
-        llenarSpinnerProvincias();
+        //llenarSpinnerProvincias();
     }
 
     public void actualizar(View view) {
@@ -83,10 +90,10 @@ public class EditarProfesor extends AppCompatActivity {
         if(seleccion.equals("Masculino")) {
             sexoBD= "1";
         }
-        if(seleccion.equals("Femenino")) {
+        else if(seleccion.equals("Femenino")) {
             sexoBD="2";
         }
-        if(seleccion.equals("Otro")) {
+        else if(seleccion.equals("Otro")) {
             sexoBD="3";
         }
 
@@ -118,7 +125,7 @@ public class EditarProfesor extends AppCompatActivity {
                 parametros.put("apellido", etapellido.getText().toString());
                 parametros.put("nombres", etnombres.getText().toString());
                 parametros.put("sexo_id", sexoBD);
-                parametros.put("provincia", idprovincia);
+                //parametros.put("provincia", idprovincia);
                 parametros.put("estado", "1");
                 parametros.put("estado_civil", etestadocivil.getText().toString());
                 parametros.put("email", etemail.getText().toString());
@@ -130,6 +137,7 @@ public class EditarProfesor extends AppCompatActivity {
         requestQueue.add(request);
     }
 
+    /*
     private void llenarSpinnerProvincias() {
         String url = "https://medinamagali.com.ar/gimnasio_unne/consultarprovincias.php";
         cliente.post(url, new AsyncHttpResponseHandler() {
@@ -173,6 +181,6 @@ public class EditarProfesor extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
 }
