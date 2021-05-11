@@ -30,7 +30,7 @@ import java.util.Map;
 public class Login extends AppCompatActivity {
     EditText edtUsuario, edtPassword;
     Button btnLogin;
-    String usuario, password;
+    String usuario, password, personas_id,apellido,nombres,lu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +63,11 @@ public class Login extends AppCompatActivity {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
                         String usuario_id = jsonObject.getString("usuario_id");
-                        String personas_id= jsonObject.getString("personas_id");
-                        saveLoginSharedPreferences(personas_id);
+                        personas_id= jsonObject.getString("personas_id");
+                        apellido= jsonObject.getString("apellido");
+                        nombres = jsonObject.getString("nombres");
+                        lu= jsonObject.getString("lu");
+                        saveLoginSharedPreferences();
                         edtUsuario.setText("");
                         edtPassword.setText("");
                         //PERFIL ADMINISTRADOR
@@ -115,10 +118,23 @@ public class Login extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    private void saveLoginSharedPreferences(String personas_id) {
+    //Datos para activity Reservar
+    private void saveLoginSharedPreferences() {
         SharedPreferences sharedPref = getSharedPreferences("personas_id",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("personas_id", personas_id);
+        SharedPreferences sharedPref2 = getSharedPreferences("apellido",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor2 = sharedPref2.edit();
+        editor2.putString("apellido", apellido);
+        SharedPreferences sharedPref3 = getSharedPreferences("nombres",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor3 = sharedPref3.edit();
+        editor3.putString("nombres", nombres);
+        SharedPreferences sharedPref4 = getSharedPreferences("lu",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor4 = sharedPref4.edit();
+        editor4.putString("lu", lu);
+        editor2.commit();
+        editor3.commit();
+        editor4.commit();
         editor.commit();
     }
 }

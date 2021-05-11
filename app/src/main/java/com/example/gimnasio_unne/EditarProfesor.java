@@ -137,7 +137,6 @@ public class EditarProfesor extends AppCompatActivity {
         requestQueue.add(request);
     }
 
-    /*
     private void llenarSpinnerProvincias() {
         String url = "https://medinamagali.com.ar/gimnasio_unne/consultarprovincias.php";
         cliente.post(url, new AsyncHttpResponseHandler() {
@@ -181,6 +180,6 @@ public class EditarProfesor extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }*/
+    }
 
 }

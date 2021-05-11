@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
+    android:id="@+id/mobile_navigation_personal"
     app:startDestination="@+id/fragment_confirmar_reservas">
 
     <fragment
@@ -10,5 +10,10 @@
         android:name="com.example.gimnasio_unne.view.fragments.FragmentConfirmarReservas"
         android:label="Reservas realizadas"
         tools:layout="@layout/fragment_confirmar_reservas"/>
+    <fragment
+        android:id="@+id/fragmentAltaCuposLibres"
+        android:name="com.example.gimnasio_unne.view.fragments.FragmentAltaCuposLibres"
+        android:label="Cargar cupos libres"
+        tools:layout="@layout/fragment_alta_cupos_libres" />
 
 </navigation>

@@ -162,10 +162,7 @@ public class AbmProfesor extends AppCompatActivity {
         etApellido.setText("");
     }
 
-    public void irMenu (View view) {
-        Intent i = new Intent(this, Administrador.class);
-        startActivity(i);
-    }
+
 
 
 

@@ -15,8 +15,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Reservar"
+            android:parentActivityName=".view.AlumnoActivity"></activity>
+        <activity
             android:name=".EditarProfesor"
-            android:parentActivityName=".view.MainActivity"/>
+            android:parentActivityName=".view.MainActivity" />
         <activity
             android:name=".view.ActivityPersonal"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -24,24 +27,25 @@
             android:name=".view.AlumnoActivity"
             android:label="@string/title_activity_alumno"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AltaPersona"
-            android:parentActivityName=".view.MainActivity"/>
-        <activity android:name=".AltaGrupo"
-            android:parentActivityName=".view.MainActivity"/>
+        <activity
+            android:name=".AltaPersona"
+            android:parentActivityName=".view.MainActivity" />
+        <activity
+            android:name=".AltaGrupo"
+            android:parentActivityName=".view.MainActivity" />
         <activity
             android:name=".DetallesPersonas"
-            android:parentActivityName=".view.MainActivity"/>
+            android:parentActivityName=".view.MainActivity" />
         <activity
             android:name=".EditarGrupos"
-            android:parentActivityName=".view.MainActivity"/>
+            android:parentActivityName=".view.MainActivity" />
         <activity
             android:name=".DetallesGrupo"
-            android:parentActivityName=".view.MainActivity"/>
+            android:parentActivityName=".view.MainActivity" />
         <activity
             android:name=".view.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Administrador" />
         <activity android:name=".AbmProfesor" />
         <activity android:name=".view.Login">
             <intent-filter>

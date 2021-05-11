@@ -1,11 +1,17 @@
 package com.example.gimnasio_unne.view.fragments;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.Request;
@@ -15,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.gimnasio_unne.R;
+import com.example.gimnasio_unne.Reservar;
 import com.example.gimnasio_unne.model.CuposLibres;
 import com.example.gimnasio_unne.view.adapter.AdaptadorCuposLibres;
 import org.json.JSONArray;
@@ -31,19 +38,44 @@ public class FragmentListarCuposLibres extends Fragment {
     AdaptadorCuposLibres adaptador;
     CuposLibres cuposLibres;
     TextView tvReservaRealizada;
+    ScrollView svListaCuposLibres;
 
     public FragmentListarCuposLibres() {  }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_listar_cupos_libres, container, false);
-        tvReservaRealizada=view.findViewById(R.id.tvReservaRealizada);
+        //tvReservaRealizada=view.findViewById(R.id.tvReservaRealizada);
 
         list = view.findViewById(R.id.lvListarCuposLibres);
+        svListaCuposLibres = view.findViewById(R.id.svListaCuposLibres);
+
 
         adaptador= new AdaptadorCuposLibres(getActivity().getApplicationContext(), arrayCuposLibres);
         list.setAdapter(adaptador);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 
+                CharSequence[] dialogoItem={"Reservar"};
+                //titulo del alert dialog
+                builder.setTitle(arrayCuposLibres.get(position).getGrupo_descripcion());
+                builder.setItems(dialogoItem, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        switch (i) {
+                            case 0:
+                                //pasamos position para poder recibir en Reservar
+                                startActivity(new Intent(getActivity().getApplicationContext(), Reservar.class)
+                                        .putExtra("position",position));
+                                break;
+                        }
+                    }
+                });
+                builder.create().show();
+            }
+        });
         mostrarDatos();
         return view;
     }

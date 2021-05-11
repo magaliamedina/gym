@@ -1,0 +1,153 @@
+package com.example.gimnasio_unne;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.gimnasio_unne.view.fragments.FragmentListarCuposLibres;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TimeZone;
+
+public class Reservar extends AppCompatActivity {
+    int position;
+    TextView tvDescripcionGrupo, tvProfesor, tvDiayHora, tvTotalCuposLibres, tvReservaRealizada, tvListarCuposLibresIdCupolibre,
+            tvNombreEstudiante, tvLUEstudiante, tvDiaYHoraActual;
+    Button btnReservarCupoLibre;
+    RequestQueue requestQueue;
+    String idcupolibre;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_reservar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        tvNombreEstudiante= findViewById(R.id.tvReservarNombreAlumno);
+        tvLUEstudiante= findViewById(R.id.tvReservarLUEstudiante);
+        tvDescripcionGrupo= findViewById(R.id.tvReservarDescripcionGrupo);
+        tvProfesor = findViewById(R.id.tvReservarNombreProfesor);
+        tvDiayHora= findViewById(R.id.tvReservarDiayHora);
+        tvTotalCuposLibres = findViewById(R.id.tvReservarCuposLibresDisponible);
+        btnReservarCupoLibre = findViewById(R.id.btnReservarCupoLibre);
+        tvDiaYHoraActual = findViewById(R.id.tvReservarFechaReserva);
+        tvReservaRealizada= findViewById(R.id.tvReservaRealizada);
+
+        Intent intent=getIntent();
+        position= intent.getExtras().getInt("position");
+
+        SharedPreferences sharedPref = getSharedPreferences("apellido", Context.MODE_PRIVATE);
+        String apellido= sharedPref.getString("apellido","");
+        SharedPreferences sharedPref2 = getSharedPreferences("nombres", Context.MODE_PRIVATE);
+        String nombres = sharedPref2.getString("nombres","");
+        SharedPreferences sharedPref3 = getSharedPreferences("lu", Context.MODE_PRIVATE);
+        String lu = sharedPref3.getString("lu","");
+
+        tvNombreEstudiante.setText("Nombre y apellido del estudiante: " + nombres + " " + apellido);
+        tvLUEstudiante.setText("LU: " +lu);
+        tvDescripcionGrupo.setText(FragmentListarCuposLibres.arrayCuposLibres.get(position).getGrupo_descripcion());
+        tvProfesor.setText(FragmentListarCuposLibres.arrayCuposLibres.get(position).getProfesor_nombreYapellido());
+        tvDiayHora.setText(FragmentListarCuposLibres.arrayCuposLibres.get(position).getHorarios_inicio_fin());
+        idcupolibre= FragmentListarCuposLibres.arrayCuposLibres.get(position).getId_cupolibre();
+        tvTotalCuposLibres.setText(FragmentListarCuposLibres.arrayCuposLibres.get(position).getCupolibre_total());
+        tvDiaYHoraActual.setText("Fecha: " + Utiles.obtenerFechaActual("GMT-3")
+                + " Hora: " + Utiles.obtenerHoraActual("GMT-3"));
+
+        btnReservarCupoLibre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reservarCupoLibre("http://medinamagali.com.ar/gimnasio_unne/reservar_cupo_libre.php");
+                descontarCupoLibre("http://medinamagali.com.ar/gimnasio_unne/descontar_cupo_libre.php");
+                //que no se vea mas la lista de cupos libres al reservar uno
+                //svListaCuposLibres.setVisibility(View.INVISIBLE);
+                tvReservaRealizada.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    private void reservarCupoLibre(String URL) {
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getApplicationContext(), "Reserva exitosa", Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                //id del alumno (sesion), id del cupo libre, estado, fecha
+                Map<String, String> parametros = new HashMap<String, String>();
+                //Se trae el dato desde login con la clase SharedPreferences
+                parametros.put("alumno_id", getFromSharedPreferences("personas_id"));
+                parametros.put("cupo_id", idcupolibre);
+                parametros.put("estado", "1");
+                return parametros;
+            }
+        };
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
+    }
+
+    private void descontarCupoLibre(String URL) {
+        StringRequest stringRequest= new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getApplicationContext(), "Se descontó exitosamente", Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                // id del cupo libre, cupototal
+                Map<String, String> parametros = new HashMap<String, String>();
+                parametros.put("cupo_id", idcupolibre);
+                //DESCUENTO DEL CUPO TOTAL - 1
+                String cupoTotal_String = tvTotalCuposLibres.getText().toString();
+                Integer cupoTotal_int= Integer.parseInt(cupoTotal_String);
+                cupoTotal_int=cupoTotal_int -1;
+                String cupoTotal_string = cupoTotal_int+"";
+                parametros.put("cupo_disponible", cupoTotal_string);
+                return parametros;
+            }
+        };
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
+    }
+
+    private String getFromSharedPreferences(String key) {
+        SharedPreferences sharedPref = getSharedPreferences(key, Context.MODE_PRIVATE);
+        return sharedPref.getString(key,"");
+    }
+}

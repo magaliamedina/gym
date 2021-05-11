@@ -14,6 +14,13 @@ public class Grupos {
         this.descripcion= descripcion;
     }
 
+    public Grupos(String id, String p_descripcion, String prof, String horario) {
+        this.id=id;
+        this.descripcion = p_descripcion;
+        this.prof=prof;
+        this.horario=horario;
+    }
+
     public String getDescripcion() {
         return descripcion;
     }
@@ -34,7 +41,7 @@ public class Grupos {
         return prof;
     }
 
-    public void setProf(String prof1) {
+    public void setProf(String prof) {
         this.prof = prof;
     }
 
@@ -53,6 +60,11 @@ public class Grupos {
     public void setCupototal(String cupototal) {
         this.cupototal = cupototal;
     }
+
+    public String toString() {
+        return descripcion + " - Profesor: " + prof +" - " + horario;
+    }
+
 
 
 }
