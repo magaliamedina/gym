@@ -22,12 +22,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.gimnasio_unne.DetallesPersonal;
+import com.example.gimnasio_unne.DetallesProfesor;
+import com.example.gimnasio_unne.EditarPersonal;
 import com.example.gimnasio_unne.EditarProfesor;
-import com.example.gimnasio_unne.view.adapter.AdaptadorPersonas;
-import com.example.gimnasio_unne.AltaPersona;
-import com.example.gimnasio_unne.DetallesPersonas;
 import com.example.gimnasio_unne.R;
 import com.example.gimnasio_unne.model.Personas;
+import com.example.gimnasio_unne.view.adapter.AdaptadorPersonas;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -39,25 +40,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class FragmentListarPersonas extends Fragment {
+public class FragmentListarPersonal extends Fragment {
     private ListView list;
     AdaptadorPersonas adaptador;
     public static ArrayList<Personas> persons= new ArrayList<>();
-    String url="https://medinamagali.com.ar/gimnasio_unne/mostrarpersonas.php";
+    String url="https://medinamagali.com.ar/gimnasio_unne/listar_personal.php";
     Personas personas;
-    public FragmentListarPersonas() {  }
+    public FragmentListarPersonal() {  }
+
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_listar_personas, container, false);
-        list = view.findViewById(R.id.listviewpersonas);
-        FloatingActionButton fab = view.findViewById(R.id.fabpersonas);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view= inflater.inflate(R.layout.fragment_listar_personal, container, false);
+        list = view.findViewById(R.id.lvListarPersonalAdministrativo);
+        FloatingActionButton fab = view.findViewById(R.id.fabPersonalAdmin);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity().getApplication(), AltaPersona.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(getActivity().getApplication(), AltaPersona.class);
+                startActivity(intent);*/
             }
         });
 
@@ -78,13 +79,14 @@ public class FragmentListarPersonas extends Fragment {
                     public void onClick(DialogInterface dialog, int i) {
                         switch (i) {
                             case 0:
-                               // pasamos position para poder recibir en detalles
-                                startActivity(new Intent(getActivity().getApplicationContext(), DetallesPersonas.class)
+                                // pasamos position para poder recibir en detalles
+                                startActivity(new Intent(getActivity().getApplicationContext(), DetallesPersonal.class)
                                         .putExtra("position",position));
                                 break;
                             case 1:
                                 //pasamos position para poder recibir en editar
-                                startActivity(new Intent(getActivity().getApplicationContext(), EditarProfesor.class)
+                                //no lleva el id correcto
+                                startActivity(new Intent(getActivity().getApplicationContext(), EditarPersonal.class)
                                         .putExtra("position",position));
                                 break;
                             case 2:
@@ -97,12 +99,11 @@ public class FragmentListarPersonas extends Fragment {
                 builder.create().show();
             }
         });
-        mostrarDatos();
+        mostrarDatos(url);
         return view;
     }
 
-
-    public void mostrarDatos() {
+    public void mostrarDatos(String url) {
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -128,8 +129,8 @@ public class FragmentListarPersonas extends Fragment {
                             String email = object.getString("email");
                             String pass = object.getString("pass");
 
-                            personas = new Personas(id, dni, apellido, nombres, sexo, fechaNac, localidad, provincia,
-                            estado, estadoCivil, usuario_id, email, pass);
+                            Personas personas = new Personas(id, dni, apellido, nombres, sexo, fechaNac, localidad, provincia,
+                                    estado, estadoCivil, usuario_id, email, pass);
                             persons.add(personas);
                             adaptador.notifyDataSetChanged();
                         }
@@ -171,4 +172,5 @@ public class FragmentListarPersonas extends Fragment {
         RequestQueue requestQueue= Volley.newRequestQueue(getActivity().getApplicationContext());
         requestQueue.add(request);
     }
+
 }

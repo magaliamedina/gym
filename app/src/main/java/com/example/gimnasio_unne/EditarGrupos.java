@@ -25,7 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.gimnasio_unne.model.Horarios;
 import com.example.gimnasio_unne.model.Personas;
 import com.example.gimnasio_unne.view.fragments.FragmentListarGrupos;
-import com.example.gimnasio_unne.view.fragments.FragmentListarPersonas;
+import com.example.gimnasio_unne.view.fragments.FragmentListarProfesores;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -85,7 +85,7 @@ public class EditarGrupos extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(EditarGrupos.this, "Grupo modificado correctamente", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(getApplicationContext(), FragmentListarPersonas.class));
+                startActivity(new Intent(getApplicationContext(), FragmentListarProfesores.class));
                 finish();
                 progressDialog.dismiss();
             }

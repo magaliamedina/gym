@@ -23,7 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.gimnasio_unne.model.Provincias;
-import com.example.gimnasio_unne.view.fragments.FragmentListarProfesores;
+import com.example.gimnasio_unne.view.fragments.FragmentListarPersonal;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -35,8 +35,7 @@ import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 
-public class EditarProfesor extends AppCompatActivity {
-
+public class EditarPersonal extends AppCompatActivity {
     EditText etdni,etapellido, etnombres, etestadocivil,etemail, etpassword;
     TextView tvid;
     Spinner spinnerProvincias, spinnerSexos;
@@ -44,41 +43,41 @@ public class EditarProfesor extends AppCompatActivity {
     private AsyncHttpClient cliente;
     int position;
     private String idprovincia, sexoBD;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editar_profesor);
+        setContentView(R.layout.activity_editar_personal);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        tvid = findViewById(R.id.tvideditarprofesor);
-        etdni = findViewById(R.id.etDnieditarprofesor);
-        etapellido= findViewById(R.id.etApellidoeditarprofesor);
-        etnombres= findViewById(R.id.etNombreseditarprofesor);
-        etestadocivil= findViewById(R.id.etEstadoCivilEditarprofesor);
-        etemail= findViewById(R.id.etEmailEditarProfesor);
-        etpassword=findViewById(R.id.etPasswordEditarProfesor);
-        spinnerProvincias = findViewById(R.id.spinnerProvinciaEditarProfesor);
-        spinnerSexos = findViewById(R.id.spinnerSexosEditarProfesor);
-        btn= findViewById(R.id.btneditarprofesor);
+        tvid = findViewById(R.id.tvideditarPersonal);
+        etdni = findViewById(R.id.etDnieditarPersonal);
+        etapellido= findViewById(R.id.etApellidoeditarPersonal);
+        etnombres= findViewById(R.id.etNombreseditarPersonal);
+        etestadocivil= findViewById(R.id.etEstadoCivilEditarPersonal);
+        etemail= findViewById(R.id.etEmailEditarPersonal);
+        etpassword=findViewById(R.id.etPasswordEditarPersonal);
+        spinnerProvincias = findViewById(R.id.spinnerProvinciaEditarPersonal);
+        spinnerSexos = findViewById(R.id.spinnerSexosEditarPersonal);
+        btn= findViewById(R.id.btneditarPersonal);
         cliente = new AsyncHttpClient();
 
         Intent intent =getIntent();
         position=intent.getExtras().getInt("position");
-        tvid.setText(FragmentListarProfesores.persons.get(position).getId());
-        etdni.setText(FragmentListarProfesores.persons.get(position).getDni());
-        etapellido.setText(FragmentListarProfesores.persons.get(position).getApellido());
-        etnombres.setText(FragmentListarProfesores.persons.get(position).getNombres());
-        etestadocivil.setText(FragmentListarProfesores.persons.get(position).getEstadoCivil());
-        etemail.setText(FragmentListarProfesores.persons.get(position).getEmail());
-        etpassword.setText(FragmentListarProfesores.persons.get(position).getPassword());
+        tvid.setText(FragmentListarPersonal.persons.get(position).getId());
+        etdni.setText(FragmentListarPersonal.persons.get(position).getDni());
+        etapellido.setText(FragmentListarPersonal.persons.get(position).getApellido());
+        etnombres.setText(FragmentListarPersonal.persons.get(position).getNombres());
+        etestadocivil.setText(FragmentListarPersonal.persons.get(position).getEstadoCivil());
+        etemail.setText(FragmentListarPersonal.persons.get(position).getEmail());
+        etpassword.setText(FragmentListarPersonal.persons.get(position).getPassword());
 
         String [] sexos = {"Masculino", "Femenino", "Otro"};
-        ArrayAdapter <String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sexos);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sexos);
         spinnerSexos.setAdapter(adapter);
 
         llenarSpinnerProvincias();
@@ -104,15 +103,15 @@ public class EditarProfesor extends AppCompatActivity {
                 , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(EditarProfesor.this, "Profesor modificado correctamente", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(getApplicationContext(), FragmentListarProfesores.class));
+                Toast.makeText(EditarPersonal.this, "Personal modificado correctamente", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getApplicationContext(), FragmentListarPersonal.class));
                 finish();
                 progressDialog.dismiss();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(EditarProfesor.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(EditarPersonal.this, error.getMessage(), Toast.LENGTH_LONG).show();
                 progressDialog.dismiss();
             }
         }){
@@ -132,7 +131,7 @@ public class EditarProfesor extends AppCompatActivity {
                 return parametros;
             }
         };
-        RequestQueue requestQueue= Volley.newRequestQueue(EditarProfesor.this);
+        RequestQueue requestQueue= Volley.newRequestQueue(EditarPersonal.this);
         requestQueue.add(request);
     }
 
@@ -180,5 +179,4 @@ public class EditarProfesor extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
 }

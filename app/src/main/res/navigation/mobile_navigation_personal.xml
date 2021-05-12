@@ -19,6 +19,6 @@
         android:id="@+id/fragmentPersonalCuposLibres"
         android:name="com.example.gimnasio_unne.view.fragments.FragmentPersonalCuposLibres"
         android:label="Cupos libres"
-        tools:layout="@layout/fragment_personal_cupos_libres" />
+        tools:layout="@layout/fragment_listar_cupos_libres" />
 
 </navigation>

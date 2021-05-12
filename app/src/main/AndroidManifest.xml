@@ -14,9 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".EditarPersonal"></activity>
+        <activity android:name=".DetallesPersonal" />
         <activity
             android:name=".EditarCupoLibre"
-            android:parentActivityName=".view.ActivityPersonal"></activity>
+            android:parentActivityName=".view.ActivityPersonal" />
         <activity
             android:name=".Reservar"
             android:parentActivityName=".view.AlumnoActivity" />
@@ -37,7 +39,7 @@
             android:name=".AltaGrupo"
             android:parentActivityName=".view.MainActivity" />
         <activity
-            android:name=".DetallesPersonas"
+            android:name=".DetallesProfesor"
             android:parentActivityName=".view.MainActivity" />
         <activity
             android:name=".EditarGrupos"

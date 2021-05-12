@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         drawer.addDrawerListener(toggle);
 
         //se cargan los id de los fragments que se van a mostrar
-        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.fragmentListarGrupos, R.id.fragmentListarPersonas)
+        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.fragmentListarGrupos, R.id.fragmentListarPersonas, R.id.fragmentListarPersonal)
                 .setDrawerLayout(drawer)
                 .build();
 

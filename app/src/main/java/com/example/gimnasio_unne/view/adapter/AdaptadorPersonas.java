@@ -19,7 +19,7 @@ public class AdaptadorPersonas extends ArrayAdapter<Personas> {
     Context context;
     List<Personas> arrayListPersons;
     public AdaptadorPersonas(@NonNull Context context, List<Personas>arrayListPersons) {
-        super(context, R.layout.list_personas, arrayListPersons);
+        super(context, R.layout.list_profesores, arrayListPersons);
         this.context = context;
         this.arrayListPersons=arrayListPersons;
     }
@@ -27,7 +27,7 @@ public class AdaptadorPersonas extends ArrayAdapter<Personas> {
     @NonNull
     @Override
     public View getView (int position, @NonNull View convertView, @NonNull ViewGroup parent){
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_personas, null, true);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_profesores, null, true);
         TextView tvid= view.findViewById(R.id.tvid);
         TextView tvpersona = view.findViewById(R.id.tvpersona);
 

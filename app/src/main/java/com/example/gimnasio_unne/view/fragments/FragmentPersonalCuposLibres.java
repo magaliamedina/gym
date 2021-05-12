@@ -44,8 +44,8 @@ public class FragmentPersonalCuposLibres extends Fragment {
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.fragment_personal_cupos_libres, container, false);
-        list = view.findViewById(R.id.lvPersonalListarCuposLibres);
+        View view =inflater.inflate(R.layout.fragment_listar_cupos_libres, container, false);
+        list = view.findViewById(R.id.lvListarCuposLibres);
         adaptador= new AdaptadorCuposLibres(getActivity().getApplicationContext(), arrayCuposLibres);
         list.setAdapter(adaptador);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -51,6 +51,7 @@ public class EditarCupoLibre extends AppCompatActivity {
         setContentView(R.layout.activity_editar_cupo_libre);
         btnguardar=findViewById(R.id.btnEditarCupoLibre);
         tvFechaReserva=findViewById(R.id.tvEditarCuposLibresFechaReserva);
+        etTotalCupos=findViewById(R.id.etEditarCuposLibresTotalCupos);
         spinnerGrupos=findViewById(R.id.spinnerEditarCuposLibresGrupos);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -66,7 +67,7 @@ public class EditarCupoLibre extends AppCompatActivity {
         btnguardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                actualizar("http://medinamagali.com.ar/gimnasio_unne/editar_cupolibre.php");
+                actualizar();
             }
         });
 
@@ -123,12 +124,12 @@ public class EditarCupoLibre extends AppCompatActivity {
         }
     }
 
-    public void actualizar(String URL) {
+    public void actualizar() {
         final ProgressDialog progressDialog= new ProgressDialog(this);
         progressDialog.setMessage("Cargando....");
         progressDialog.show();
 
-        StringRequest request=new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+        StringRequest request=new StringRequest(Request.Method.POST, "http://medinamagali.com.ar/gimnasio_unne/editar_cupolibre.php", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(EditarCupoLibre.this, "Modificado exitosamente", Toast.LENGTH_LONG).show();
