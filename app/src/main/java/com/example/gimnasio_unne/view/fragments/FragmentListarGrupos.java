@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -34,6 +35,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class FragmentListarGrupos extends Fragment {
@@ -91,6 +94,8 @@ public class FragmentListarGrupos extends Fragment {
                                         .putExtra("position",position));
                                 break;
                             case 2:
+                                //cambiamos de estado al grupo
+                                darDeBajaGrupo(groups.get(position).getId());
                                 break;
 
                         }
@@ -143,6 +148,29 @@ public class FragmentListarGrupos extends Fragment {
         requestQueue.add(request);
     }
 
-
+    public void darDeBajaGrupo(final String id) {
+        StringRequest request=new StringRequest(Request.Method.POST, "https://medinamagali.com.ar/gimnasio_unne/baja_grupo.php"
+                , new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getActivity().getApplicationContext(), "Se dió de baja al grupo exitosamente", Toast.LENGTH_LONG).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params= new HashMap<String, String>();
+                params.put("grupo_id", id);
+                params.put("estado", "0");
+                return params;
+            }
+        };
+        RequestQueue requestQueue= Volley.newRequestQueue(getActivity().getApplicationContext());
+        requestQueue.add(request);
+    }
 
 }

@@ -6,50 +6,46 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.ScrollView;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.gimnasio_unne.EditarCupoLibre;
 import com.example.gimnasio_unne.R;
-import com.example.gimnasio_unne.Reservar;
 import com.example.gimnasio_unne.model.CuposLibres;
 import com.example.gimnasio_unne.view.adapter.AdaptadorCuposLibres;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-
-public class FragmentListarCuposLibres extends Fragment {
-
+public class FragmentPersonalCuposLibres extends Fragment {
     private ListView list;
     public static ArrayList<CuposLibres> arrayCuposLibres= new ArrayList<>();
     String url = "https://medinamagali.com.ar/gimnasio_unne/listarcuposlibres.php";
     AdaptadorCuposLibres adaptador;
     CuposLibres cuposLibres;
-    TextView tvReservaRealizada;
-    ScrollView svListaCuposLibres;
-
-    public FragmentListarCuposLibres() {  }
-
+    public FragmentPersonalCuposLibres() {
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_listar_cupos_libres, container, false);
-        //tvReservaRealizada=view.findViewById(R.id.tvReservaRealizada);
-
-        list = view.findViewById(R.id.lvListarCuposLibres);
-        svListaCuposLibres = view.findViewById(R.id.svListaCuposLibres);
-
+        View view =inflater.inflate(R.layout.fragment_personal_cupos_libres, container, false);
+        list = view.findViewById(R.id.lvPersonalListarCuposLibres);
         adaptador= new AdaptadorCuposLibres(getActivity().getApplicationContext(), arrayCuposLibres);
         list.setAdapter(adaptador);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -57,7 +53,7 @@ public class FragmentListarCuposLibres extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 
-                CharSequence[] dialogoItem={"Reservar"};
+                CharSequence[] dialogoItem={"Editar cupo libre", "Dar de baja cupo libre"};
                 //titulo del alert dialog
                 builder.setTitle(arrayCuposLibres.get(position).getGrupo_descripcion());
                 builder.setItems(dialogoItem, new DialogInterface.OnClickListener() {
@@ -65,9 +61,12 @@ public class FragmentListarCuposLibres extends Fragment {
                     public void onClick(DialogInterface dialog, int i) {
                         switch (i) {
                             case 0:
-                                //pasamos position para poder recibir en Reservar
-                                startActivity(new Intent(getActivity().getApplicationContext(), Reservar.class)
+                                //pasamos position para poder recibir en EditarCupolibre
+                                startActivity(new Intent(getActivity().getApplicationContext(), EditarCupoLibre.class)
                                         .putExtra("position",position));
+                                break;
+                            case 1:
+                                darDeBajaCupoLibre(arrayCuposLibres.get(position).getId_cupolibre());
                                 break;
                         }
                     }
@@ -77,6 +76,30 @@ public class FragmentListarCuposLibres extends Fragment {
         });
         mostrarDatos();
         return view;
+    }
+
+    public void darDeBajaCupoLibre(final String id) {
+        StringRequest request=new StringRequest(Request.Method.POST, "https://medinamagali.com.ar/gimnasio_unne/baja_cupolibre.php"
+                , new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getActivity().getApplicationContext(), "Se dió de baja exitosamente", Toast.LENGTH_LONG).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params= new HashMap<String, String>();
+                params.put("cupolibre_id", id);
+                return params;
+            }
+        };
+        RequestQueue requestQueue= Volley.newRequestQueue(getActivity().getApplicationContext());
+        requestQueue.add(request);
     }
 
     public void mostrarDatos() {
@@ -106,9 +129,6 @@ public class FragmentListarCuposLibres extends Fragment {
                             adaptador.notifyDataSetChanged();
                         }
                     }
-                    else {
-                        tvReservaRealizada.setVisibility(View.VISIBLE);
-                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -122,7 +142,4 @@ public class FragmentListarCuposLibres extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         requestQueue.add(request);
     }
-
-
-
 }

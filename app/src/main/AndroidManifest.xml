@@ -15,8 +15,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".EditarCupoLibre"
+            android:parentActivityName=".view.ActivityPersonal"></activity>
+        <activity
             android:name=".Reservar"
-            android:parentActivityName=".view.AlumnoActivity"></activity>
+            android:parentActivityName=".view.AlumnoActivity" />
         <activity
             android:name=".EditarProfesor"
             android:parentActivityName=".view.MainActivity" />

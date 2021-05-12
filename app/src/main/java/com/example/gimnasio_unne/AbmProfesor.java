@@ -28,7 +28,7 @@ import java.util.Map;
 
 public class AbmProfesor extends AppCompatActivity {
     EditText etNroDoc, etNombre, etApellido, etEmail, etPassword;
-    ImageView btnAgregar, btnEditar, btnEliminar, btnBuscar, btnMenu ;
+    ImageView  btnBuscar ;
     RequestQueue requestQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,25 +40,7 @@ public class AbmProfesor extends AppCompatActivity {
         etEmail = findViewById(R.id.txt_email);
         etPassword = findViewById(R.id.txt_password);
 
-        btnAgregar = findViewById(R.id.btn_insertar);
-        btnEditar = findViewById(R.id.btn_editar);
-        btnEliminar = findViewById(R.id.btn_eliminar);
         btnBuscar = findViewById(R.id.btn_buscar);
-
-
-        btnAgregar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ejecutarServicio("http://medinamagali.com.ar/gimnasio_unne/insertar_profesor.php");
-            }
-        });
-
-        btnEditar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ejecutarServicio("http://medinamagali.com.ar/gimnasio_unne/insertar_profesor.php");
-            }
-        });
 
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,42 +49,7 @@ public class AbmProfesor extends AppCompatActivity {
             }
         });
 
-        btnEliminar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                eliminar("http://medinamagali.com.ar/gimnasio_unne/eliminar_profesor.php");
-            }
-        });
     }
-
-    private void ejecutarServicio(String URL) {//enviar peticiones al servidor
-        //declaramos una peticion
-        StringRequest stringRequest= new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(), "OPERACION EXITOSA", Toast.LENGTH_SHORT).show();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> parametros = new HashMap<String, String>();
-                parametros.put("NroDocumento", etNroDoc.getText().toString());
-                parametros.put("Nombres", etNombre.getText().toString());
-                parametros.put("Apellido", etApellido.getText().toString());
-                parametros.put("Email", etEmail.getText().toString());
-                parametros.put("Password", etPassword.getText().toString());
-                return parametros;
-            }
-        };
-        requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-    }
-
     private void buscar(String URL) {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             @Override
@@ -131,36 +78,6 @@ public class AbmProfesor extends AppCompatActivity {
         requestQueue.add(jsonArrayRequest);
     }
 
-    private void eliminar(String URL) {//enviar peticiones al servidor
-        //declaramos una peticion
-        StringRequest stringRequest= new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(), "El profesor fue eliminado", Toast.LENGTH_SHORT).show();
-                limpiarFormulario();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> parametros = new HashMap<String, String>();
-                parametros.put("NroDocumento", etNroDoc.getText().toString());
-                return parametros;
-            }
-        };
-        requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-    }
-
-    private void limpiarFormulario() {
-        etNroDoc.setText("");
-        etNombre.setText("");
-        etApellido.setText("");
-    }
 
 
 

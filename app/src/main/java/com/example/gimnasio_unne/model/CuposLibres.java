@@ -1,16 +1,18 @@
 package com.example.gimnasio_unne.model;
 
 public class CuposLibres {
-    private String id_cupolibre, grupo_descripcion, profesor_nombreYapellido, cupolibre_total, horarios_inicio_fin, grupo_id;
+    private String id_cupolibre, grupo_descripcion, profesor_nombreYapellido, cupolibre_total, horarios_inicio_fin, grupo_id, fecha_reserva;
 
     public CuposLibres(){}
-    public CuposLibres(String id_cupolibre, String grupo_descripcion, String nombreYapellido, String cupolibre_total, String horarios_inicio_fin, String grupo_id) {
+    public CuposLibres(String id_cupolibre, String grupo_descripcion, String nombreYapellido, String cupolibre_total,
+                       String horarios_inicio_fin, String grupo_id, String fecha_reserva) {
         this.id_cupolibre=id_cupolibre;
         this.grupo_descripcion = grupo_descripcion;
         this.profesor_nombreYapellido = nombreYapellido;
         this.cupolibre_total = cupolibre_total;
         this.horarios_inicio_fin = horarios_inicio_fin;
         this.grupo_id= grupo_id;
+        this.fecha_reserva=fecha_reserva;
     }
 
     public String getId_cupolibre() {
@@ -59,5 +61,13 @@ public class CuposLibres {
 
     public void setHorarios_inicio_fin(String horarios_inicio_fin) {
         this.horarios_inicio_fin = horarios_inicio_fin;
+    }
+
+    public String getFecha_reserva() {
+        return fecha_reserva;
+    }
+
+    public void setFecha_reserva(String fecha_reserva) {
+        this.fecha_reserva = fecha_reserva;
     }
 }

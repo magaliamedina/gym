@@ -82,7 +82,7 @@ public class EditarProfesor extends AppCompatActivity {
         ArrayAdapter <String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sexos);
         spinnerSexos.setAdapter(adapter);
 
-        //llenarSpinnerProvincias();
+        llenarSpinnerProvincias();
     }
 
     public void actualizar(View view) {

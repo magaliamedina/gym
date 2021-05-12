@@ -61,7 +61,7 @@ public class AltaPersona extends AppCompatActivity {
         btn= findViewById(R.id.btneditarprofesor);
         cliente = new AsyncHttpClient();
 
-        //llenarSpinnerProvincias();
+        llenarSpinnerProvincias();
 
         String [] sexos = {"Masculino", "Femenino", "Otro"};
         ArrayAdapter <String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sexos);
@@ -75,7 +75,7 @@ public class AltaPersona extends AppCompatActivity {
         });
     }
 
-    /*private void llenarSpinnerProvincias() {
+    private void llenarSpinnerProvincias() {
         String url = "https://medinamagali.com.ar/gimnasio_unne/consultarprovincias.php";
         cliente.post(url, new AsyncHttpResponseHandler() {
             @Override
@@ -118,7 +118,7 @@ public class AltaPersona extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }*/
+    }
 
     private void altapersona(String URL) {
         String seleccion = spinnerSexos.getSelectedItem().toString();
@@ -155,7 +155,7 @@ public class AltaPersona extends AppCompatActivity {
                 parametros.put("apellido", etapellido.getText().toString());
                 parametros.put("nombres", etnombres.getText().toString());
                 parametros.put("sexo_id", sexoBD);
-                //parametros.put("provincia", idprovincia);
+                parametros.put("provincia", idprovincia);
                 parametros.put("estado", "1");
                 parametros.put("estado_civil", etestadocivil.getText().toString());
                 parametros.put("usuario_id", "2"); //usuario profesor

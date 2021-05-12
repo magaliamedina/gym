@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -34,6 +35,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class FragmentListarPersonas extends Fragment {
@@ -85,6 +88,7 @@ public class FragmentListarPersonas extends Fragment {
                                         .putExtra("position",position));
                                 break;
                             case 2:
+                                darDeBajaPersona(persons.get(position).getId());
                                 break;
 
                         }
@@ -141,6 +145,30 @@ public class FragmentListarPersonas extends Fragment {
             }
         });
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        requestQueue.add(request);
+    }
+
+    public void darDeBajaPersona(final String id) {
+        StringRequest request=new StringRequest(Request.Method.POST, "https://medinamagali.com.ar/gimnasio_unne/baja_persona.php"
+                , new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getActivity().getApplicationContext(), "Se dió de baja exitosamente", Toast.LENGTH_LONG).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params= new HashMap<String, String>();
+                params.put("personas_id", id);
+                return params;
+            }
+        };
+        RequestQueue requestQueue= Volley.newRequestQueue(getActivity().getApplicationContext());
         requestQueue.add(request);
     }
 }
