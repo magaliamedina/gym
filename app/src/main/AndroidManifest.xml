@@ -14,8 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".EditarPersonal"></activity>
-        <activity android:name=".DetallesPersonal" />
+        <activity
+            android:name=".EditarPersonal"
+            android:parentActivityName=".view.MainActivity"/>
+        <activity
+            android:name=".DetallesPersonal"
+            android:parentActivityName=".view.MainActivity"/>
         <activity
             android:name=".EditarCupoLibre"
             android:parentActivityName=".view.ActivityPersonal" />
@@ -51,7 +55,6 @@
             android:name=".view.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AbmProfesor" />
         <activity android:name=".view.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

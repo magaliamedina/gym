@@ -58,7 +58,8 @@ public class AltaPersona extends AppCompatActivity {
         etemail= findViewById(R.id.etemailaltapersona);
         etpassword=findViewById(R.id.etpassaltapersona);
         spinnerProvincias = findViewById(R.id.spinnerProvinciaAltaProfesor);
-        btn= findViewById(R.id.btneditarprofesor);
+        spinnerSexos=findViewById(R.id.spsexoaltapersona);
+        btn= findViewById(R.id.btnaltapersona);
         cliente = new AsyncHttpClient();
 
         llenarSpinnerProvincias();

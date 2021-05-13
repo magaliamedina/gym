@@ -132,9 +132,8 @@ public class EditarCupoLibre extends AppCompatActivity {
         StringRequest request=new StringRequest(Request.Method.POST, "http://medinamagali.com.ar/gimnasio_unne/editar_cupolibre.php", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(EditarCupoLibre.this, "Modificado exitosamente", Toast.LENGTH_LONG).show();
+                Toast.makeText(EditarCupoLibre.this, "Modificado exitosamente", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(), FragmentListarCuposLibres.class));
-                finish();
                 progressDialog.dismiss();
             }
         }, new Response.ErrorListener() {

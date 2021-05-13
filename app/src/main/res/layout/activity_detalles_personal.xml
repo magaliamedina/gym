@@ -22,7 +22,7 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayoutCompat
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -109,6 +109,6 @@
             android:hint="Email:"
             android:textSize="18sp" />
 
-    </LinearLayoutCompat>
+    </LinearLayout>
 
 </LinearLayout>

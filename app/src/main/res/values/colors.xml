@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#4782d3</color>
-    <color name="colorPrimaryDark">#4782d3</color>
+    <color name="colorPrimaryDark">#3A6FB8</color> <!-- status bar: color de la barra de arriba de la app -->
     <color name="colorAccent">#042F6A</color>
     <color name="white">#ffffff</color>
 

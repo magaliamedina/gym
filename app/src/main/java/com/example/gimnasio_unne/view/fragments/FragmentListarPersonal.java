@@ -22,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.gimnasio_unne.AltaPersona;
 import com.example.gimnasio_unne.DetallesPersonal;
 import com.example.gimnasio_unne.DetallesProfesor;
 import com.example.gimnasio_unne.EditarPersonal;
@@ -48,7 +49,6 @@ public class FragmentListarPersonal extends Fragment {
     Personas personas;
     public FragmentListarPersonal() {  }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_listar_personal, container, false);
@@ -57,8 +57,8 @@ public class FragmentListarPersonal extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent intent = new Intent(getActivity().getApplication(), AltaPersona.class);
-                startActivity(intent);*/
+                Intent intent = new Intent(getActivity().getApplication(), AltaPersona.class);
+                startActivity(intent);
             }
         });
 
