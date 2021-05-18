@@ -23,9 +23,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.gimnasio_unne.view.adapter.Adaptador;
-import com.example.gimnasio_unne.AltaGrupo;
-import com.example.gimnasio_unne.DetallesGrupo;
-import com.example.gimnasio_unne.EditarGrupos;
+import com.example.gimnasio_unne.view.AltaGrupo;
+import com.example.gimnasio_unne.view.DetallesGrupo;
+import com.example.gimnasio_unne.view.EditarGrupos;
 import com.example.gimnasio_unne.R;
 import com.example.gimnasio_unne.model.Grupos;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -52,7 +52,6 @@ public class FragmentListarGrupos extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_listar_grupos, container, false);
 
         list = view.findViewById(R.id.listview);

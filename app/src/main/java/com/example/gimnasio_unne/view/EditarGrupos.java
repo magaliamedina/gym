@@ -1,4 +1,4 @@
-package com.example.gimnasio_unne;
+package com.example.gimnasio_unne.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -22,6 +22,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.gimnasio_unne.AdministradorActivity;
+import com.example.gimnasio_unne.R;
 import com.example.gimnasio_unne.model.Horarios;
 import com.example.gimnasio_unne.model.Personas;
 import com.example.gimnasio_unne.view.fragments.FragmentListarGrupos;
@@ -73,20 +75,39 @@ public class EditarGrupos extends AppCompatActivity {
 
         llenarSpinnerProfesor();
         llenarSpinnerHorario();
+
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(validarCampos()) {
+                    actualizar("https://medinamagali.com.ar/gimnasio_unne/editargrupo.php");
+                }
+            }
+        });
     }
 
-    public void actualizar(View view) {
+    public boolean validarCampos() {
+        if(etcupototal.getText().toString().isEmpty()) {
+            etcupototal.setError("Ingrese cupo total");
+            return false;
+        }
+        if(etnombre.getText().toString().isEmpty()) {
+            etnombre.setError("Ingrese una descripción");
+            return false;
+        }
+        return true;
+    }
+
+    public void actualizar(String URL) {
         final ProgressDialog progressDialog= new ProgressDialog(this);
         progressDialog.setMessage("Cargando....");
         progressDialog.show();
 
-        StringRequest request=new StringRequest(Request.Method.POST, "https://medinamagali.com.ar/gimnasio_unne/editargrupo.php"
-                , new Response.Listener<String>() {
+        StringRequest request=new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(EditarGrupos.this, "Grupo modificado correctamente", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(getApplicationContext(), FragmentListarProfesores.class));
-                finish();
+                startActivity(new Intent(getApplicationContext(), AdministradorActivity.class));
                 progressDialog.dismiss();
             }
         }, new Response.ErrorListener() {

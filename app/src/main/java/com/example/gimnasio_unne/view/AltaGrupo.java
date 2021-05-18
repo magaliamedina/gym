@@ -1,4 +1,4 @@
-package com.example.gimnasio_unne;
+package com.example.gimnasio_unne.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.example.gimnasio_unne.R;
 import com.example.gimnasio_unne.model.Horarios;
 import com.example.gimnasio_unne.model.Personas;
 import com.loopj.android.http.*;
@@ -63,10 +64,24 @@ public class AltaGrupo extends AppCompatActivity {
         btnguardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                altagrupo("http://medinamagali.com.ar/gimnasio_unne/altagrupo.php");
+                if (validarCampos()) {
+                    altagrupo("http://medinamagali.com.ar/gimnasio_unne/altagrupo.php");
+                }
             }
         });
 
+    }
+
+    public boolean validarCampos() {
+        if(ettotalcupos.getText().toString().isEmpty()) {
+            ettotalcupos.setError("Ingrese cupo total");
+            return false;
+        }
+        if(etdescripcion.getText().toString().isEmpty()) {
+            etdescripcion.setError("Ingrese una descripción");
+            return false;
+        }
+        return true;
     }
 
     private void llenarSpinner() {
@@ -163,9 +178,14 @@ public class AltaGrupo extends AppCompatActivity {
         StringRequest stringRequest= new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(), "Alta de grupo exitosa", Toast.LENGTH_SHORT).show();
-                etdescripcion.setText("");
-                ettotalcupos.setText("");
+                if(response.length()==0) {
+                    Toast.makeText(getApplicationContext(), "Alta de grupo exitosa", Toast.LENGTH_SHORT).show();
+                    etdescripcion.setText("");
+                    ettotalcupos.setText("");
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Ya existe un grupo en ese horario", Toast.LENGTH_LONG).show();
+                }
             }
         }, new Response.ErrorListener() {
             @Override

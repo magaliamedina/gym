@@ -1,4 +1,4 @@
-package com.example.gimnasio_unne;
+package com.example.gimnasio_unne.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -20,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.gimnasio_unne.R;
 import com.example.gimnasio_unne.model.Provincias;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -32,7 +32,7 @@ import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 
-public class AltaPersona extends AppCompatActivity {
+public class AltaProfesor extends AppCompatActivity {
 
     EditText etdni,etapellido, etnombres, etestadocivil,etemail, etpassword;
     Spinner spinnerProvincias, spinnerSexos;
@@ -44,7 +44,7 @@ public class AltaPersona extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_alta_persona);
+        setContentView(R.layout.activity_alta_profesor);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -71,9 +71,36 @@ public class AltaPersona extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                altapersona("http://medinamagali.com.ar/gimnasio_unne/altapersona.php");
+                if(validarCampos()) {
+                    altapersona("http://medinamagali.com.ar/gimnasio_unne/altapersona.php");
+                }
             }
         });
+    }
+
+
+    public boolean validarCampos() {
+        if(etdni.getText().toString().isEmpty()) {
+            etdni.setError("Ingrese DNI");
+            return false;
+        }
+        if(etapellido.getText().toString().isEmpty()) {
+            etapellido.setError("Ingrese apellido");
+            return false;
+        }
+        if(etnombres.getText().toString().isEmpty()) {
+            etnombres.setError("Ingrese nombres");
+            return false;
+        }
+        if (etemail.getText().toString().isEmpty()) {
+            etemail.setError("Ingrese email");
+            return false;
+        }
+        if (etpassword.getText().toString().isEmpty())  {
+            etpassword.setError("Ingrese contraseña");
+            return false;
+        }
+        return true;
     }
 
     private void llenarSpinnerProvincias() {
@@ -135,13 +162,18 @@ public class AltaPersona extends AppCompatActivity {
         StringRequest stringRequest= new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(), "Alta de profesor exitosa", Toast.LENGTH_SHORT).show();
-                etdni.setText("");
-                etapellido.setText("");
-                etnombres.setText("");
-                etestadocivil.setText("");
-                etemail.setText("");
-                etpassword.setText("");
+                if(response.length()==0){
+                    Toast.makeText(getApplicationContext(), "Alta exitosa", Toast.LENGTH_SHORT).show();
+                    etdni.setText("");
+                    etapellido.setText("");
+                    etnombres.setText("");
+                    etestadocivil.setText("");
+                    etemail.setText("");
+                    etpassword.setText("");
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Usuario existente con ese DNI", Toast.LENGTH_SHORT).show();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -165,7 +197,7 @@ public class AltaPersona extends AppCompatActivity {
                 return parametros;
             }
         };
-        requestQueue = Volley.newRequestQueue(AltaPersona.this);
+        requestQueue = Volley.newRequestQueue(AltaProfesor.this);
         requestQueue.add(stringRequest);
     }
 }

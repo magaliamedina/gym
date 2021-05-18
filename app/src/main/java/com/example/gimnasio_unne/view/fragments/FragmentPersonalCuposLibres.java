@@ -21,7 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.gimnasio_unne.EditarCupoLibre;
+import com.example.gimnasio_unne.view.EditarCupoLibre;
 import com.example.gimnasio_unne.R;
 import com.example.gimnasio_unne.model.CuposLibres;
 import com.example.gimnasio_unne.view.adapter.AdaptadorCuposLibres;

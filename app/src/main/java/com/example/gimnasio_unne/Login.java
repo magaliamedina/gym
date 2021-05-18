@@ -1,4 +1,4 @@
-package com.example.gimnasio_unne.view;
+package com.example.gimnasio_unne;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,8 +18,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.gimnasio_unne.R;
-import com.example.gimnasio_unne.model.Personas;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,7 +28,7 @@ import java.util.Map;
 public class Login extends AppCompatActivity {
     EditText edtUsuario, edtPassword;
     Button btnLogin;
-    String usuario, password, personas_id,apellido,nombres,lu;
+    public static String usuario="", password="", personas_id="",apellido="",nombres="",lu="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +46,8 @@ public class Login extends AppCompatActivity {
                 if(!usuario.isEmpty() && !password.isEmpty()) {
                     validarUsuario("https://medinamagali.com.ar/gimnasio_unne/validar_usuario.php");
                 } else {
-                    Toast.makeText(Login.this, "Completa los campos", Toast.LENGTH_SHORT).show();
+                    edtUsuario.setError("Ingrese usuario");
+                    edtPassword.setError("Ingrese contraseña");
                 }
             }
         });
@@ -67,18 +66,13 @@ public class Login extends AppCompatActivity {
                         apellido= jsonObject.getString("apellido");
                         nombres = jsonObject.getString("nombres");
                         lu= jsonObject.getString("lu");
-                        saveLoginSharedPreferences();
                         edtUsuario.setText("");
                         edtPassword.setText("");
                         //PERFIL ADMINISTRADOR
                         if( usuario_id.equals("1")) {
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), AdministradorActivity.class);
                             startActivity(intent);
                         }
-                        /*if( usuario_id.equals("2")) {
-                            Intent intent = new Intent(getApplicationContext(), Administrador.class);
-                            startActivity(intent);
-                        }*/
                         //PERFIL ESTUDIANTE
                         if( usuario_id.equals("3")) {
                             Intent intent = new Intent(getApplicationContext(), AlumnoActivity.class);
@@ -86,7 +80,7 @@ public class Login extends AppCompatActivity {
                         }
                         //PERFIL PERSONAL ADMINISTRATIVO
                         if( usuario_id.equals("4")) {
-                            Intent intent = new Intent(getApplicationContext(), ActivityPersonal.class);
+                            Intent intent = new Intent(getApplicationContext(), PersonalActivity.class);
                             startActivity(intent);
                         }
                     }
@@ -114,27 +108,8 @@ public class Login extends AppCompatActivity {
                 return parametros;
             }
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        RequestQueue requestQueue = Volley.newRequestQueue(this); //instancia de la cola de peticiones de Volley
         requestQueue.add(stringRequest);
     }
 
-    //Datos para activity Reservar
-    private void saveLoginSharedPreferences() {
-        SharedPreferences sharedPref = getSharedPreferences("personas_id",Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("personas_id", personas_id);
-        SharedPreferences sharedPref2 = getSharedPreferences("apellido",Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor2 = sharedPref2.edit();
-        editor2.putString("apellido", apellido);
-        SharedPreferences sharedPref3 = getSharedPreferences("nombres",Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor3 = sharedPref3.edit();
-        editor3.putString("nombres", nombres);
-        SharedPreferences sharedPref4 = getSharedPreferences("lu",Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor4 = sharedPref4.edit();
-        editor4.putString("lu", lu);
-        editor2.commit();
-        editor3.commit();
-        editor4.commit();
-        editor.commit();
-    }
 }

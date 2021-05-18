@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,13 +21,17 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.gimnasio_unne.AlumnoActivity;
+import com.example.gimnasio_unne.Login;
 import com.example.gimnasio_unne.R;
-import com.example.gimnasio_unne.Reservar;
+import com.example.gimnasio_unne.view.Reservar;
 import com.example.gimnasio_unne.model.CuposLibres;
 import com.example.gimnasio_unne.view.adapter.AdaptadorCuposLibres;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONStringer;
+
 import java.util.ArrayList;
 
 
@@ -34,21 +39,19 @@ public class FragmentListarCuposLibres extends Fragment {
 
     private ListView list;
     public static ArrayList<CuposLibres> arrayCuposLibres= new ArrayList<>();
-    String url = "https://medinamagali.com.ar/gimnasio_unne/listarcuposlibres.php";
+    String url = "https://medinamagali.com.ar/gimnasio_unne/listarcuposlibres.php?alumno_id="+Login.personas_id+"";
+
     AdaptadorCuposLibres adaptador;
     CuposLibres cuposLibres;
     TextView tvReservaRealizada;
-    ScrollView svListaCuposLibres;
 
     public FragmentListarCuposLibres() {  }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_listar_cupos_libres, container, false);
-        //tvReservaRealizada=view.findViewById(R.id.tvReservaRealizada);
-
+        tvReservaRealizada=view.findViewById(R.id.tvReservaRealizada);
         list = view.findViewById(R.id.lvListarCuposLibres);
-        svListaCuposLibres = view.findViewById(R.id.svListaCuposLibres);
 
         adaptador= new AdaptadorCuposLibres(getActivity().getApplicationContext(), arrayCuposLibres);
         list.setAdapter(adaptador);
@@ -87,8 +90,8 @@ public class FragmentListarCuposLibres extends Fragment {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String sucess=jsonObject.getString("sucess");
-                    JSONArray jsonArray=jsonObject.getJSONArray("cuposlibres");
                     if (sucess.equals("1")) {
+                        JSONArray jsonArray=jsonObject.getJSONArray("cuposlibres");
                         for (int i=0;i<jsonArray.length();i++) {
                             JSONObject object= jsonArray.getJSONObject(i);
                             String id_cupolibre= object.getString("id_cupolibre");
@@ -106,7 +109,7 @@ public class FragmentListarCuposLibres extends Fragment {
                             adaptador.notifyDataSetChanged();
                         }
                     }
-                    else {
+                    if(sucess.equals("2")) {
                         tvReservaRealizada.setVisibility(View.VISIBLE);
                     }
                 } catch (JSONException e) {
@@ -122,7 +125,5 @@ public class FragmentListarCuposLibres extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         requestQueue.add(request);
     }
-
-
 
 }

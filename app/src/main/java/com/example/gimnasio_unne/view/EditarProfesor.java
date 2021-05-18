@@ -1,4 +1,4 @@
-package com.example.gimnasio_unne;
+package com.example.gimnasio_unne.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -22,7 +22,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.gimnasio_unne.AdministradorActivity;
+import com.example.gimnasio_unne.AlumnoActivity;
+import com.example.gimnasio_unne.R;
 import com.example.gimnasio_unne.model.Provincias;
+import com.example.gimnasio_unne.view.fragments.FragmentListarPersonal;
 import com.example.gimnasio_unne.view.fragments.FragmentListarProfesores;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -82,9 +86,42 @@ public class EditarProfesor extends AppCompatActivity {
         spinnerSexos.setAdapter(adapter);
 
         llenarSpinnerProvincias();
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(validarCampos()) {
+                    actualizar("http://medinamagali.com.ar/gimnasio_unne/editarpersona.php");
+                }
+            }
+        });
     }
 
-    public void actualizar(View view) {
+    public boolean validarCampos() {
+        if(etdni.getText().toString().isEmpty()) {
+            etdni.setError("Ingrese DNI");
+            return false;
+        }
+        if(etapellido.getText().toString().isEmpty()) {
+            etapellido.setError("Ingrese apellido");
+            return false;
+        }
+        if(etnombres.getText().toString().isEmpty()) {
+            etnombres.setError("Ingrese nombres");
+            return false;
+        }
+        if (etemail.getText().toString().isEmpty()) {
+            etemail.setError("Ingrese email");
+            return false;
+        }
+        if (etpassword.getText().toString().isEmpty())  {
+            etpassword.setError("Ingrese contraseña");
+            return false;
+        }
+        return true;
+    }
+
+    public void actualizar(String URL) {
         String seleccion = spinnerSexos.getSelectedItem().toString();
         if(seleccion.equals("Masculino")) {
             sexoBD= "1";
@@ -97,17 +134,18 @@ public class EditarProfesor extends AppCompatActivity {
         }
 
         final ProgressDialog progressDialog= new ProgressDialog(this);
-        progressDialog.setMessage("Cargando....");
-        progressDialog.show();
 
-        StringRequest request=new StringRequest(Request.Method.POST, "https://medinamagali.com.ar/gimnasio_unne/editarpersona.php"
+        StringRequest request=new StringRequest(Request.Method.POST, URL
                 , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(EditarProfesor.this, "Profesor modificado correctamente", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(getApplicationContext(), FragmentListarProfesores.class));
-                finish();
-                progressDialog.dismiss();
+                if(response.length()==0) {
+                    Toast.makeText(EditarProfesor.this, "Profesor modificado correctamente", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(getApplicationContext(), AdministradorActivity.class));
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Usuario existente con ese DNI", Toast.LENGTH_SHORT).show();
+                }
             }
         }, new Response.ErrorListener() {
             @Override

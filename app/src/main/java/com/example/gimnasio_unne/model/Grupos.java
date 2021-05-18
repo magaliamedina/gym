@@ -14,13 +14,6 @@ public class Grupos {
         this.descripcion= descripcion;
     }
 
-    public Grupos(String id, String p_descripcion, String prof, String horario) {
-        this.id=id;
-        this.descripcion = p_descripcion;
-        this.prof=prof;
-        this.horario=horario;
-    }
-
     public String getDescripcion() {
         return descripcion;
     }

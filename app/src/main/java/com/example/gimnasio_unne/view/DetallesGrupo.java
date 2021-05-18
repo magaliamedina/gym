@@ -1,4 +1,4 @@
-package com.example.gimnasio_unne;
+package com.example.gimnasio_unne.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.gimnasio_unne.R;
 import com.example.gimnasio_unne.view.fragments.FragmentListarGrupos;
 
 public class DetallesGrupo extends AppCompatActivity {

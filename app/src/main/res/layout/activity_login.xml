@@ -6,10 +6,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="30dp"
-    tools:context=".view.Login">
+    tools:context=".Login">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imglogoSGASLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="130dp"
@@ -17,7 +17,7 @@
 
     <EditText
         android:id="@+id/txt_emailLogin"
-        android:layout_width="370dp"
+        android:layout_width="match_parent"
         android:layout_marginTop="40dp"
         android:layout_height="wrap_content"
         android:autofillHints=""
@@ -28,7 +28,7 @@
 
     <EditText
         android:id="@+id/txt_passLogin"
-        android:layout_width="370dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="23dp"
         android:autofillHints=""
@@ -47,7 +47,7 @@
 
     <Button
         android:id="@+id/btn_iniciarsesion"
-        android:layout_width="370dp"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
         android:background="@color/colorPrimary"

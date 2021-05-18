@@ -64,14 +64,24 @@ public class FragmentAltaCuposLibres extends Fragment {
         btnguardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                altaCuposLibres("http://medinamagali.com.ar/gimnasio_unne/altacupolibre.php");
+                if(validarCampos()) {
+                    altaCuposLibres("http://medinamagali.com.ar/gimnasio_unne/altacupolibre.php");
+                }
             }
         });
         return view;
     }
 
+    public boolean validarCampos() {
+        if(etTotalCupos.getText().toString().isEmpty()) {
+            etTotalCupos.setError("Ingrese cupo total");
+            return false;
+        }
+        return true;
+    }
+
     private void llenarSpinnerGrupo() {
-        String url = "https://medinamagali.com.ar/gimnasio_unne/mostrargrupos.php";
+        String url = "https://medinamagali.com.ar/gimnasio_unne/gruposdisponibles.php";
         cliente.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -89,7 +99,7 @@ public class FragmentAltaCuposLibres extends Fragment {
         try {
             JSONObject jsonObject = new JSONObject(respuesta);
             String sucess=jsonObject.getString("sucess");
-            JSONArray jsonArray=jsonObject.getJSONArray("grupos");
+            JSONArray jsonArray=jsonObject.getJSONArray("gruposdisponibles");
             for (int i= 0; i< jsonArray.length();i++){
                 Grupos g = new Grupos();
                 JSONObject object= jsonArray.getJSONObject(i);
@@ -98,7 +108,7 @@ public class FragmentAltaCuposLibres extends Fragment {
                 g.setProf(object.getString("nombres") + " " + object.getString("apellido"));
                 g.setHorario("de " + object.getString("hora_inicio") + " a " + object.getString("hora_fin"));
                 g.setCupototal(object.getString("total_cupos"));
-                //en el metodo tostring de la clase grupo se define lo que se va a mostrar
+                //en el metodo tostring de la clase cupos libres se define lo que se va a mostrar
                 listaGrupos.add(g);
             }
             ArrayAdapter<Grupos> grupos = new ArrayAdapter<Grupos>(getActivity().getApplicationContext(), android.R.

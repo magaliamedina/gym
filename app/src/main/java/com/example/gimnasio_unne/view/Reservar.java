@@ -1,9 +1,8 @@
-package com.example.gimnasio_unne;
+package com.example.gimnasio_unne.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,14 +19,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.gimnasio_unne.Login;
+import com.example.gimnasio_unne.R;
+import com.example.gimnasio_unne.Utiles;
 import com.example.gimnasio_unne.view.fragments.FragmentListarCuposLibres;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TimeZone;
 
 public class Reservar extends AppCompatActivity {
     int position;
@@ -60,15 +58,8 @@ public class Reservar extends AppCompatActivity {
         Intent intent=getIntent();
         position= intent.getExtras().getInt("position");
 
-        SharedPreferences sharedPref = getSharedPreferences("apellido", Context.MODE_PRIVATE);
-        String apellido= sharedPref.getString("apellido","");
-        SharedPreferences sharedPref2 = getSharedPreferences("nombres", Context.MODE_PRIVATE);
-        String nombres = sharedPref2.getString("nombres","");
-        SharedPreferences sharedPref3 = getSharedPreferences("lu", Context.MODE_PRIVATE);
-        String lu = sharedPref3.getString("lu","");
-
-        tvNombreEstudiante.setText("Nombre y apellido del estudiante: " + nombres + " " + apellido);
-        tvLUEstudiante.setText("LU: " +lu);
+        tvNombreEstudiante.setText("Nombre y apellido del estudiante: " + Login.nombres + " " + Login.apellido);
+        tvLUEstudiante.setText("LU: " +Login.lu);
         tvDescripcionGrupo.setText(FragmentListarCuposLibres.arrayCuposLibres.get(position).getGrupo_descripcion());
         tvProfesor.setText(FragmentListarCuposLibres.arrayCuposLibres.get(position).getProfesor_nombreYapellido());
         tvDiayHora.setText(FragmentListarCuposLibres.arrayCuposLibres.get(position).getHorarios_inicio_fin());
@@ -106,7 +97,7 @@ public class Reservar extends AppCompatActivity {
                 //id del alumno (sesion), id del cupo libre, estado, fecha
                 Map<String, String> parametros = new HashMap<String, String>();
                 //Se trae el dato desde login con la clase SharedPreferences
-                parametros.put("alumno_id", getFromSharedPreferences("personas_id"));
+                parametros.put("alumno_id", Login.personas_id);
                 parametros.put("cupo_id", idcupolibre);
                 parametros.put("estado", "1");
                 return parametros;
@@ -146,8 +137,4 @@ public class Reservar extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    private String getFromSharedPreferences(String key) {
-        SharedPreferences sharedPref = getSharedPreferences(key, Context.MODE_PRIVATE);
-        return sharedPref.getString(key,"");
-    }
 }

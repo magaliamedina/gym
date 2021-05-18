@@ -14,48 +14,49 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".view.AltaPersonal"></activity>
         <activity
-            android:name=".EditarPersonal"
-            android:parentActivityName=".view.MainActivity"/>
+            android:name=".view.EditarPersonal"
+            android:parentActivityName=".AdministradorActivity" />
         <activity
-            android:name=".DetallesPersonal"
-            android:parentActivityName=".view.MainActivity"/>
+            android:name=".view.DetallesPersonal"
+            android:parentActivityName=".AdministradorActivity" />
         <activity
-            android:name=".EditarCupoLibre"
-            android:parentActivityName=".view.ActivityPersonal" />
+            android:name=".view.EditarCupoLibre"
+            android:parentActivityName=".PersonalActivity" />
         <activity
-            android:name=".Reservar"
-            android:parentActivityName=".view.AlumnoActivity" />
+            android:name=".view.Reservar"
+            android:parentActivityName=".AlumnoActivity" />
         <activity
-            android:name=".EditarProfesor"
-            android:parentActivityName=".view.MainActivity" />
+            android:name=".view.EditarProfesor"
+            android:parentActivityName=".AdministradorActivity" />
         <activity
-            android:name=".view.ActivityPersonal"
+            android:name=".PersonalActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.AlumnoActivity"
+            android:name=".AlumnoActivity"
             android:label="@string/title_activity_alumno"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".AltaPersona"
-            android:parentActivityName=".view.MainActivity" />
+            android:name=".view.AltaProfesor"
+            android:parentActivityName=".AdministradorActivity" />
         <activity
-            android:name=".AltaGrupo"
-            android:parentActivityName=".view.MainActivity" />
+            android:name=".view.AltaGrupo"
+            android:parentActivityName=".AdministradorActivity" />
         <activity
-            android:name=".DetallesProfesor"
-            android:parentActivityName=".view.MainActivity" />
+            android:name=".view.DetallesProfesor"
+            android:parentActivityName=".AdministradorActivity" />
         <activity
-            android:name=".EditarGrupos"
-            android:parentActivityName=".view.MainActivity" />
+            android:name=".view.EditarGrupos"
+            android:parentActivityName=".AdministradorActivity" />
         <activity
-            android:name=".DetallesGrupo"
-            android:parentActivityName=".view.MainActivity" />
+            android:name=".view.DetallesGrupo"
+            android:parentActivityName=".AdministradorActivity" />
         <activity
-            android:name=".view.MainActivity"
+            android:name=".AdministradorActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.Login">
+        <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

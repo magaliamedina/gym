@@ -5,16 +5,20 @@
     android:layout_height="match_parent"
     tools:context=".view.fragments.FragmentListarCuposLibres">
 
-    <ScrollView
-        android:id="@+id/svListaCuposLibres"
-        android:layout_width="match_parent"
-        android:fillViewport="true"
-        android:layout_height="match_parent">
-
     <ListView
         android:id="@+id/lvListarCuposLibres"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-    </ScrollView>
+
+    <TextView
+        android:id="@+id/tvReservaRealizada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="#F44336"
+        android:layout_marginTop="250dp"
+        android:visibility="invisible"
+        android:text="Ya tienes una reserva realizada"
+        android:layout_gravity="center_horizontal"/>
 
 </FrameLayout>

@@ -1,4 +1,4 @@
-package com.example.gimnasio_unne;
+package com.example.gimnasio_unne.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -22,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.gimnasio_unne.R;
 import com.example.gimnasio_unne.model.Grupos;
 import com.example.gimnasio_unne.view.fragments.FragmentListarCuposLibres;
 import com.example.gimnasio_unne.view.fragments.FragmentPersonalCuposLibres;
@@ -67,14 +68,23 @@ public class EditarCupoLibre extends AppCompatActivity {
         btnguardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                actualizar();
+                if(validarCampos()) {
+                    actualizar();
+                }
             }
         });
+    }
 
+    public boolean validarCampos() {
+        if(etTotalCupos.getText().toString().isEmpty()) {
+            etTotalCupos.setError("Ingrese cupo total");
+            return false;
+        }
+        return true;
     }
 
     private void llenarSpinnerGrupo() {
-        String url = "https://medinamagali.com.ar/gimnasio_unne/mostrargrupos.php";
+        String url = "https://medinamagali.com.ar/gimnasio_unne/gruposdisponibles.php";
         cliente.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -92,7 +102,7 @@ public class EditarCupoLibre extends AppCompatActivity {
         try {
             JSONObject jsonObject = new JSONObject(respuesta);
             String sucess=jsonObject.getString("sucess");
-            JSONArray jsonArray=jsonObject.getJSONArray("grupos");
+            JSONArray jsonArray=jsonObject.getJSONArray("gruposdisponibles");
             for (int i= 0; i< jsonArray.length();i++){
                 Grupos g = new Grupos();
                 JSONObject object= jsonArray.getJSONObject(i);

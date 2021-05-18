@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.EditarPersonal">
+    android:layout_height="match_parent"
+    tools:context=".view.AltaPersonal">
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,80 +15,61 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            app:title="Editar datos del personal"
+            app:title="Nuevo"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:orientation="vertical">
-
-        <LinearLayout
+        android:orientation="vertical"
+        android:padding="10dp">
+        <EditText
+            android:id="@+id/etdnialtaPersonal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:text="ID: "/>
-            <TextView
-                android:id="@+id/tvideditarPersonal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="número de ID"
-                android:inputType="number"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:text="DNI: "/>
-            <EditText
-                android:id="@+id/etDnieditarPersonal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="número de DNI"
-                android:inputType="number"
-                android:textSize="18sp" />
-        </LinearLayout>
+            android:ems="10"
+            android:hint="@string/txt_dni"
+            android:inputType="number"
+            android:autofillHints="" />
 
         <EditText
-            android:id="@+id/etApellidoeditarPersonal"
+            android:id="@+id/etapellidoaltaPersonal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Apellido"
-            android:inputType="text" />
+            android:ems="10"
+            android:fontFamily="sans-serif"
+            android:hint="@string/txt_apellido"
+            android:inputType="textPersonName"
+            android:autofillHints="" />
+
         <EditText
-            android:id="@+id/etNombreseditarPersonal"
+            android:id="@+id/etnombresaltaPersonal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Nombres"
-            android:inputType="text" />
+            android:ems="10"
+            android:hint="@string/txt_nombres"
+            android:inputType="textPersonName"
+            android:importantForAutofill="no" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
+                android:id="@+id/tvAltaPersonalSexo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:text="Sexo:"/>
             <Spinner
-                android:id="@+id/spinnerSexosEditarPersonal"
+                android:id="@+id/spsexoaltaPersonal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <LinearLayout
@@ -99,44 +82,48 @@
                 android:textSize="18sp"
                 android:text="Provincia:"/>
             <Spinner
-                android:id="@+id/spinnerProvinciaEditarPersonal"
+                android:id="@+id/spinnerProvinciaAltaPersonal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 
         <EditText
-            android:id="@+id/etEstadoCivilEditarPersonal"
+            android:id="@+id/etestadocivilaltaPersonal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:ems="10"
             android:hint="Estado Civil"
-            android:inputType="text"/>
+            android:inputType="textPersonName"
+            android:autofillHints="" />
 
         <EditText
-            android:id="@+id/etEmailEditarPersonal"
-            android:layout_width="match_parent"
+            android:id="@+id/etemailaltaPersonal"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Email"
             android:ems="10"
-            android:inputType="textEmailAddress" />
+            android:hint="@string/txt_email"
+            android:inputType="textEmailAddress"
+            android:autofillHints="" />
 
         <EditText
-            android:id="@+id/etPasswordEditarPersonal"
-            android:layout_width="match_parent"
+            android:id="@+id/etpassaltaPersonal"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Contraseña"
             android:ems="10"
-            android:inputType="textPassword"/>
+            android:hint="@string/txt_password"
+            android:inputType="textPassword"
+            android:autofillHints="" />
+
 
         <Button
-            android:id="@+id/btneditarPersonal"
+            android:id="@+id/btnaltaPersonal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@color/colorPrimary"
-            android:text="Modificar"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp" />
-
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:text="@string/btn_guardar" />
     </LinearLayout>
 
 </LinearLayout>

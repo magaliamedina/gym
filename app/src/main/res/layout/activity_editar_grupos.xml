@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".EditarGrupos">
+    tools:context=".view.EditarGrupos">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -102,7 +102,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@color/colorPrimary"
-            android:onClick="actualizar"
             android:text="Modificar"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
