@@ -37,7 +37,7 @@ import java.util.Map;
 public class FragmentPersonalCuposLibres extends Fragment {
     private ListView list;
     public static ArrayList<CuposLibres> arrayCuposLibres= new ArrayList<>();
-    String url = "https://medinamagali.com.ar/gimnasio_unne/listarcuposlibres.php";
+    String url = "https://medinamagali.com.ar/gimnasio_unne/listarcuposlibres.php?alumno_id=0";
     AdaptadorCuposLibres adaptador;
     CuposLibres cuposLibres;
     public FragmentPersonalCuposLibres() {
@@ -113,6 +113,7 @@ public class FragmentPersonalCuposLibres extends Fragment {
                     JSONArray jsonArray=jsonObject.getJSONArray("cuposlibres");
                     if (sucess.equals("1")) {
                         for (int i=0;i<jsonArray.length();i++) {
+                            list.setVisibility(View.VISIBLE);
                             JSONObject object= jsonArray.getJSONObject(i);
                             String id_cupolibre= object.getString("id_cupolibre");
                             String grupo_descripcion= object.getString("grupo_descripcion");

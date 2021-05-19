@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -29,6 +31,9 @@ public class Login extends AppCompatActivity {
     EditText edtUsuario, edtPassword;
     Button btnLogin;
     public static String usuario="", password="", personas_id="",apellido="",nombres="",lu="";
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+    CheckBox cbRecordarUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,22 @@ public class Login extends AppCompatActivity {
         edtUsuario = findViewById(R.id.txt_emailLogin);
         edtPassword = findViewById(R.id.txt_passLogin);
         btnLogin = findViewById(R.id.btn_iniciarsesion);
+        cbRecordarUsuario= findViewById(R.id.cbRecordarUsuario);
+        inicializarElementos();
+        if(revisarSesion()) {
+            if(revisarUsuario().equals("1")) { //PERFIL ADMINISTRADOR
+                Intent intent = new Intent(getApplicationContext(), AdministradorActivity.class);
+                startActivity(intent);
+            }
+            if(revisarUsuario().equals("3")) { //PERFIL ESTUDIANTE
+                Intent intent = new Intent(getApplicationContext(), AlumnoActivity.class);
+                startActivity(intent);
+            }
+            if(revisarUsuario().equals("4")) { //PERFIL PERSONAL ADMINISTRATIVO
+                Intent intent = new Intent(getApplicationContext(), PersonalActivity.class);
+                startActivity(intent);
+            }
+        }
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +72,6 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     private void validarUsuario (String URL) {
@@ -68,18 +88,19 @@ public class Login extends AppCompatActivity {
                         lu= jsonObject.getString("lu");
                         edtUsuario.setText("");
                         edtPassword.setText("");
+                        guardarSesion(cbRecordarUsuario.isChecked(), usuario_id);
                         //PERFIL ADMINISTRADOR
                         if( usuario_id.equals("1")) {
                             Intent intent = new Intent(getApplicationContext(), AdministradorActivity.class);
                             startActivity(intent);
                         }
                         //PERFIL ESTUDIANTE
-                        if( usuario_id.equals("3")) {
+                        else if( usuario_id.equals("3")) {
                             Intent intent = new Intent(getApplicationContext(), AlumnoActivity.class);
                             startActivity(intent);
                         }
                         //PERFIL PERSONAL ADMINISTRATIVO
-                        if( usuario_id.equals("4")) {
+                        else if( usuario_id.equals("4")) {
                             Intent intent = new Intent(getApplicationContext(), PersonalActivity.class);
                             startActivity(intent);
                         }
@@ -110,6 +131,27 @@ public class Login extends AppCompatActivity {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this); //instancia de la cola de peticiones de Volley
         requestQueue.add(stringRequest);
+    }
+
+    private void inicializarElementos() {
+        preferences= this.getSharedPreferences("sesiones",Context.MODE_PRIVATE);
+        editor=preferences.edit();
+    }
+
+    private boolean revisarSesion() {
+        //si devulve false no hace nada
+        //si devuelve true va la vista principal
+        return this.preferences.getBoolean("sesion",false);
+    }
+
+    private String revisarUsuario() {
+        return this.preferences.getString("tipo_usuario","");
+    }
+
+    private void guardarSesion(boolean checked, String tipousuario) {
+        editor.putBoolean("sesion",checked);
+        editor.putString("tipo_usuario", tipousuario);
+        editor.apply();
     }
 
 }

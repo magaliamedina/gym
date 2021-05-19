@@ -1,6 +1,8 @@
 package com.example.gimnasio_unne;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Menu;
@@ -22,6 +24,8 @@ public class AlumnoActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     ActionBarDrawerToggle toggle;
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,10 @@ public class AlumnoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_alumno);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //cerrar sesion con shared preferences
+        preferences=getSharedPreferences("sesiones", Context.MODE_PRIVATE);
+        editor = preferences.edit();
 
         //el drawer layout esta en activity_alumno
         DrawerLayout drawer = findViewById(R.id.drawer_layout_alumno);
@@ -74,6 +82,8 @@ public class AlumnoActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.logout:
+                editor.putBoolean("sesion", false);
+                editor.apply();
                 finish();
                 startActivity(new Intent(this, Login.class));
                 break;

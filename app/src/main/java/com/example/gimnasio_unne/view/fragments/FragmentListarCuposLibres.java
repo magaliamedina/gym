@@ -24,6 +24,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.gimnasio_unne.AlumnoActivity;
 import com.example.gimnasio_unne.Login;
 import com.example.gimnasio_unne.R;
+import com.example.gimnasio_unne.view.EditarCupoLibre;
 import com.example.gimnasio_unne.view.Reservar;
 import com.example.gimnasio_unne.model.CuposLibres;
 import com.example.gimnasio_unne.view.adapter.AdaptadorCuposLibres;
@@ -55,29 +56,29 @@ public class FragmentListarCuposLibres extends Fragment {
 
         adaptador= new AdaptadorCuposLibres(getActivity().getApplicationContext(), arrayCuposLibres);
         list.setAdapter(adaptador);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 
-                CharSequence[] dialogoItem={"Reservar"};
-                //titulo del alert dialog
-                builder.setTitle(arrayCuposLibres.get(position).getGrupo_descripcion());
-                builder.setItems(dialogoItem, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int i) {
-                        switch (i) {
-                            case 0:
-                                //pasamos position para poder recibir en Reservar
-                                startActivity(new Intent(getActivity().getApplicationContext(), Reservar.class)
-                                        .putExtra("position",position));
-                                break;
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                    CharSequence[] dialogoItem={"Reservar"};
+                    //titulo del alert dialog
+                    builder.setTitle(arrayCuposLibres.get(position).getGrupo_descripcion());
+                    builder.setItems(dialogoItem, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            switch (i) {
+                                case 0:
+                                    //pasamos position para poder recibir en Reservar
+                                    startActivity(new Intent(getActivity().getApplicationContext(), Reservar.class)
+                                            .putExtra("position",position));
+                                    break;
+                            }
                         }
-                    }
-                });
-                builder.create().show();
-            }
-        });
+                    });
+                    builder.create().show();
+                }
+            }); //fin list.setOnItemClickListener
         mostrarDatos();
         return view;
     }
@@ -91,6 +92,7 @@ public class FragmentListarCuposLibres extends Fragment {
                     JSONObject jsonObject = new JSONObject(response);
                     String sucess=jsonObject.getString("sucess");
                     if (sucess.equals("1")) {
+                        list.setVisibility(View.VISIBLE);
                         JSONArray jsonArray=jsonObject.getJSONArray("cuposlibres");
                         for (int i=0;i<jsonArray.length();i++) {
                             JSONObject object= jsonArray.getJSONObject(i);

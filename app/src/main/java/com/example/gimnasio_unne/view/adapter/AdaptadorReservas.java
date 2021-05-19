@@ -18,9 +18,7 @@ import java.util.List;
 public class AdaptadorReservas extends ArrayAdapter<Reservas> {
     Context context;
     List<Reservas> arrayListReservas;
-    Button btnReservaConfirmar, btnReservaCancelar;
     TextView tvDescripcionGrupo, tvEstudiante, tvDiayHora, tvFechaReserva, tvIdReserva;
-    //String id_grupo, id_cupolibre;
 
     public AdaptadorReservas(@NonNull Context context, List<Reservas>arrayListReservas) {
         super(context, R.layout.list_reservas, arrayListReservas);

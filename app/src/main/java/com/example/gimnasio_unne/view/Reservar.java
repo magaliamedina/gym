@@ -99,7 +99,7 @@ public class Reservar extends AppCompatActivity {
                 //Se trae el dato desde login con la clase SharedPreferences
                 parametros.put("alumno_id", Login.personas_id);
                 parametros.put("cupo_id", idcupolibre);
-                parametros.put("estado", "1");
+                parametros.put("estado", "0"); //estado pendiente
                 return parametros;
             }
         };
