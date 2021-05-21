@@ -19,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.gimnasio_unne.AlumnoActivity;
 import com.example.gimnasio_unne.Login;
 import com.example.gimnasio_unne.R;
 import com.example.gimnasio_unne.Utiles;
@@ -29,11 +30,11 @@ import java.util.Map;
 
 public class Reservar extends AppCompatActivity {
     int position;
-    TextView tvDescripcionGrupo, tvProfesor, tvDiayHora, tvTotalCuposLibres, tvReservaRealizada, tvListarCuposLibresIdCupolibre,
+    TextView tvDescripcionGrupo, tvProfesor, tvDiayHora, tvTotalCuposLibres,
             tvNombreEstudiante, tvLUEstudiante, tvDiaYHoraActual;
     Button btnReservarCupoLibre;
     RequestQueue requestQueue;
-    String idcupolibre;
+    String idcupolibre, alumno_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +54,15 @@ public class Reservar extends AppCompatActivity {
         tvTotalCuposLibres = findViewById(R.id.tvReservarCuposLibresDisponible);
         btnReservarCupoLibre = findViewById(R.id.btnReservarCupoLibre);
         tvDiaYHoraActual = findViewById(R.id.tvReservarFechaReserva);
-        tvReservaRealizada= findViewById(R.id.tvReservaRealizada);
 
         Intent intent=getIntent();
         position= intent.getExtras().getInt("position");
 
         tvNombreEstudiante.setText("Nombre y apellido del estudiante: " + Login.nombres + " " + Login.apellido);
         tvLUEstudiante.setText("LU: " +Login.lu);
+        if(Login.lu.equals("")) {
+            getSharedPreferences();
+        }
         tvDescripcionGrupo.setText(FragmentListarCuposLibres.arrayCuposLibres.get(position).getGrupo_descripcion());
         tvProfesor.setText(FragmentListarCuposLibres.arrayCuposLibres.get(position).getProfesor_nombreYapellido());
         tvDiayHora.setText(FragmentListarCuposLibres.arrayCuposLibres.get(position).getHorarios_inicio_fin());
@@ -73,9 +76,8 @@ public class Reservar extends AppCompatActivity {
             public void onClick(View v) {
                 reservarCupoLibre("http://medinamagali.com.ar/gimnasio_unne/reservar_cupo_libre.php");
                 descontarCupoLibre("http://medinamagali.com.ar/gimnasio_unne/descontar_cupo_libre.php");
-                //que no se vea mas la lista de cupos libres al reservar uno
-                //svListaCuposLibres.setVisibility(View.INVISIBLE);
-                tvReservaRealizada.setVisibility(View.VISIBLE);
+                Intent i = new Intent(getApplicationContext(), AlumnoActivity.class);
+                startActivity(i);
             }
         });
     }
@@ -97,7 +99,7 @@ public class Reservar extends AppCompatActivity {
                 //id del alumno (sesion), id del cupo libre, estado, fecha
                 Map<String, String> parametros = new HashMap<String, String>();
                 //Se trae el dato desde login con la clase SharedPreferences
-                parametros.put("alumno_id", Login.personas_id);
+                parametros.put("alumno_id", alumno_id);
                 parametros.put("cupo_id", idcupolibre);
                 parametros.put("estado", "0"); //estado pendiente
                 return parametros;
@@ -135,6 +137,13 @@ public class Reservar extends AppCompatActivity {
         };
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
+    }
+
+    public void getSharedPreferences() {
+        SharedPreferences sharedPreferences = this.getSharedPreferences("datosusuario",Context.MODE_PRIVATE);
+        tvNombreEstudiante.setText("Nombre y apellido del estudiante: " + sharedPreferences.getString("nya", ""));
+        tvLUEstudiante.setText("LU: " +sharedPreferences.getString("lu", ""));
+        alumno_id= sharedPreferences.getString("lu", "");
     }
 
 }

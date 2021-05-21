@@ -2,16 +2,17 @@ package com.example.gimnasio_unne.model;
 
 public class Grupos {
 
-    private String id, prof, horario, cupototal, descripcion;
+    private String id, prof, horario, cupototal, descripcion,estado;
 
     public Grupos() {}
 
-    public Grupos(String id, String prof, String horario, String cupototal, String descripcion) {
+    public Grupos(String id, String prof, String horario, String cupototal, String descripcion,String estado) {
         this.id = id;
         this.prof = prof;
         this.horario = horario;
         this.cupototal = cupototal;
         this.descripcion= descripcion;
+        this.estado=estado;
     }
 
     public String getDescripcion() {
@@ -54,8 +55,16 @@ public class Grupos {
         this.cupototal = cupototal;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     public String toString() {
-        return descripcion + " - Profesor: " + prof +" - " + horario;
+        return descripcion + " " + horario;
     }
 
 

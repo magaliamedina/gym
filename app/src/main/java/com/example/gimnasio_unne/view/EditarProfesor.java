@@ -48,6 +48,7 @@ public class EditarProfesor extends AppCompatActivity {
     private AsyncHttpClient cliente;
     int position;
     private String idprovincia, sexoBD;
+    String [] sexos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +81,15 @@ public class EditarProfesor extends AppCompatActivity {
         etestadocivil.setText(FragmentListarProfesores.persons.get(position).getEstadoCivil());
         etemail.setText(FragmentListarProfesores.persons.get(position).getEmail());
         etpassword.setText(FragmentListarProfesores.persons.get(position).getPassword());
-
-        String [] sexos = {"Masculino", "Femenino", "Otro"};
+        String sexo_guardado= FragmentListarProfesores.persons.get(position).getSexo();
+        //lo siguiente es para mostrar en orden como esta guardado
+        if(sexo_guardado.equals("2")) {
+            sexos= new String [] {"Femenino", "Masculino", "Otro"};
+        } else if(sexo_guardado.equals("1")) {
+            sexos = new String [] {"Masculino", "Femenino", "Otro"};
+        } else {
+            sexos =new String []{"Otro", "Masculino", "Femenino"};
+        }
         ArrayAdapter <String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sexos);
         spinnerSexos.setAdapter(adapter);
 
@@ -175,7 +183,7 @@ public class EditarProfesor extends AppCompatActivity {
     }
 
     private void llenarSpinnerProvincias() {
-        String url = "https://medinamagali.com.ar/gimnasio_unne/consultarprovincias.php";
+        String url = "https://medinamagali.com.ar/gimnasio_unne/consultarprovincias.php?persona_id="+tvid.getText().toString()+"";
         cliente.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -192,7 +200,6 @@ public class EditarProfesor extends AppCompatActivity {
         final ArrayList<Provincias> listaProvincias = new ArrayList<Provincias>();
         try {
             JSONArray jsonArray = new JSONArray(respuesta);
-
             for (int i= 0; i< jsonArray.length();i++){
                 Provincias p = new Provincias();
                 //las claves son los nombres de los campos de la BD

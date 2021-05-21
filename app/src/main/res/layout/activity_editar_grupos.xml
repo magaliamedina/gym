@@ -36,12 +36,15 @@
                 android:layout_height="wrap_content"
                 android:hint="ID: "
                 android:inputType="number"
+                android:textColor="@color/grey"
+                android:textStyle="bold"
                 android:textSize="18sp" />
             <TextView
                 android:id="@+id/tvideditargrupo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="número de ID"
+                android:textColor="@color/grey"
                 android:inputType="number"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -53,18 +56,20 @@
                 android:id="@+id/tvHorarioEditarGrupo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Horario:"
+                android:text="Horario: "
+                android:textColor="@color/grey"
+                android:textStyle="bold"
                 android:textSize="18sp" />
             <Spinner
                 android:id="@+id/spinnerhorarioeditargrupo"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:textSize="18sp"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 
         <EditText
             android:id="@+id/etnombreeditargrupo"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Nombre del grupo"
@@ -79,22 +84,50 @@
                 android:id="@+id/tvProfesorEditarGrupo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Profesor:"
+                android:text="Profesor: "
+                android:textColor="@color/grey"
+                android:textStyle="bold"
                 android:textSize="18sp"/>
             <Spinner
                 android:id="@+id/spinnerProfeditargrupo"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 
         <EditText
             android:id="@+id/ettotaleditargrupo"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/txt_totalCupos"
             android:inputType="number"
             android:textSize="18sp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:textStyle="bold"
+                android:text="Estado: " />
+            <EditText
+                android:id="@+id/etEditarGrupoEstado"
+                android:layout_width="30dp"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:layout_height="wrap_content"
+                android:inputType="number"/>
+            <TextView
+                android:layout_marginLeft="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/grey"
+                android:text="(0: Inactivo - 1: Activo) " />
+        </LinearLayout>
 
         <Button
             android:id="@+id/btneditargrupo"

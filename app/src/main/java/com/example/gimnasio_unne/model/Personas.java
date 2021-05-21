@@ -157,6 +157,6 @@ public class Personas {
     }
 
     public String toString() {
-        return nombres+ " " +apellido + " " + id;
+        return nombres+ " " +apellido;
     }
 }

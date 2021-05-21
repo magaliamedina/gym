@@ -81,7 +81,7 @@ public class FragmentAltaCuposLibres extends Fragment {
     }
 
     private void llenarSpinnerGrupo() {
-        String url = "https://medinamagali.com.ar/gimnasio_unne/gruposdisponibles.php";
+        String url = "https://medinamagali.com.ar/gimnasio_unne/gruposdisponibles_altacupolibre.php";
         cliente.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -98,14 +98,12 @@ public class FragmentAltaCuposLibres extends Fragment {
         final ArrayList<Grupos> listaGrupos = new ArrayList<Grupos>();
         try {
             JSONObject jsonObject = new JSONObject(respuesta);
-            String sucess=jsonObject.getString("sucess");
             JSONArray jsonArray=jsonObject.getJSONArray("gruposdisponibles");
             for (int i= 0; i< jsonArray.length();i++){
                 Grupos g = new Grupos();
                 JSONObject object= jsonArray.getJSONObject(i);
                 g.setDescripcion(object.getString("descripcion"));
                 g.setId(object.getString("grupo_id"));
-                g.setProf(object.getString("nombres") + " " + object.getString("apellido"));
                 g.setHorario("de " + object.getString("hora_inicio") + " a " + object.getString("hora_fin"));
                 g.setCupototal(object.getString("total_cupos"));
                 //en el metodo tostring de la clase cupos libres se define lo que se va a mostrar

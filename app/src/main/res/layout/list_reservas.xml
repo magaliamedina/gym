@@ -16,7 +16,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:padding="10dp"
+            android:background="@drawable/shape_parrafo"
             android:orientation="vertical">
 
         <LinearLayout
@@ -27,58 +28,55 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:layout_margin="5dp"
-                android:text="Número de reserva:"
-                android:textColor="@color/colorPrimary"
-                android:textSize="20sp" />
+                android:text="Número de reserva: "
+                android:textColor="@color/grey"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
             <TextView
                 android:id="@+id/tvListarReservasNumeroReserva"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:layout_margin="5dp"
-                android:text="número: "
-                android:textColor="@color/colorPrimary"
-                android:textSize="20sp" />
+                android:text="número"
+                android:textColor="@color/grey"
+                android:textSize="18sp" />
         </LinearLayout>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_margin="5dp"
-                    android:text="Fecha de la reserva:"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp" />
+                    android:text="Fecha y hora de la reserva: "
+                    android:textColor="@color/grey"
+                    android:textStyle="bold"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/tvListarReservasFechaReserva"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_margin="5dp"
                     android:text="fecha"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp" />
+                    android:textColor="@color/grey"
+                    android:textSize="18sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:layout_margin="5dp"
                 android:text="Nombre del estudiante: "
-                android:textColor="@color/colorPrimary"
-                android:textSize="20sp" />
+                android:textColor="@color/grey"
+                android:textStyle="bold"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tvListarReservasEstudiante"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:layout_margin="5dp"
                 android:text="nombre completo "
-                android:textColor="@color/colorPrimary"
-                android:textSize="20sp" />
+                android:textColor="@color/grey"
+                android:textSize="18sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -89,31 +87,41 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:layout_margin="5dp"
                 android:text="Grupo: "
-                android:textColor="@color/colorPrimary"
-                android:textSize="20sp" />
+                android:textColor="@color/grey"
+                android:textStyle="bold"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tvListarReservasGrupo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:layout_margin="5dp"
                 android:text="nombre del grupo"
-                android:textColor="@color/colorPrimary"
-                android:textSize="20sp" />
+                android:textColor="@color/grey"
+                android:textSize="18sp" />
         </LinearLayout>
-
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
             <TextView
-                android:id="@+id/tvListarReservasDiayHora"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:layout_margin="5dp"
-                android:text="Días y horario: "
-                android:textColor="@color/colorPrimary"
-                android:textSize="20sp" />
+                android:text="Horario: "
+                android:textColor="@color/grey"
+                android:textStyle="bold"
+                android:textSize="18sp" />
+            <TextView
+                android:id="@+id/tvListarReservasDiayHora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="horario"
+                android:textColor="@color/grey"
+                android:textSize="18sp" />
+        </LinearLayout>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

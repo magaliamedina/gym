@@ -23,11 +23,19 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:orientation="vertical">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/grey"
         android:text="Grupo: " />
 
     <Spinner
@@ -45,12 +53,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/grey"
             android:text="Fecha: " />
         <TextView
             android:id="@+id/tvEditarCuposLibresFechaReserva"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:textColor="@color/grey"
             android:text="fecha de reserva" />
     </LinearLayout>
 
@@ -63,18 +74,51 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:textColor="@color/grey"
+            android:textStyle="bold"
             android:text="Total de cupos libres: " />
         <EditText
             android:id="@+id/etEditarCuposLibresTotalCupos"
-            android:layout_width="50dp"
+            android:layout_width="30dp"
             android:textSize="18sp"
+            android:textColor="@color/grey"
             android:layout_height="wrap_content"
             android:inputType="number"/>
     </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:textStyle="bold"
+                android:text="Estado: " />
+            <EditText
+                android:id="@+id/etEditarCuposLibresEstado"
+                android:layout_width="30dp"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:layout_height="wrap_content"
+                android:inputType="number"/>
+            <TextView
+                android:layout_marginLeft="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/grey"
+                android:text="(0: Inactivo - 1: Activo) " />
+        </LinearLayout>
+
+
+
     <Button
         android:id="@+id/btnEditarCupoLibre"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@color/colorPrimary"
@@ -82,5 +126,6 @@
         android:padding="10dp"
         android:textColor="@color/white"
         android:text="Guardar"/>
+    </LinearLayout>
 
 </LinearLayout>

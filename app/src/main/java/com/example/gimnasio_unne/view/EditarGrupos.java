@@ -40,7 +40,7 @@ import java.util.Map;
 import cz.msebera.android.httpclient.Header;
 
 public class EditarGrupos extends AppCompatActivity {
-    EditText etnombre,etcupototal;
+    EditText etnombre,etcupototal, etestado;
     TextView tvid;
     Spinner spinnerProf, spinnerHorario;
     Button btn1;
@@ -63,6 +63,7 @@ public class EditarGrupos extends AppCompatActivity {
         spinnerProf = findViewById(R.id.spinnerProfeditargrupo);
         spinnerHorario = findViewById(R.id.spinnerhorarioeditargrupo);
         etcupototal = findViewById(R.id.ettotaleditargrupo);
+        etestado= findViewById(R.id.etEditarGrupoEstado);
         btn1= findViewById(R.id.btneditargrupo);
         cliente = new AsyncHttpClient();
         cliente2 = new AsyncHttpClient();
@@ -72,6 +73,7 @@ public class EditarGrupos extends AppCompatActivity {
         tvid.setText(FragmentListarGrupos.groups.get(position).getId());
         etnombre.setText(FragmentListarGrupos.groups.get(position).getDescripcion());
         etcupototal.setText(FragmentListarGrupos.groups.get(position).getCupototal());
+        etestado.setText(FragmentListarGrupos.groups.get(position).getEstado());
 
         llenarSpinnerProfesor();
         llenarSpinnerHorario();
@@ -93,6 +95,14 @@ public class EditarGrupos extends AppCompatActivity {
         }
         if(etnombre.getText().toString().isEmpty()) {
             etnombre.setError("Ingrese una descripción");
+            return false;
+        }
+        if(etestado.getText().toString().isEmpty()) {
+            etestado.setError("Ingrese un estado");
+            return false;
+        }
+        if(Integer.parseInt(etestado.getText().toString()) > 1) {
+            etestado.setError("Ingrese '0': inactivo o '1': activo");
             return false;
         }
         return true;
@@ -125,6 +135,7 @@ public class EditarGrupos extends AppCompatActivity {
                 params.put("profesor_id", idprof);
                 params.put("total_cupos", etcupototal.getText().toString());
                 params.put("descripcion", etnombre.getText().toString());
+                params.put("estado", etestado.getText().toString());
                 return params;
             }
         };
@@ -133,7 +144,7 @@ public class EditarGrupos extends AppCompatActivity {
     }
 
     private void llenarSpinnerHorario() {
-        String url = "https://medinamagali.com.ar/gimnasio_unne/consultarhorarios.php";
+        String url = "https://medinamagali.com.ar/gimnasio_unne/consultarhorarios.php?grupo_id="+tvid.getText().toString()+"";
         cliente2.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -178,7 +189,7 @@ public class EditarGrupos extends AppCompatActivity {
     }
 
     private void llenarSpinnerProfesor() {
-        String url = "https://medinamagali.com.ar/gimnasio_unne/consultarProfesor.php";
+        String url = "https://medinamagali.com.ar/gimnasio_unne/consultarProfesor.php?grupo_id="+tvid.getText().toString()+"";
         cliente.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

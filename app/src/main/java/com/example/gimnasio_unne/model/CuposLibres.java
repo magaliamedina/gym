@@ -1,7 +1,8 @@
 package com.example.gimnasio_unne.model;
 
 public class CuposLibres {
-    private String id_cupolibre, grupo_descripcion, profesor_nombreYapellido, cupolibre_total, horarios_inicio_fin, grupo_id, fecha_reserva;
+    private String id_cupolibre, grupo_descripcion, profesor_nombreYapellido, cupolibre_total,
+            horarios_inicio_fin, grupo_id, fecha_reserva, estado;
 
     public CuposLibres(){}
     public CuposLibres(String id_cupolibre, String grupo_descripcion, String nombreYapellido, String cupolibre_total,
@@ -13,6 +14,18 @@ public class CuposLibres {
         this.horarios_inicio_fin = horarios_inicio_fin;
         this.grupo_id= grupo_id;
         this.fecha_reserva=fecha_reserva;
+    }
+
+    public CuposLibres(String id_cupolibre, String grupo_descripcion, String nombreYapellido, String cupolibre_total,
+                       String horarios_inicio_fin, String grupo_id, String fecha_reserva, String estado) {
+        this.id_cupolibre=id_cupolibre;
+        this.grupo_descripcion = grupo_descripcion;
+        this.profesor_nombreYapellido = nombreYapellido;
+        this.cupolibre_total = cupolibre_total;
+        this.horarios_inicio_fin = horarios_inicio_fin;
+        this.grupo_id= grupo_id;
+        this.fecha_reserva=fecha_reserva;
+        this.estado=estado;
     }
 
     public String getId_cupolibre() {
@@ -69,5 +82,13 @@ public class CuposLibres {
 
     public void setFecha_reserva(String fecha_reserva) {
         this.fecha_reserva = fecha_reserva;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

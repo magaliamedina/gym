@@ -43,8 +43,7 @@ public class AlumnoActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view_alumno);
 
         //clase para implementar el icono hamburguesa
-        toggle = new ActionBarDrawerToggle(this, drawer,toolbar,
-                R.string.nav_app_bar_open_drawer_description, R.string.drawer_close);
+        toggle = new ActionBarDrawerToggle(this, drawer,toolbar,R.string.nav_app_bar_open_drawer_description, R.string.drawer_close);
         drawer.addDrawerListener(toggle);
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(

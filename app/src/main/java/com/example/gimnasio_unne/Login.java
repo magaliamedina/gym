@@ -86,21 +86,25 @@ public class Login extends AppCompatActivity {
                         apellido= jsonObject.getString("apellido");
                         nombres = jsonObject.getString("nombres");
                         lu= jsonObject.getString("lu");
+                        guardarSharedPreferences();
                         edtUsuario.setText("");
                         edtPassword.setText("");
                         guardarSesion(cbRecordarUsuario.isChecked(), usuario_id);
                         //PERFIL ADMINISTRADOR
                         if( usuario_id.equals("1")) {
+                            finish();
                             Intent intent = new Intent(getApplicationContext(), AdministradorActivity.class);
                             startActivity(intent);
                         }
                         //PERFIL ESTUDIANTE
                         else if( usuario_id.equals("3")) {
+                            finish();
                             Intent intent = new Intent(getApplicationContext(), AlumnoActivity.class);
                             startActivity(intent);
                         }
                         //PERFIL PERSONAL ADMINISTRATIVO
                         else if( usuario_id.equals("4")) {
+                            finish();
                             Intent intent = new Intent(getApplicationContext(), PersonalActivity.class);
                             startActivity(intent);
                         }
@@ -151,6 +155,15 @@ public class Login extends AppCompatActivity {
     private void guardarSesion(boolean checked, String tipousuario) {
         editor.putBoolean("sesion",checked);
         editor.putString("tipo_usuario", tipousuario);
+        editor.apply();
+    }
+
+    public void guardarSharedPreferences() {
+        SharedPreferences preferences=getSharedPreferences("datosusuario", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("nya", nombres+" " +apellido);
+        editor.putString("lu", lu);
+        editor.putString("id_alumno",personas_id);
         editor.apply();
     }
 

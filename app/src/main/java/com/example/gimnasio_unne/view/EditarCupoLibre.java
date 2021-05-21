@@ -43,7 +43,7 @@ public class EditarCupoLibre extends AppCompatActivity {
     TextView tvFechaReserva;
     Spinner spinnerGrupos;
     String idgrupo, idcupolibre;
-    EditText etTotalCupos;
+    EditText etTotalCupos, etEstado;
     Button btnguardar;
 
     @Override
@@ -54,17 +54,19 @@ public class EditarCupoLibre extends AppCompatActivity {
         tvFechaReserva=findViewById(R.id.tvEditarCuposLibresFechaReserva);
         etTotalCupos=findViewById(R.id.etEditarCuposLibresTotalCupos);
         spinnerGrupos=findViewById(R.id.spinnerEditarCuposLibresGrupos);
+        etEstado = findViewById(R.id.etEditarCuposLibresEstado);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         cliente = new AsyncHttpClient();
-        llenarSpinnerGrupo();
         Intent intent =getIntent();
         Integer position=intent.getExtras().getInt("position");
         idcupolibre= FragmentPersonalCuposLibres.arrayCuposLibres.get(position).getId_cupolibre();
+        llenarSpinnerGrupo();
         tvFechaReserva.setText(FragmentPersonalCuposLibres.arrayCuposLibres.get(position).getFecha_reserva());
+        etEstado.setText(FragmentPersonalCuposLibres.arrayCuposLibres.get(position).getEstado());
         btnguardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,11 +82,19 @@ public class EditarCupoLibre extends AppCompatActivity {
             etTotalCupos.setError("Ingrese cupo total");
             return false;
         }
+        if(etEstado.getText().toString().isEmpty()) {
+            etEstado.setError("Ingrese un estado");
+            return false;
+        }
+        if(Integer.parseInt(etEstado.getText().toString()) > 1) {
+            etEstado.setError("Ingrese '0': inactivo o '1': activo");
+            return false;
+        }
         return true;
     }
 
     private void llenarSpinnerGrupo() {
-        String url = "https://medinamagali.com.ar/gimnasio_unne/gruposdisponibles.php";
+        String url = "https://medinamagali.com.ar/gimnasio_unne/gruposdisponibles.php?id_cupolibre="+idcupolibre+"";
         cliente.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -100,15 +110,12 @@ public class EditarCupoLibre extends AppCompatActivity {
     private void cargarSpinnerGrupos(String respuesta) {
         final ArrayList<Grupos> listaGrupos = new ArrayList<Grupos>();
         try {
-            JSONObject jsonObject = new JSONObject(respuesta);
-            String sucess=jsonObject.getString("sucess");
-            JSONArray jsonArray=jsonObject.getJSONArray("gruposdisponibles");
+            JSONArray jsonArray = new JSONArray(respuesta);
             for (int i= 0; i< jsonArray.length();i++){
                 Grupos g = new Grupos();
                 JSONObject object= jsonArray.getJSONObject(i);
                 g.setDescripcion(object.getString("descripcion"));
                 g.setId(object.getString("grupo_id"));
-                g.setProf(object.getString("nombres") + " " + object.getString("apellido"));
                 g.setHorario("de " + object.getString("hora_inicio") + " a " + object.getString("hora_fin"));
                 g.setCupototal(object.getString("total_cupos"));
                 //en el metodo tostring de la clase grupo se define lo que se va a mostrar
@@ -159,6 +166,7 @@ public class EditarCupoLibre extends AppCompatActivity {
                 parametros.put("cupolibre_id", idcupolibre);
                 parametros.put("grupo_id", idgrupo);
                 parametros.put("total", etTotalCupos.getText().toString());
+                parametros.put("estado", etEstado.getText().toString());
                 return parametros;
             }
         };

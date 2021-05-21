@@ -11,7 +11,7 @@ import com.example.gimnasio_unne.R;
 import com.example.gimnasio_unne.view.fragments.FragmentListarGrupos;
 
 public class DetallesGrupo extends AppCompatActivity {
-    TextView tvnombre, tvprof,  tvtcupototal,tvid, tvhorario;
+    TextView tvnombre, tvprof,  tvtcupototal,tvid, tvhorario, tvestado;
     int position;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,7 @@ public class DetallesGrupo extends AppCompatActivity {
         tvnombre = findViewById(R.id.txtnombre);
         tvprof = findViewById(R.id.txtprof);
         tvtcupototal = findViewById(R.id.txtcupototal);
+        tvestado= findViewById(R.id.tvEstadoGrupoDetalle);
 
         //recibimos los parametros de Home
         Intent intent=getIntent();
@@ -38,5 +39,10 @@ public class DetallesGrupo extends AppCompatActivity {
         tvnombre.setText("Nombre " + FragmentListarGrupos.groups.get(position).getDescripcion());
         tvprof.setText("Profesor " + FragmentListarGrupos.groups.get(position).getProf());
         tvtcupototal.setText("Cupo total " + FragmentListarGrupos.groups.get(position).getCupototal());
+        if (FragmentListarGrupos.groups.get(position).getEstado().equals("0")) {
+            tvestado.setText("Estado: INACTIVO");
+        } else {
+            tvestado.setText("Estado: ACTIVO");
+        }
     }
 }

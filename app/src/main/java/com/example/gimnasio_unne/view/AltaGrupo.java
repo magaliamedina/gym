@@ -85,7 +85,7 @@ public class AltaGrupo extends AppCompatActivity {
     }
 
     private void llenarSpinner() {
-        String url = "https://medinamagali.com.ar/gimnasio_unne/consultarProfesor.php";
+        String url = "https://medinamagali.com.ar/gimnasio_unne/consultar_profesor_altagrupo.php";
         cliente.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

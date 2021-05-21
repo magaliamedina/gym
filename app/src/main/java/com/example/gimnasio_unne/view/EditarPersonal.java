@@ -46,6 +46,8 @@ public class EditarPersonal extends AppCompatActivity {
     private AsyncHttpClient cliente;
     int position;
     private String idprovincia, sexoBD;
+    String [] sexos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +81,15 @@ public class EditarPersonal extends AppCompatActivity {
         etemail.setText(FragmentListarPersonal.persons.get(position).getEmail());
         etpassword.setText(FragmentListarPersonal.persons.get(position).getPassword());
 
-        String [] sexos = {"Masculino", "Femenino", "Otro"};
+        String sexo_guardado= FragmentListarPersonal.persons.get(position).getSexo();
+        //lo siguiente es para mostrar en orden como esta guardado
+        if(sexo_guardado.equals("2")) {
+            sexos= new String [] {"Femenino", "Masculino", "Otro"};
+        } else if(sexo_guardado.equals("1")) {
+            sexos = new String [] {"Masculino", "Femenino", "Otro"};
+        } else {
+            sexos =new String []{"Otro", "Masculino", "Femenino"};
+        }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sexos);
         spinnerSexos.setAdapter(adapter);
 
@@ -172,7 +182,7 @@ public class EditarPersonal extends AppCompatActivity {
     }
 
     private void llenarSpinnerProvincias() {
-        String url = "https://medinamagali.com.ar/gimnasio_unne/consultarprovincias.php";
+        String url = "https://medinamagali.com.ar/gimnasio_unne/consultarprovincias.php?persona_id="+tvid.getText().toString()+"";
         cliente.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

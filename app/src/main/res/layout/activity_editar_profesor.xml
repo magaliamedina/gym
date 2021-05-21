@@ -35,28 +35,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:textColor="@color/grey"
             android:text="ID: "/>
         <TextView
             android:id="@+id/tvideditarprofesor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="número de ID"
+            android:textColor="@color/grey"
             android:inputType="number"
             android:textSize="18sp" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:textColor="@color/grey"
             android:text="DNI: "/>
         <EditText
             android:id="@+id/etDnieditarprofesor"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="número de DNI"
             android:inputType="number"
@@ -65,13 +68,13 @@
 
     <EditText
         android:id="@+id/etApellidoeditarprofesor"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Apellido"
         android:inputType="text" />
     <EditText
         android:id="@+id/etNombreseditarprofesor"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nombres"
         android:inputType="text" />
@@ -83,10 +86,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:textColor="@color/grey"
             android:text="Sexo:"/>
         <Spinner
             android:id="@+id/spinnerSexosEditarProfesor"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
@@ -98,16 +102,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:textColor="@color/grey"
             android:text="Provincia:"/>
         <Spinner
             android:id="@+id/spinnerProvinciaEditarProfesor"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <EditText
         android:id="@+id/etEstadoCivilEditarprofesor"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Estado Civil"
         android:inputType="text"/>

@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#3A6FB8</color> <!-- status bar: color de la barra de arriba de la app -->
     <color name="colorAccent">#042F6A</color>
     <color name="white">#ffffff</color>
+    <color name="grey">#292929</color>
 
     <!-- para la fuente montserrat y open sans -->
 </resources>

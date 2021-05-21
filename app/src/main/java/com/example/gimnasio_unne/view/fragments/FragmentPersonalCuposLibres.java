@@ -37,7 +37,7 @@ import java.util.Map;
 public class FragmentPersonalCuposLibres extends Fragment {
     private ListView list;
     public static ArrayList<CuposLibres> arrayCuposLibres= new ArrayList<>();
-    String url = "https://medinamagali.com.ar/gimnasio_unne/listarcuposlibres.php?alumno_id=0";
+    String url = "https://medinamagali.com.ar/gimnasio_unne/listarcuposlibres_personal.php";
     AdaptadorCuposLibres adaptador;
     CuposLibres cuposLibres;
     public FragmentPersonalCuposLibres() {
@@ -124,8 +124,9 @@ public class FragmentPersonalCuposLibres extends Fragment {
                             String hora_fin = object.getString("horarios_hora_fin");
                             String id_grupo = object.getString("grupo_id");
                             String fecha_reserva = object.getString("fecha");
+                            String estado = object.getString("estado");
                             cuposLibres = new CuposLibres(id_cupolibre, grupo_descripcion, nombres+" " + apellido,
-                                    cupolibre_total,"de "+hora_inicio+" a " +  hora_fin, id_grupo, fecha_reserva);
+                                    cupolibre_total,"de "+hora_inicio+" a " +  hora_fin, id_grupo, fecha_reserva, estado);
                             arrayCuposLibres.add(cuposLibres);
                             adaptador.notifyDataSetChanged();
                         }

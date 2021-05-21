@@ -127,8 +127,9 @@ public class FragmentListarGrupos extends Fragment {
                             String apellido = object.getString("apellido");
                             String prof = object.getString("profesor_id");
                             String cupototal = object.getString("total_cupos");
+                            String estado = object.getString("estado");
                             grupos = new Grupos(id, nombres+" " + apellido, "de "+hora_inicio+" a " +
-                                    hora_fin, cupototal, descripcion);
+                                    hora_fin, cupototal, descripcion, estado);
                             groups.add(grupos);
                             adaptador.notifyDataSetChanged();
                         }
