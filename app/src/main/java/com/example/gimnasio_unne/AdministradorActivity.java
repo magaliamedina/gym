@@ -41,13 +41,22 @@ public class AdministradorActivity extends AppCompatActivity {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
+        navigationView.getMenu().findItem(R.id.logoutadmin).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                AdministradorActivity.this.logout();
+                return true;
+            }
+        });
+
         //clase para implementar el icono hamburguesa
         toggle = new ActionBarDrawerToggle(this, drawer,toolbar,
                 R.string.nav_app_bar_open_drawer_description, R.string.drawer_close);
         drawer.addDrawerListener(toggle);
 
         //se cargan los id de los fragments que se van a mostrar
-        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.fragmentListarGrupos, R.id.fragmentListarPersonas, R.id.fragmentListarPersonal)
+        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.fragmentListarGrupos, R.id.fragmentListarPersonas,
+                R.id.fragmentListarPersonal, R.id.logoutadmin)
                 .setDrawerLayout(drawer)
                 .build();
 
@@ -58,17 +67,17 @@ public class AdministradorActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
+    private void logout() {
+        editor.putBoolean("sesion", false);
+        editor.apply();
+        finish();
+        startActivity(new Intent(this, Login.class));
+    }
+
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         toggle.syncState();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);;
-        return true;
     }
 
     @Override
@@ -78,7 +87,7 @@ public class AdministradorActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    @Override
+    /*@Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.logout:
@@ -92,5 +101,5 @@ public class AdministradorActivity extends AppCompatActivity {
             return true;
         }
         return true;
-    }
+    }*/
 }

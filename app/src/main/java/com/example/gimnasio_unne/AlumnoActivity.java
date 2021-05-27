@@ -3,9 +3,12 @@ package com.example.gimnasio_unne;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -42,13 +45,31 @@ public class AlumnoActivity extends AppCompatActivity {
         DrawerLayout drawer = findViewById(R.id.drawer_layout_alumno);
         NavigationView navigationView = findViewById(R.id.nav_view_alumno);
 
+        navigationView.getMenu().findItem(R.id.consultarViaEmail).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto","correo@gmail.com", null));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Gimnasio APP - ");
+                startActivity(Intent.createChooser(emailIntent,  "Enviar email"));
+                return true;
+            }
+        });
+
+        navigationView.getMenu().findItem(R.id.logout).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                AlumnoActivity.this.logout();
+                return true;
+            }
+        });
+
         //clase para implementar el icono hamburguesa
         toggle = new ActionBarDrawerToggle(this, drawer,toolbar,R.string.nav_app_bar_open_drawer_description, R.string.drawer_close);
         drawer.addDrawerListener(toggle);
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 //es el identificador del menu que se encuenta en menu/menu_alumno
-                R.id.fragmentListarCuposLibres, R.id.fragmentMisReservas)
+        R.id.fragmentListarCuposLibres, R.id.fragmentMisReservas, R.id.consultarViaEmail, R.id.logout)
                 .setDrawerLayout(drawer)
                 .build();
         //nav_host_fragment_alumno se encuentra en content_alumno
@@ -57,18 +78,25 @@ public class AlumnoActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
+    private void logout() {
+        editor.putBoolean("sesion", false);
+        editor.apply();
+        finish();
+        startActivity(new Intent(this, Login.class));
+    }
+
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         toggle.syncState();
     }
 
-    //selector de opciones para cerrar sesion
+    /*selector de opciones para cerrar sesion
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
-    }
+    }*/
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -77,7 +105,7 @@ public class AlumnoActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    @Override
+    /*@Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.logout:
@@ -91,5 +119,6 @@ public class AlumnoActivity extends AppCompatActivity {
             return true;
         }
         return true;
-    }
+    }*/
+
 }

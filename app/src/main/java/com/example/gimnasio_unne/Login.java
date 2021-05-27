@@ -1,16 +1,22 @@
 package com.example.gimnasio_unne;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -29,8 +35,8 @@ import java.util.Map;
 
 public class Login extends AppCompatActivity {
     EditText edtUsuario, edtPassword;
-    Button btnLogin;
-    public static String usuario="", password="", personas_id="",apellido="",nombres="",lu="";
+    Button btnLogin, btnCallPhone, btnSendMail;
+    public static String usuario = "", password = "", personas_id = "", apellido = "", nombres = "", lu = "";
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
     CheckBox cbRecordarUsuario;
@@ -42,18 +48,20 @@ public class Login extends AppCompatActivity {
         edtUsuario = findViewById(R.id.txt_emailLogin);
         edtPassword = findViewById(R.id.txt_passLogin);
         btnLogin = findViewById(R.id.btn_iniciarsesion);
-        cbRecordarUsuario= findViewById(R.id.cbRecordarUsuario);
+        btnCallPhone=findViewById(R.id.btnCallPhone);
+        btnSendMail=findViewById(R.id.btnSendEmail);
+        cbRecordarUsuario = findViewById(R.id.cbRecordarUsuario);
         inicializarElementos();
-        if(revisarSesion()) {
-            if(revisarUsuario().equals("1")) { //PERFIL ADMINISTRADOR
+        if (revisarSesion()) {
+            if (revisarUsuario().equals("1")) { //PERFIL ADMINISTRADOR
                 Intent intent = new Intent(getApplicationContext(), AdministradorActivity.class);
                 startActivity(intent);
             }
-            if(revisarUsuario().equals("3")) { //PERFIL ESTUDIANTE
+            if (revisarUsuario().equals("3")) { //PERFIL ESTUDIANTE
                 Intent intent = new Intent(getApplicationContext(), AlumnoActivity.class);
                 startActivity(intent);
             }
-            if(revisarUsuario().equals("4")) { //PERFIL PERSONAL ADMINISTRATIVO
+            if (revisarUsuario().equals("4")) { //PERFIL PERSONAL ADMINISTRATIVO
                 Intent intent = new Intent(getApplicationContext(), PersonalActivity.class);
                 startActivity(intent);
             }
@@ -64,7 +72,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 usuario = edtUsuario.getText().toString();
                 password = edtPassword.getText().toString();
-                if(!usuario.isEmpty() && !password.isEmpty()) {
+                if (!usuario.isEmpty() && !password.isEmpty()) {
                     validarUsuario("https://medinamagali.com.ar/gimnasio_unne/validar_usuario.php");
                 } else {
                     edtUsuario.setError("Ingrese usuario");
@@ -74,47 +82,45 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    private void validarUsuario (String URL) {
+    private void validarUsuario(String URL) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) { //nos devuelve la fila encontrada en el servicio web
-                if (!response.isEmpty() ) {
+                if (!response.isEmpty()) {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
                         String usuario_id = jsonObject.getString("usuario_id");
-                        personas_id= jsonObject.getString("personas_id");
-                        apellido= jsonObject.getString("apellido");
+                        personas_id = jsonObject.getString("personas_id");
+                        apellido = jsonObject.getString("apellido");
                         nombres = jsonObject.getString("nombres");
-                        lu= jsonObject.getString("lu");
+                        lu = jsonObject.getString("lu");
                         guardarSharedPreferences();
                         edtUsuario.setText("");
                         edtPassword.setText("");
                         guardarSesion(cbRecordarUsuario.isChecked(), usuario_id);
                         //PERFIL ADMINISTRADOR
-                        if( usuario_id.equals("1")) {
+                        if (usuario_id.equals("1")) {
                             finish();
                             Intent intent = new Intent(getApplicationContext(), AdministradorActivity.class);
                             startActivity(intent);
                         }
                         //PERFIL ESTUDIANTE
-                        else if( usuario_id.equals("3")) {
+                        else if (usuario_id.equals("3")) {
                             finish();
                             Intent intent = new Intent(getApplicationContext(), AlumnoActivity.class);
                             startActivity(intent);
                         }
                         //PERFIL PERSONAL ADMINISTRATIVO
-                        else if( usuario_id.equals("4")) {
+                        else if (usuario_id.equals("4")) {
                             finish();
                             Intent intent = new Intent(getApplicationContext(), PersonalActivity.class);
                             startActivity(intent);
                         }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                        catch (JSONException e) {
-                             e.printStackTrace();
-                        }
 
-                }
-                else {
+                } else {
                     Toast.makeText(Login.this, "Email o contraseña incorrecta", Toast.LENGTH_SHORT).show();
                 }
 
@@ -124,11 +130,11 @@ public class Login extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(Login.this, error.toString(), Toast.LENGTH_SHORT).show(); //recomendable luego cambiar con un mensaje para el usuario
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
-                parametros.put("email",edtUsuario.getText().toString());
+                parametros.put("email", edtUsuario.getText().toString());
                 parametros.put("password", edtPassword.getText().toString());
                 return parametros;
             }
@@ -138,33 +144,44 @@ public class Login extends AppCompatActivity {
     }
 
     private void inicializarElementos() {
-        preferences= this.getSharedPreferences("sesiones",Context.MODE_PRIVATE);
-        editor=preferences.edit();
+        preferences = this.getSharedPreferences("sesiones", Context.MODE_PRIVATE);
+        editor = preferences.edit();
     }
 
     private boolean revisarSesion() {
         //si devulve false no hace nada
         //si devuelve true va la vista principal
-        return this.preferences.getBoolean("sesion",false);
+        return this.preferences.getBoolean("sesion", false);
     }
 
     private String revisarUsuario() {
-        return this.preferences.getString("tipo_usuario","");
+        return this.preferences.getString("tipo_usuario", "");
     }
 
     private void guardarSesion(boolean checked, String tipousuario) {
-        editor.putBoolean("sesion",checked);
+        editor.putBoolean("sesion", checked);
         editor.putString("tipo_usuario", tipousuario);
         editor.apply();
     }
 
     public void guardarSharedPreferences() {
-        SharedPreferences preferences=getSharedPreferences("datosusuario", Context.MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences("datosusuario", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("nya", nombres+" " +apellido);
+        editor.putString("nya", nombres + " " + apellido);
         editor.putString("lu", lu);
-        editor.putString("id_alumno",personas_id);
+        editor.putString("id_alumno", personas_id);
         editor.apply();
+    }
+
+    public void onClickLlamada(View v) {
+        int numero=154861591;
+        startActivity(new Intent(Intent.ACTION_DIAL).setData(Uri.parse("tel:" + numero)));
+    }
+
+    public void onClickEmail(View v) {
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto","correo@gmail.com", null));
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Gimnasio APP - ");
+        startActivity(Intent.createChooser(emailIntent,  "Enviar email"));
     }
 
 }

@@ -12,7 +12,7 @@
         android:id="@+id/imglogoSGASLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="40dp"
         app:srcCompat="@drawable/sgas" />
 
     <EditText
@@ -23,6 +23,7 @@
         android:autofillHints=""
         android:drawableStart="@drawable/vector_person"
         android:ems="10"
+        android:textSize="18dp"
         android:hint="@string/txt_email"
         android:inputType="textEmailAddress" />
 
@@ -32,6 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="23dp"
         android:autofillHints=""
+        android:textSize="18dp"
         android:drawableStart="@drawable/vector_lock"
         android:ems="10"
         android:hint="@string/txt_password"
@@ -49,10 +51,37 @@
         android:id="@+id/btn_iniciarsesion"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:textSize="18dp"
         android:layout_marginTop="20dp"
         android:background="@color/colorPrimary"
         android:text="@string/btn_iniciar_sesion"
         android:textColor="#ffffff" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grey"
+        android:layout_marginTop="30dp"
+        android:text="Ante cualquier consulta comunicarse al: "/>
+        <Button
+            android:id="@+id/btnCallPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClickLlamada"
+            android:background="#0000"
+            android:text="  1548961591 "
+            android:stateListAnimator="@null"
+            android:drawableStart="@drawable/ic_phone"/>
+    <!--- para quitarle bordes sombreados android:stateListAnimator="@null"-->
+    <Button
+            android:id="@+id/btnSendEmail"
+            android:layout_width="wrap_content"
+            android:background="#0000"
+            android:layout_height="wrap_content"
+            android:onClick="onClickEmail"
+            android:text="  sgas@gmail.com  "
+            android:stateListAnimator="@null"
+            android:textAllCaps="false"
+            android:drawableStart="@drawable/ic_email" />
 
 </LinearLayout>

@@ -74,8 +74,9 @@ public class Reservar extends AppCompatActivity {
         btnReservarCupoLibre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                reservarCupoLibre("http://medinamagali.com.ar/gimnasio_unne/reservar_cupo_libre.php");
-                descontarCupoLibre("http://medinamagali.com.ar/gimnasio_unne/descontar_cupo_libre.php");
+                reservarCupoLibre("https://medinamagali.com.ar/gimnasio_unne/reservar_cupo_libre.php");
+                descontarCupoLibre("https://medinamagali.com.ar/gimnasio_unne/descontar_cupo_libre.php");
+                finish();
                 Intent i = new Intent(getApplicationContext(), AlumnoActivity.class);
                 startActivity(i);
             }
@@ -143,7 +144,7 @@ public class Reservar extends AppCompatActivity {
         SharedPreferences sharedPreferences = this.getSharedPreferences("datosusuario",Context.MODE_PRIVATE);
         tvNombreEstudiante.setText("Nombre y apellido del estudiante: " + sharedPreferences.getString("nya", ""));
         tvLUEstudiante.setText("LU: " +sharedPreferences.getString("lu", ""));
-        alumno_id= sharedPreferences.getString("lu", "");
+        alumno_id= sharedPreferences.getString("id_alumno", "");
     }
 
 }
