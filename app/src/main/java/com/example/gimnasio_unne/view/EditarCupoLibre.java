@@ -22,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.gimnasio_unne.PersonalActivity;
 import com.example.gimnasio_unne.R;
 import com.example.gimnasio_unne.model.Grupos;
 import com.example.gimnasio_unne.view.fragments.FragmentListarCuposLibres;
@@ -146,17 +147,19 @@ public class EditarCupoLibre extends AppCompatActivity {
         progressDialog.setMessage("Cargando....");
         progressDialog.show();
 
-        StringRequest request=new StringRequest(Request.Method.POST, "http://medinamagali.com.ar/gimnasio_unne/editar_cupolibre.php", new Response.Listener<String>() {
+        StringRequest request=new StringRequest(Request.Method.POST, "https://medinamagali.com.ar/gimnasio_unne/editar_cupolibre.php", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(EditarCupoLibre.this, "Modificado exitosamente", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), FragmentListarCuposLibres.class));
+                finish();
+                startActivity(new Intent(getApplicationContext(), PersonalActivity.class));
                 progressDialog.dismiss();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(EditarCupoLibre.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                finish();
                 progressDialog.dismiss();
             }
         }){

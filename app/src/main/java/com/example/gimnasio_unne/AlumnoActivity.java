@@ -48,7 +48,7 @@ public class AlumnoActivity extends AppCompatActivity {
         navigationView.getMenu().findItem(R.id.consultarViaEmail).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto","correo@gmail.com", null));
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto","secretaria.sociales.unne@gmail.com", null));
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Gimnasio APP - ");
                 startActivity(Intent.createChooser(emailIntent,  "Enviar email"));
                 return true;

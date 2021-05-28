@@ -174,12 +174,12 @@ public class Login extends AppCompatActivity {
     }
 
     public void onClickLlamada(View v) {
-        int numero=154861591;
+        int numero=4439627;
         startActivity(new Intent(Intent.ACTION_DIAL).setData(Uri.parse("tel:" + numero)));
     }
 
     public void onClickEmail(View v) {
-        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto","correo@gmail.com", null));
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto","secretaria.sociales.unne@gmail.com", null));
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Gimnasio APP - ");
         startActivity(Intent.createChooser(emailIntent,  "Enviar email"));
     }

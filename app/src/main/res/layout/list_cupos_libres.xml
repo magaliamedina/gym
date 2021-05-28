@@ -26,7 +26,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Nombre del grupo"
+            android:drawableStart="@drawable/ic_grupos"
+            android:text="  Nombre del grupo"
             android:textColor="@color/grey"
             android:textStyle="bold"
             android:textSize="18sp" />
@@ -39,7 +40,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="Profesor: "
+                    android:drawableStart="@drawable/vector_person"
+                    android:text="  Profesor: "
                     android:textColor="@color/grey"
                     android:textStyle="bold"
                     android:textSize="18sp" />
@@ -61,7 +63,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Horario: "
+                android:drawableStart="@drawable/ic_time"
+                android:text="  Horario: "
                 android:textStyle="bold"
                 android:textColor="@color/grey"
                 android:textSize="18sp" />
@@ -85,7 +88,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Cupos disponibles: "
+                android:drawableStart="@drawable/ic_check"
+                android:text="  Cupos disponibles: "
                 android:textColor="@color/grey"
                 android:textSize="18sp"
                 android:textStyle="bold"/>

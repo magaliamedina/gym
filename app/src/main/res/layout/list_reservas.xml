@@ -28,7 +28,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Número de reserva: "
+                android:drawableStart="@drawable/ic_mis_reservas"
+                android:text="  Número de reserva: "
                 android:textColor="@color/grey"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -46,7 +47,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="Fecha y hora de la reserva: "
+                    android:drawableStart="@drawable/ic_reserve"
+                    android:text="  Fecha y hora de la reserva: "
                     android:textColor="@color/grey"
                     android:textStyle="bold"
                     android:textSize="18sp" />
@@ -55,26 +57,29 @@
                     android:id="@+id/tvListarReservasFechaReserva"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="33dp"
                     android:layout_centerInParent="true"
                     android:text="fecha"
                     android:textColor="@color/grey"
                     android:textSize="18sp" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Nombre del estudiante: "
+                android:drawableStart="@drawable/vector_person"
+                android:text="  Estudiante: "
                 android:textColor="@color/grey"
                 android:textStyle="bold"
                 android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tvListarReservasEstudiante"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="nombre completo "
+                android:layout_marginLeft="33dp"
                 android:textColor="@color/grey"
                 android:textSize="18sp" />
 
@@ -87,7 +92,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Grupo: "
+                android:text="  Grupo: "
+                android:drawableStart="@drawable/ic_grupos"
                 android:textColor="@color/grey"
                 android:textStyle="bold"
                 android:textSize="18sp" />
@@ -109,7 +115,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Horario: "
+                android:drawableStart="@drawable/ic_time"
+                android:text="  Horario: "
                 android:textColor="@color/grey"
                 android:textStyle="bold"
                 android:textSize="18sp" />

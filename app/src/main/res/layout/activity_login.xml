@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:onClick="onClickLlamada"
             android:background="#0000"
-            android:text="  1548961591 "
+            android:text="  379-4439627 "
             android:stateListAnimator="@null"
             android:drawableStart="@drawable/ic_phone"/>
     <!--- para quitarle bordes sombreados android:stateListAnimator="@null"-->
@@ -79,7 +79,7 @@
             android:background="#0000"
             android:layout_height="wrap_content"
             android:onClick="onClickEmail"
-            android:text="  sgas@gmail.com  "
+            android:text="  secretaria.sociales.unne@gmail.com  "
             android:stateListAnimator="@null"
             android:textAllCaps="false"
             android:drawableStart="@drawable/ic_email" />

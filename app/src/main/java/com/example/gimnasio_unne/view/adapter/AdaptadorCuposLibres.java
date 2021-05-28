@@ -35,7 +35,7 @@ public class AdaptadorCuposLibres extends ArrayAdapter<CuposLibres> {
         tvTotalCuposLibres = view.findViewById(R.id.tvListarCuposLibresDisponible);
         btnReservarCupoLibre = view.findViewById(R.id.btnReservarCupoLibre);
 
-        tvDescripcionGrupo.setText(arrayListCuposLibres.get(position).getGrupo_descripcion());
+        tvDescripcionGrupo.setText("  " +arrayListCuposLibres.get(position).getGrupo_descripcion());
         tvProfesor.setText(arrayListCuposLibres.get(position).getProfesor_nombreYapellido());
         tvDiayHora.setText(arrayListCuposLibres.get(position).getHorarios_inicio_fin());
         id_grupo = arrayListCuposLibres.get(position).getGrupo_id();
