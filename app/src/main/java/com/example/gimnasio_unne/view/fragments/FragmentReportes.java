@@ -13,6 +13,7 @@ import com.example.gimnasio_unne.R;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.components.XAxis;
@@ -26,6 +27,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
@@ -35,9 +37,9 @@ public class FragmentReportes extends Fragment {
     private PieChart pieChart;
     private BarChart barChart;
 
-    private String[]months= new String[] {"Enero","Febrero","Marzo","Abril","Mayo"};
+   /*private String[]months= new String[] {"Enero","Febrero","Marzo","Abril","Mayo"};
     private int[]sale= new int[] {25,30,28,10,15};
-    private int[]colors= new int[] {Color.BLACK, Color.RED, Color.GREEN, Color.BLUE};
+    private int[]colors= new int[] {Color.BLACK, Color.RED, Color.GREEN, Color.BLUE};*/
 
     public FragmentReportes() {
     }
@@ -47,11 +49,29 @@ public class FragmentReportes extends Fragment {
         View view= inflater.inflate(R.layout.fragment_reportes, container, false);
         pieChart=view.findViewById(R.id.pieChartEdadAlumnos);
         barChart=view.findViewById(R.id.barChartInasistencias);
-        createCharts();
+        //createCharts();
+        crearGraficoPastel();
         return view;
     }
 
-    private Chart getSameChart(Chart chart, String description, int textColor, int background,int animateY) {
+    private void crearGraficoPastel() {
+        Description description = new Description();
+        description.setText("grafico de pastel");
+        pieChart.setDescription(description);
+        ArrayList<PieEntry> pieEntries=new ArrayList<>();
+        //se puede traer de un json
+        pieEntries.add(new PieEntry(2, 3));
+        pieEntries.add(new PieEntry(3, 8));
+        pieEntries.add(new PieEntry(6, 7));
+
+        PieDataSet pieDataSet=new PieDataSet(pieEntries,"texto descriptivo");
+        pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+
+        PieData pieData= new PieData(pieDataSet);
+        pieChart.setData(pieData);
+    }
+
+   /*private Chart getSameChart(Chart chart, String description, int textColor, int background,int animateY) {
         chart.getDescription().setText(description);
         chart.getDescription().setTextSize(15);
         chart.setBackgroundColor(background);
@@ -152,5 +172,5 @@ public class FragmentReportes extends Fragment {
         pieDataSet.setSliceSpace(2); //separacion de las lineas de la torta
         pieDataSet.setValueFormatter(new PercentFormatter()); //que se muestre en porcentaje
         return new PieData(pieDataSet);
-    }
+    }*/
 }
