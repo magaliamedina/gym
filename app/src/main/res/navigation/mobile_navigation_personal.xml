@@ -20,5 +20,10 @@
         android:name="com.example.gimnasio_unne.view.fragments.FragmentPersonalCuposLibres"
         android:label="Cupos libres"
         tools:layout="@layout/fragment_listar_cupos_libres" />
+    <fragment
+        android:id="@+id/fragmentReportes"
+        android:name="com.example.gimnasio_unne.view.fragments.FragmentReportes"
+        android:label="Reportes"
+        tools:layout="@layout/fragment_reportes" />
 
 </navigation>

@@ -20,8 +20,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/proguard/androidx-annotations.pro'
+    }
 
 }
+/*repositories {
+    maven { url 'https://jitpack.io' }
+}*/
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -48,4 +54,7 @@ dependencies {
 
     //asincrono para cargar spinner
     implementation 'com.loopj.android:android-async-http:1.4.9'
+
+    //para grafico de barras tortas URL:
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
 }

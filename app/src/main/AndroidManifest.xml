@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.AltaPersonal"></activity>
+
+        <activity android:name=".view.AltaPersonal" />
         <activity
             android:name=".view.EditarPersonal"
             android:parentActivityName=".AdministradorActivity" />
