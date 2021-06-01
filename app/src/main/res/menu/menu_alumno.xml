@@ -16,6 +16,10 @@
             android:id="@+id/consultarViaEmail"
             android:icon="@drawable/ic_email"
             android:title="Consultar por email" />
+    </group>
+    <group
+        android:id="@+id/menuInferiorAlumno"
+        android:checkableBehavior="none">
         <item
             android:id="@+id/logout"
             android:icon="@drawable/ic_exit"
