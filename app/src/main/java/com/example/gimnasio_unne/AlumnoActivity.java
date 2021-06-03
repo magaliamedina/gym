@@ -91,13 +91,6 @@ public class AlumnoActivity extends AppCompatActivity {
         toggle.syncState();
     }
 
-    /*selector de opciones para cerrar sesion
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }*/
-
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_alumno);

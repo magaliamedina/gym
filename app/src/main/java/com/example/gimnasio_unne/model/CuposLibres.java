@@ -5,16 +5,6 @@ public class CuposLibres {
             horarios_inicio_fin, grupo_id, fecha_reserva, estado;
 
     public CuposLibres(){}
-    public CuposLibres(String id_cupolibre, String grupo_descripcion, String nombreYapellido, String cupolibre_total,
-                       String horarios_inicio_fin, String grupo_id, String fecha_reserva) {
-        this.id_cupolibre=id_cupolibre;
-        this.grupo_descripcion = grupo_descripcion;
-        this.profesor_nombreYapellido = nombreYapellido;
-        this.cupolibre_total = cupolibre_total;
-        this.horarios_inicio_fin = horarios_inicio_fin;
-        this.grupo_id= grupo_id;
-        this.fecha_reserva=fecha_reserva;
-    }
 
     public CuposLibres(String id_cupolibre, String grupo_descripcion, String nombreYapellido, String cupolibre_total,
                        String horarios_inicio_fin, String grupo_id, String fecha_reserva, String estado) {

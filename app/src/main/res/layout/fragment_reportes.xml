@@ -6,20 +6,19 @@
     android:orientation="vertical"
     tools:context=".view.fragments.FragmentReportes">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="fdkjnfdkjfd"/>
-
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/pieChartEdadAlumnos"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"/>
+        android:layout_margin="15dp"
+        android:layout_height="wrap_content">
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pieChartEdadAlumnos"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"/>
+    </androidx.cardview.widget.CardView>
 
-    <com.github.mikephil.charting.charts.BarChart
+    <!--com.github.mikephil.charting.charts.BarChart
         android:id="@+id/barChartInasistencias"
         android:layout_width="match_parent"
         android:layout_weight="1"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"/-->
 </LinearLayout>

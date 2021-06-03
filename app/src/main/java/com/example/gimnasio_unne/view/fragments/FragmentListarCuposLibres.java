@@ -105,8 +105,9 @@ public class FragmentListarCuposLibres extends Fragment {
                             String hora_fin = object.getString("horarios_hora_fin");
                             String id_grupo = object.getString("grupo_id");
                             String fecha_reserva = object.getString("fecha");
+                            String estado = object.getString("estado");
                             cuposLibres = new CuposLibres(id_cupolibre, grupo_descripcion, nombres+" " + apellido,
-                                    cupolibre_total,"de "+hora_inicio+" a " +  hora_fin, id_grupo, fecha_reserva);
+                                    cupolibre_total,"de "+hora_inicio+" a " +  hora_fin, id_grupo, fecha_reserva, estado);
                             arrayCuposLibres.add(cuposLibres);
                             adaptador.notifyDataSetChanged();
                         }

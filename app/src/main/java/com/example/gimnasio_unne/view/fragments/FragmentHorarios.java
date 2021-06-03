@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -106,6 +107,7 @@ public class FragmentHorarios extends Fragment {
                 horariosArrayList.clear();
                 try {
                     JSONArray jsonArray = new JSONArray(response);
+                    Log.d("entrahorario", response);
                     for (int i= 0; i< jsonArray.length();i++){
                         String id= jsonArray.getJSONObject(i).getString("horario_id");
                         String hora_inicio = jsonArray.getJSONObject(i).getString("hora_inicio");

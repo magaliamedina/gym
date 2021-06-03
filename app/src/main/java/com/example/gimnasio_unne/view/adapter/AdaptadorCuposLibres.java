@@ -1,6 +1,7 @@
 package com.example.gimnasio_unne.view.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ public class AdaptadorCuposLibres extends ArrayAdapter<CuposLibres> {
     Context context;
     List<CuposLibres> arrayListCuposLibres;
     Button btnReservarCupoLibre;
-    TextView tvDescripcionGrupo, tvProfesor, tvDiayHora, tvTotalCuposLibres;
+    TextView tvDescripcionGrupo, tvProfesor, tvDiayHora, tvTotalCuposLibres, tvEstado;
     String id_grupo, id_cupolibre;
 
     public AdaptadorCuposLibres(@NonNull Context context, List<CuposLibres>arrayListCuposLibres) {
@@ -33,6 +34,7 @@ public class AdaptadorCuposLibres extends ArrayAdapter<CuposLibres> {
         tvProfesor = view.findViewById(R.id.tvListarCuposLibresProfesor);
         tvDiayHora= view.findViewById(R.id.tvListarCuposLibresDiayHora);
         tvTotalCuposLibres = view.findViewById(R.id.tvListarCuposLibresDisponible);
+        tvEstado=view.findViewById(R.id.tvListarCuposLibresEstado);
         btnReservarCupoLibre = view.findViewById(R.id.btnReservarCupoLibre);
 
         tvDescripcionGrupo.setText("  " +arrayListCuposLibres.get(position).getGrupo_descripcion());
@@ -41,6 +43,12 @@ public class AdaptadorCuposLibres extends ArrayAdapter<CuposLibres> {
         id_grupo = arrayListCuposLibres.get(position).getGrupo_id();
         id_cupolibre = arrayListCuposLibres.get(position).getId_cupolibre();
         tvTotalCuposLibres.setText(arrayListCuposLibres.get(position).getCupolibre_total());
+        if (arrayListCuposLibres.get(position).getEstado().equals("1")) {
+            tvEstado.setText("ACTIVO");
+        } else {
+            tvEstado.setTextColor(Color.RED);
+            tvEstado.setText("INACTIVO");
+        }
         return view;
     }
 
