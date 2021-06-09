@@ -3,6 +3,8 @@ package com.example.gimnasio_unne.view;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -25,6 +28,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.gimnasio_unne.AdministradorActivity;
 import com.example.gimnasio_unne.AlumnoActivity;
 import com.example.gimnasio_unne.R;
+import com.example.gimnasio_unne.Utiles;
 import com.example.gimnasio_unne.model.Provincias;
 import com.example.gimnasio_unne.view.fragments.FragmentListarPersonal;
 import com.example.gimnasio_unne.view.fragments.FragmentListarProfesores;
@@ -33,7 +37,11 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.json.JSONArray;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,13 +50,14 @@ import cz.msebera.android.httpclient.Header;
 public class EditarProfesor extends AppCompatActivity {
 
     EditText etdni,etapellido, etnombres, etestadocivil,etemail, etpassword;
-    TextView tvid;
     Spinner spinnerProvincias, spinnerSexos;
-    Button btn;
+    Button btn, btn_date_editarProfesor;
     private AsyncHttpClient cliente;
     int position;
-    private String idprovincia, sexoBD;
+    private String idprovincia, sexoBD, id;
     String [] sexos;
+    DatePickerDialog datePickerDialog;
+    String fechaNacimiento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +69,6 @@ public class EditarProfesor extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        tvid = findViewById(R.id.tvideditarprofesor);
         etdni = findViewById(R.id.etDnieditarprofesor);
         etapellido= findViewById(R.id.etApellidoeditarprofesor);
         etnombres= findViewById(R.id.etNombreseditarprofesor);
@@ -70,17 +78,23 @@ public class EditarProfesor extends AppCompatActivity {
         spinnerProvincias = findViewById(R.id.spinnerProvinciaEditarProfesor);
         spinnerSexos = findViewById(R.id.spinnerSexosEditarProfesor);
         btn= findViewById(R.id.btneditarprofesor);
+        btn_date_editarProfesor= findViewById(R.id.btn_date_editarProfesor);
         cliente = new AsyncHttpClient();
 
         Intent intent =getIntent();
         position=intent.getExtras().getInt("position");
-        tvid.setText(FragmentListarProfesores.persons.get(position).getId());
+        id= FragmentListarProfesores.persons.get(position).getId();
+        //tvid.setText(FragmentListarProfesores.persons.get(position).getId());
+        fechaNacimiento= FragmentListarProfesores.persons.get(position).getFechaNac();
+
         etdni.setText(FragmentListarProfesores.persons.get(position).getDni());
         etapellido.setText(FragmentListarProfesores.persons.get(position).getApellido());
         etnombres.setText(FragmentListarProfesores.persons.get(position).getNombres());
         etestadocivil.setText(FragmentListarProfesores.persons.get(position).getEstadoCivil());
         etemail.setText(FragmentListarProfesores.persons.get(position).getEmail());
         etpassword.setText(FragmentListarProfesores.persons.get(position).getPassword());
+        btn_date_editarProfesor.setText(FragmentListarProfesores.persons.get(position).getFechaNac());
+
         String sexo_guardado= FragmentListarProfesores.persons.get(position).getSexo();
         //lo siguiente es para mostrar en orden como esta guardado
         if(sexo_guardado.equals("2")) {
@@ -95,6 +109,18 @@ public class EditarProfesor extends AppCompatActivity {
 
         llenarSpinnerProvincias();
 
+        try {
+            initDatePicker();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        btn_date_editarProfesor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                datePickerDialog.show();
+            }
+        });
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,6 +129,29 @@ public class EditarProfesor extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void initDatePicker() throws ParseException {
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month= month+1;
+                String date= year+"-"+month+"-"+day;
+                btn_date_editarProfesor.setText(date);
+            }
+        };
+        Calendar calendar = Calendar.getInstance();
+        int style= AlertDialog.THEME_HOLO_LIGHT;
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        datePickerDialog = new DatePickerDialog(this, style,dateSetListener,year,month,day);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        long dateMillis;
+        Date dateHoy;
+        dateHoy= sdf.parse(Utiles.obtenerFechaActual("GMT -3"));
+        dateMillis=dateHoy.getTime();
+        datePickerDialog.getDatePicker().setMaxDate(dateMillis);
     }
 
     public boolean validarCampos() {
@@ -165,11 +214,12 @@ public class EditarProfesor extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros= new HashMap<String, String>();
-                parametros.put("persona_id", tvid.getText().toString());
+                parametros.put("persona_id", id);
                 parametros.put("dni", etdni.getText().toString());
                 parametros.put("apellido", etapellido.getText().toString());
                 parametros.put("nombres", etnombres.getText().toString());
                 parametros.put("sexo_id", sexoBD);
+                parametros.put("fecha_nac", btn_date_editarProfesor.getText().toString());
                 parametros.put("provincia", idprovincia);
                 parametros.put("estado", "1");
                 parametros.put("estado_civil", etestadocivil.getText().toString());
@@ -183,7 +233,7 @@ public class EditarProfesor extends AppCompatActivity {
     }
 
     private void llenarSpinnerProvincias() {
-        String url = "https://medinamagali.com.ar/gimnasio_unne/consultarprovincias.php?persona_id="+tvid.getText().toString()+"";
+        String url = "https://medinamagali.com.ar/gimnasio_unne/consultarprovincias.php?persona_id="+id+"";
         cliente.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -225,5 +275,27 @@ public class EditarProfesor extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    /*private void fechaNacimiento() throws ParseException {
+        //datePicker=findViewById(R.id.datePicker);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        long dateMillis;
+        Date dateHoy, fechaMinima;
+        dateHoy= sdf.parse(Utiles.obtenerFechaActual("GMT -3"));
+        dateMillis=dateHoy.getTime();
+        datePicker.setMaxDate(dateMillis);
+        fechaMinima= sdf.parse("1921-01-01");
+        dateMillis= fechaMinima.getTime();
+        datePicker.setMinDate(dateMillis);
+        //fecha que inicia la App
+        datePicker.init(1990, 00, 01, new DatePicker.OnDateChangedListener() {
+            @Override
+            //fecha que selecciona el usuario
+            public void onDateChanged(DatePicker datePicker, int i, int i1, int i2) {
+                int mes= i1+1;
+                fechaNacimiento= i+"-"+mes+"-"+i2;
+            }
+        });
+    }*/
 
 }

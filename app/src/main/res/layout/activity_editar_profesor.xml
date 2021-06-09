@@ -24,28 +24,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp"
+        android:padding="10dp"
         android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="@color/grey"
-            android:text="ID: "/>
-        <TextView
-            android:id="@+id/tvideditarprofesor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="número de ID"
-            android:textColor="@color/grey"
-            android:inputType="number"
-            android:textSize="18sp" />
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -109,6 +89,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
+
+     <LinearLayout
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha de nacimiento:"
+            android:textSize="18sp"/>
+         <Button
+             android:id="@+id/btn_date_editarProfesor"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textSize="18sp"
+             android:paddingLeft="10dp"
+             android:textColor="@color/grey"
+             style="?android:spinnerStyle"/>
+     </LinearLayout>
 
     <EditText
         android:id="@+id/etEstadoCivilEditarprofesor"

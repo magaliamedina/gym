@@ -15,7 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.AltaHorario"></activity>
+        <activity android:name=".view.ReservasConfirmadas"
+            android:parentActivityName=".PersonalActivity">
+
+        </activity>
+        <activity android:name=".view.AltaHorario" />
         <activity android:name=".view.AltaPersonal" />
         <activity
             android:name=".view.EditarPersonal"

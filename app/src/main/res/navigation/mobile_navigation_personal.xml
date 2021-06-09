@@ -13,7 +13,7 @@
     <fragment
         android:id="@+id/fragmentAltaCuposLibres"
         android:name="com.example.gimnasio_unne.view.fragments.FragmentAltaCuposLibres"
-        android:label="Cargar cupos libres"
+        android:label="Cargar un cupo"
         tools:layout="@layout/fragment_alta_cupos_libres" />
     <fragment
         android:id="@+id/fragmentPersonalCuposLibres"

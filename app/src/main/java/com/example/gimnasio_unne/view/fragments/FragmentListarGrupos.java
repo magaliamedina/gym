@@ -22,7 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.gimnasio_unne.view.adapter.Adaptador;
+import com.example.gimnasio_unne.view.adapter.AdaptadorGrupos;
 import com.example.gimnasio_unne.view.AltaGrupo;
 import com.example.gimnasio_unne.view.DetallesGrupo;
 import com.example.gimnasio_unne.view.EditarGrupos;
@@ -42,7 +42,7 @@ import java.util.Map;
 public class FragmentListarGrupos extends Fragment {
 
     private ListView list;
-    Adaptador adaptador;
+    AdaptadorGrupos adaptador;
     public static ArrayList<Grupos>groups= new ArrayList<>();
     String url="https://medinamagali.com.ar/gimnasio_unne/mostrargrupos.php";
     Grupos grupos;
@@ -65,7 +65,7 @@ public class FragmentListarGrupos extends Fragment {
             }
         });
 
-        adaptador= new Adaptador(getActivity().getApplicationContext(), groups);
+        adaptador= new AdaptadorGrupos(getActivity().getApplicationContext(), groups);
         list.setAdapter(adaptador);
 
         //items para editar, eliminar y ver detalles
@@ -74,7 +74,9 @@ public class FragmentListarGrupos extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                 ProgressDialog progressDialog=new ProgressDialog(view.getContext());
-
+                /*ProgressBar progressBar;
+                progressBar.setProgress(int 1);
+                progressBar.setVisibility(View.GONE);*/
                 CharSequence[] dialogoItem={"Ver datos","Editar datos", "Eliminar datos"};
                 builder.setTitle(groups.get(position).getDescripcion());
                 builder.setItems(dialogoItem, new DialogInterface.OnClickListener() {

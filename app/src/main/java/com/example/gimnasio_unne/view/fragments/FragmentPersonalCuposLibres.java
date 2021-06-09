@@ -24,6 +24,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.gimnasio_unne.view.EditarCupoLibre;
 import com.example.gimnasio_unne.R;
 import com.example.gimnasio_unne.model.CuposLibres;
+import com.example.gimnasio_unne.view.ReservasConfirmadas;
 import com.example.gimnasio_unne.view.adapter.AdaptadorCuposLibres;
 
 import org.json.JSONArray;
@@ -53,7 +54,7 @@ public class FragmentPersonalCuposLibres extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 
-                CharSequence[] dialogoItem={"Editar cupo libre", "Dar de baja cupo libre"};
+                CharSequence[] dialogoItem={"Ver alumnos inscriptos","Editar cupo libre", "Dar de baja cupo libre"};
                 //titulo del alert dialog
                 builder.setTitle(arrayCuposLibres.get(position).getGrupo_descripcion());
                 builder.setItems(dialogoItem, new DialogInterface.OnClickListener() {
@@ -61,11 +62,16 @@ public class FragmentPersonalCuposLibres extends Fragment {
                     public void onClick(DialogInterface dialog, int i) {
                         switch (i) {
                             case 0:
+                                //pasamos position para poder recibir en ReservasConfirmadas
+                                startActivity(new Intent(getActivity().getApplicationContext(), ReservasConfirmadas.class)
+                                        .putExtra("position",position));
+                                break;
+                            case 1:
                                 //pasamos position para poder recibir en EditarCupolibre
                                 startActivity(new Intent(getActivity().getApplicationContext(), EditarCupoLibre.class)
                                         .putExtra("position",position));
                                 break;
-                            case 1:
+                            case 2:
                                 darDeBajaCupoLibre(arrayCuposLibres.get(position).getId_cupolibre());
                                 break;
                         }

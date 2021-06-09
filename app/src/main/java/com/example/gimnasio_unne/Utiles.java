@@ -23,9 +23,10 @@ public class Utiles {
     public static String obtenerFechaConFormato(String formato, String zonaHoraria) {
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
-        SimpleDateFormat sdf;
-        sdf = new SimpleDateFormat(formato);
+        SimpleDateFormat sdf = new SimpleDateFormat(formato);
         sdf.setTimeZone(TimeZone.getTimeZone(zonaHoraria));
         return sdf.format(date);
     }
+
+
 }

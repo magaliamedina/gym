@@ -8,11 +8,12 @@ import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -27,13 +28,11 @@ import com.example.gimnasio_unne.AdministradorActivity;
 import com.example.gimnasio_unne.R;
 import com.example.gimnasio_unne.model.Horarios;
 import com.example.gimnasio_unne.view.AltaHorario;
-import com.example.gimnasio_unne.view.adapter.Adaptador;
 import com.example.gimnasio_unne.view.adapter.AdaptadorHorarios;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -74,7 +73,7 @@ public class FragmentHorarios extends Fragment {
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                 ProgressDialog progressDialog=new ProgressDialog(view.getContext());
 
-                CharSequence[] dialogoItem={"Cambiar de estado"};
+                CharSequence[] dialogoItem={"Cambiar de estado", "Modificar horario de fin"};
                 builder.setTitle("Horario: de " + horariosArrayList.get(position).getHoraInicio() +" a " + horariosArrayList.get(position).getHoraFin());
                 builder.setItems(dialogoItem, new DialogInterface.OnClickListener() {
                     @Override
@@ -89,7 +88,9 @@ public class FragmentHorarios extends Fragment {
                                 }
                                 cambiarEstado(horariosArrayList.get(position).getId(), p_estado);
                                 break;
-
+                            case 1:
+                                //modificarHorario();
+                                break;
                         }
                     }
                 });
@@ -107,7 +108,6 @@ public class FragmentHorarios extends Fragment {
                 horariosArrayList.clear();
                 try {
                     JSONArray jsonArray = new JSONArray(response);
-                    Log.d("entrahorario", response);
                     for (int i= 0; i< jsonArray.length();i++){
                         String id= jsonArray.getJSONObject(i).getString("horario_id");
                         String hora_inicio = jsonArray.getJSONObject(i).getString("hora_inicio");

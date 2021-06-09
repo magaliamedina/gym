@@ -144,7 +144,7 @@ public class Reservar extends AppCompatActivity {
         SharedPreferences sharedPreferences = this.getSharedPreferences("datosusuario",Context.MODE_PRIVATE);
         tvNombreEstudiante.setText("Nombre y apellido del estudiante: " + sharedPreferences.getString("nya", ""));
         tvLUEstudiante.setText("LU: " +sharedPreferences.getString("lu", ""));
-        alumno_id= sharedPreferences.getString("id_alumno", "");
+        alumno_id= sharedPreferences.getString("personas_id", "");
     }
 
 }

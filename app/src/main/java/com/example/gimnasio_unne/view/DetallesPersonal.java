@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -12,7 +13,7 @@ import com.example.gimnasio_unne.view.fragments.FragmentListarPersonal;
 
 public class DetallesPersonal extends AppCompatActivity {
     TextView tvid, tvdni, tvapellido, tvnombres, tvsexo, tvfechaNac, tvlocalidad, tvprovincia, tvestado,tvestadocivil,
-            tvusuarioId, tvemail;
+            tvemail;
     int position;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +31,11 @@ public class DetallesPersonal extends AppCompatActivity {
         tvnombres = findViewById(R.id.txtnombrespersonaldetalle);
         tvsexo = findViewById(R.id.txtsexopersonaldetalle);
         tvfechaNac = findViewById(R.id.txtfechnacpersonaldetalle);
-        tvlocalidad = findViewById(R.id.txtlocalidadpersonaldetalle);
+        //tvlocalidad = findViewById(R.id.txtlocalidadpersonaldetalle);
         tvprovincia = findViewById(R.id.txtprovinciapersonaldetalle);
         tvestado = findViewById(R.id.txtestadopersonaldetalle);
         tvestadocivil = findViewById(R.id.txtestadocivilpersonaldetalle);
-        tvusuarioId = findViewById(R.id.txtusuariopersonaldetalle);
         tvemail = findViewById(R.id.txtemailpersonaldetalle);
-
 
         //recibimos los parametros de Home
         Intent intent=getIntent();
@@ -58,11 +57,12 @@ public class DetallesPersonal extends AppCompatActivity {
         tvprovincia.setText("Provincia: " + FragmentListarPersonal.persons.get(position).getProvincia());
         if (FragmentListarPersonal.persons.get(position).getEstado().equals("1")) {
             tvestado.setText("Estado: Activo");
+            tvestado.setTextColor(Color.GREEN);
         } else {
             tvestado.setText("Estado: Inactivo");
+            tvestado.setTextColor(Color.RED);
         }
         tvestadocivil.setText("Estado civil: " + FragmentListarPersonal.persons.get(position).getEstadoCivil());
-        tvusuarioId.setText("Tipo de usuario: " + FragmentListarPersonal.persons.get(position).getUsuarioId());
         tvemail.setText("Email: " + FragmentListarPersonal.persons.get(position).getEmail());
     }
 }
