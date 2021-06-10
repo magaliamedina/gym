@@ -80,6 +80,8 @@
             android:inputType="number"
             android:autofillHints="" />
 
+
+
             <Button
                 android:id="@+id/btnaltagrupo"
                 android:layout_width="match_parent"

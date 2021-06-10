@@ -3,11 +3,15 @@ package com.example.gimnasio_unne.view;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -20,13 +24,18 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.gimnasio_unne.R;
+import com.example.gimnasio_unne.Utiles;
 import com.example.gimnasio_unne.model.Provincias;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.json.JSONArray;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,10 +44,12 @@ import cz.msebera.android.httpclient.Header;
 public class AltaPersonal extends AppCompatActivity {
     EditText etdni,etapellido, etnombres, etestadocivil,etemail, etpassword;
     Spinner spinnerProvincias, spinnerSexos;
-    Button btn;
+    Button btn, btnDate;
     private AsyncHttpClient cliente;
     private String idprovincia, sexoBD;
     RequestQueue requestQueue;
+    DatePickerDialog datePickerDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +68,7 @@ public class AltaPersonal extends AppCompatActivity {
         etpassword=findViewById(R.id.etpassaltaPersonal);
         spinnerProvincias = findViewById(R.id.spinnerProvinciaAltaPersonal);
         spinnerSexos=findViewById(R.id.spsexoaltaPersonal);
+        btnDate= findViewById(R.id.btn_date_alta_personal);
         btn= findViewById(R.id.btnaltaPersonal);
         cliente = new AsyncHttpClient();
 
@@ -66,12 +78,52 @@ public class AltaPersonal extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sexos);
         spinnerSexos.setAdapter(adapter);
 
+        try {
+            initDatePicker();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        btnDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                datePickerDialog.show();
+            }
+        });
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(validarCampos()) {
                     altapersona("http://medinamagali.com.ar/gimnasio_unne/altapersona.php");
                 }
+            }
+        });
+    }
+
+    private void initDatePicker() throws ParseException {
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month= month+1;
+                String date= year+"-"+month+"-"+day;
+                btnDate.setText(date);
+            }
+        };
+        Calendar calendar = Calendar.getInstance();
+        int style= AlertDialog.THEME_HOLO_LIGHT;
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        datePickerDialog = new DatePickerDialog(this, style,dateSetListener,year,month,day);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        long dateMillis;
+        Date dateHoy;
+        dateHoy= sdf.parse(Utiles.obtenerFechaActual("GMT -3"));
+        dateMillis=dateHoy.getTime();
+        datePickerDialog.getDatePicker().setMaxDate(dateMillis);
+
+        datePickerDialog.getDatePicker().init(1990, 00, 01, new DatePicker.OnDateChangedListener() {
+            @Override
+            public void onDateChanged(DatePicker datePicker, int year, int month, int day) {
             }
         });
     }
@@ -187,6 +239,7 @@ public class AltaPersonal extends AppCompatActivity {
                 parametros.put("apellido", etapellido.getText().toString());
                 parametros.put("nombres", etnombres.getText().toString());
                 parametros.put("sexo_id", sexoBD);
+                parametros.put("fecha_nac", btnDate.getText().toString());
                 parametros.put("provincia", idprovincia);
                 parametros.put("estado", "1");
                 parametros.put("estado_civil", etestadocivil.getText().toString());

@@ -51,7 +51,7 @@ public class FragmentHorarios extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.fragment_horarios, container, false);
+        final View view= inflater.inflate(R.layout.fragment_horarios, container, false);
         list = view.findViewById(R.id.listview);
 
         FloatingActionButton fab = view.findViewById(R.id.fabHorarios);
@@ -66,35 +66,45 @@ public class FragmentHorarios extends Fragment {
         adaptador= new AdaptadorHorarios(getActivity().getApplicationContext(), horariosArrayList);
         list.setAdapter(adaptador);
 
-        //items para editar, eliminar y ver detalles
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                ProgressDialog progressDialog=new ProgressDialog(view.getContext());
-
-                CharSequence[] dialogoItem={"Cambiar de estado", "Modificar horario de fin"};
-                builder.setTitle("Horario: de " + horariosArrayList.get(position).getHoraInicio() +" a " + horariosArrayList.get(position).getHoraFin());
-                builder.setItems(dialogoItem, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int i) {
-                        switch (i) {
-                            case 0:
-                                String p_estado;
-                                if(horariosArrayList.get(position).getEstado().equals("1")) {
-                                    p_estado="0";
-                                } else {
-                                    p_estado="1";
-                                }
-                                cambiarEstado(horariosArrayList.get(position).getId(), p_estado);
-                                break;
-                            case 1:
-                                //modificarHorario();
-                                break;
+                final AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                View mView = getLayoutInflater().inflate(R.layout.modificar_horario, null);
+                builder.setTitle("Modificar horario: de " + horariosArrayList.get(position).getHoraInicio() +" a " + horariosArrayList.get(position).getHoraFin());
+                final EditText etHoraFin = mView.findViewById(R.id.etHoraFinModificarHorario);
+                final Button btnCambiarEstado= mView.findViewById(R.id.btnModificarEstado);
+                builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                builder.setPositiveButton("Guardar",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        String horaFin = etHoraFin.getText().toString();
+                        if(horaFin.isEmpty()) {
+                            Toast.makeText(getActivity().getApplicationContext(),"Ingrese una hora de fin", Toast.LENGTH_SHORT ).show();
+                        } else {
+                            String nueva_horafin = etHoraFin.getText().toString();
+                            cambiarEstado(horariosArrayList.get(position).getId(), horariosArrayList.get(position).getEstado(), nueva_horafin);
+                            Toast.makeText(getActivity().getApplicationContext(),"Modificado exitosamente", Toast.LENGTH_SHORT ).show();
                         }
                     }
                 });
-                builder.create().show();
+                btnCambiarEstado.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String p_estado;
+                        if(horariosArrayList.get(position).getEstado().equals("1")) {
+                            p_estado="0";
+                        } else {
+                            p_estado="1";
+                        }
+                        cambiarEstado(horariosArrayList.get(position).getId(), p_estado, horariosArrayList.get(position).getHoraFin());
+                    }
+                });
+                builder.setView(mView);
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         });
         mostrarDatos();
@@ -131,7 +141,7 @@ public class FragmentHorarios extends Fragment {
         requestQueue.add(request);
     }
 
-    public void cambiarEstado(final String id, final String p_estado) {
+    public void cambiarEstado(final String id, final String p_estado, final String hora_fin) {
         StringRequest request=new StringRequest(Request.Method.POST, "https://medinamagali.com.ar/gimnasio_unne/update_horario.php"
                 , new Response.Listener<String>() {
             @Override
@@ -151,6 +161,7 @@ public class FragmentHorarios extends Fragment {
                 Map<String, String> params= new HashMap<String, String>();
                 params.put("horario_id", id);
                 params.put("estado", p_estado);
+                params.put("hora_fin", hora_fin);
                 return params;
             }
         };

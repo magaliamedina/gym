@@ -84,7 +84,6 @@ public class AltaProfesor extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        btnDate= findViewById(R.id.btn_date);
         btnDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

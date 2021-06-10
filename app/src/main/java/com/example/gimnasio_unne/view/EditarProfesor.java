@@ -276,26 +276,4 @@ public class EditarProfesor extends AppCompatActivity {
         }
     }
 
-    /*private void fechaNacimiento() throws ParseException {
-        //datePicker=findViewById(R.id.datePicker);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        long dateMillis;
-        Date dateHoy, fechaMinima;
-        dateHoy= sdf.parse(Utiles.obtenerFechaActual("GMT -3"));
-        dateMillis=dateHoy.getTime();
-        datePicker.setMaxDate(dateMillis);
-        fechaMinima= sdf.parse("1921-01-01");
-        dateMillis= fechaMinima.getTime();
-        datePicker.setMinDate(dateMillis);
-        //fecha que inicia la App
-        datePicker.init(1990, 00, 01, new DatePicker.OnDateChangedListener() {
-            @Override
-            //fecha que selecciona el usuario
-            public void onDateChanged(DatePicker datePicker, int i, int i1, int i2) {
-                int mes= i1+1;
-                fechaNacimiento= i+"-"+mes+"-"+i2;
-            }
-        });
-    }*/
-
 }

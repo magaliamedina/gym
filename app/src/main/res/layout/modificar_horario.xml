@@ -3,23 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    tools:context=".view.fragments.FragmentHorarios">
+    android:orientation="vertical">
+    <Button
+        android:id="@+id/btnModificarEstado"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:background="#0000"
+        android:layout_marginRight="20dp"
+        android:gravity="right|center_vertical"
+        style="@style/textos"
+        android:textColor="@color/colorPrimary"
+        android:text="Cambiar de estado"/>
     <EditText
         android:id="@+id/etHoraFinModificarHorario"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:inputType="number"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="18sp"
         android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
-        android:hint="Hora fin" />
-
-    <Button
-        android:id="@+id/btnModificarHorario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        style="@style/textos"
-        android:layout_gravity="center_horizontal"
-        android:textColor="#ffffff"
-        android:text="Guardar"/>
+        android:hint="Nueva hora de fin" />
 
 </LinearLayout>

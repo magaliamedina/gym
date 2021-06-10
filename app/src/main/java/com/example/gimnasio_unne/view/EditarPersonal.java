@@ -3,6 +3,8 @@ package com.example.gimnasio_unne.view;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -25,6 +28,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.gimnasio_unne.AdministradorActivity;
 import com.example.gimnasio_unne.AlumnoActivity;
 import com.example.gimnasio_unne.R;
+import com.example.gimnasio_unne.Utiles;
 import com.example.gimnasio_unne.model.Provincias;
 import com.example.gimnasio_unne.view.fragments.FragmentListarPersonal;
 import com.loopj.android.http.AsyncHttpClient;
@@ -32,7 +36,11 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.json.JSONArray;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,11 +50,12 @@ public class EditarPersonal extends AppCompatActivity {
     EditText etdni,etapellido, etnombres, etestadocivil,etemail, etpassword;
     TextView tvid;
     Spinner spinnerProvincias, spinnerSexos;
-    Button btn;
+    Button btn, btn_date_editarPersonal;
     private AsyncHttpClient cliente;
     int position;
     private String idprovincia, sexoBD;
     String [] sexos;
+    DatePickerDialog datePickerDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +78,7 @@ public class EditarPersonal extends AppCompatActivity {
         spinnerProvincias = findViewById(R.id.spinnerProvinciaEditarPersonal);
         spinnerSexos = findViewById(R.id.spinnerSexosEditarPersonal);
         btn= findViewById(R.id.btneditarPersonal);
+        btn_date_editarPersonal= findViewById(R.id.btn_date_editarPersonal);
         cliente = new AsyncHttpClient();
 
         Intent intent =getIntent();
@@ -80,6 +90,7 @@ public class EditarPersonal extends AppCompatActivity {
         etestadocivil.setText(FragmentListarPersonal.persons.get(position).getEstadoCivil());
         etemail.setText(FragmentListarPersonal.persons.get(position).getEmail());
         etpassword.setText(FragmentListarPersonal.persons.get(position).getPassword());
+        btn_date_editarPersonal.setText(FragmentListarPersonal.persons.get(position).getFechaNac());
 
         String sexo_guardado= FragmentListarPersonal.persons.get(position).getSexo();
         //lo siguiente es para mostrar en orden como esta guardado
@@ -94,6 +105,17 @@ public class EditarPersonal extends AppCompatActivity {
         spinnerSexos.setAdapter(adapter);
 
         llenarSpinnerProvincias();
+        try {
+            initDatePicker();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        btn_date_editarPersonal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                datePickerDialog.show();
+            }
+        });
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,6 +125,29 @@ public class EditarPersonal extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void initDatePicker() throws ParseException {
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month= month+1;
+                String date= year+"-"+month+"-"+day;
+                btn_date_editarPersonal.setText(date);
+            }
+        };
+        Calendar calendar = Calendar.getInstance();
+        int style= AlertDialog.THEME_HOLO_LIGHT;
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        datePickerDialog = new DatePickerDialog(this, style,dateSetListener,year,month,day);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        long dateMillis;
+        Date dateHoy;
+        dateHoy= sdf.parse(Utiles.obtenerFechaActual("GMT -3"));
+        dateMillis=dateHoy.getTime();
+        datePickerDialog.getDatePicker().setMaxDate(dateMillis);
     }
 
     public boolean validarCampos() {
@@ -169,6 +214,7 @@ public class EditarPersonal extends AppCompatActivity {
                 parametros.put("apellido", etapellido.getText().toString());
                 parametros.put("nombres", etnombres.getText().toString());
                 parametros.put("sexo_id", sexoBD);
+                parametros.put("fecha_nac", btn_date_editarPersonal.getText().toString()) ;
                 parametros.put("provincia", idprovincia);
                 parametros.put("estado", "1");
                 parametros.put("estado_civil", etestadocivil.getText().toString());
